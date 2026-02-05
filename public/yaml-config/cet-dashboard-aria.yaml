@@ -1,0 +1,5 @@
+# CET Dashboard - Accessibility (ARIA) Configuration
+
+enabled: true
+tableLabel: CET Dashboard - Application Health Monitoring
+tableDescription: Real-time monitoring of CET application health including messages, issues, alerts, disabled queues, process delays, and slow operations

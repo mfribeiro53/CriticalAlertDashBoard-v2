@@ -1,0 +1,32 @@
+{
+  "type": "chart",
+  "title": "Response Time Trends",
+  "subtitle": "Last 7 days",
+  "icon": "graph-up",
+  "iconColor": "info",
+  "variant": "",
+  "shadow": true,
+  "collapsible": true,
+  "refreshable": true,
+  "fullscreenable": true,
+  "chartConfigId": "responseTimeChart",
+  "footer": {
+    "buttons": [
+      {
+        "text": "Export Data",
+        "variant": "outline-primary",
+        "size": "sm",
+        "icon": "download",
+        "action": "export"
+      },
+      {
+        "text": "Configure",
+        "variant": "outline-secondary",
+        "size": "sm",
+        "icon": "gear",
+        "action": "configure"
+      }
+    ],
+    "align": "end"
+  }
+}

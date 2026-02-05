@@ -1,0 +1,29 @@
+# CET Queues - Table Column Definitions
+
+cetQueuesSummary:
+  - data: app
+    title: App
+
+  - data: appName
+    title: App Name
+
+  - data: queue
+    title: Queue
+
+  - data: status
+    title: Status
+    render: renderQueueStatus
+
+  - data: messages
+    title: Messages
+    render: renderMessageCount
+
+cetMessageDetails:
+  - data: queue
+    title: Queue
+
+  - data: messageEnqueueTime
+    title: Message Enqueue Time
+
+  - data: criticalSection
+    title: Critical Section

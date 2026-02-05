@@ -1,0 +1,107 @@
+{
+  "_comment": "TEMPLATE: Filter Configuration - Copy this file and rename it to '[viewname]-filters.json'",
+  "_description": "Configure column-based filters that appear above the table. Users can filter data before it's displayed.",
+  "_usage": "Set enabled to true and configure filters for each column you want to be filterable.",
+  
+  "enabled": true,
+  "position": "top",
+  
+  "_options": {
+    "enabled": "true/false - Enable/disable the entire filter system",
+    "position": "'top' or 'bottom' - Where to display filters relative to the table"
+  },
+  
+  "columns": [
+    {
+      "_comment": "Select/dropdown filter example",
+      "columnIndex": 1,
+      "type": "select",
+      "label": "Filter by Status",
+      "colSize": "col-md-3",
+      "options": [
+        { "value": "active", "label": "Active" },
+        { "value": "inactive", "label": "Inactive" },
+        { "value": "pending", "label": "Pending" }
+      ],
+      "_options": {
+        "columnIndex": "Zero-based index of the column to filter (0 = first column)",
+        "type": "'select' - Dropdown filter",
+        "label": "Label text shown above the filter",
+        "colSize": "Bootstrap column class for layout (col-md-2, col-md-3, col-md-4, etc.)",
+        "options": "Array of {value, label} pairs for dropdown choices"
+      }
+    },
+    {
+      "_comment": "Text search filter example",
+      "columnIndex": 3,
+      "type": "text",
+      "label": "Search Name",
+      "placeholder": "Enter name...",
+      "colSize": "col-md-4",
+      "_options": {
+        "type": "'text' - Free-form text input filter",
+        "placeholder": "Placeholder text shown in empty input field"
+      }
+    },
+    {
+      "_comment": "Date range filter example",
+      "columnIndex": 5,
+      "type": "dateRange",
+      "label": "Date Range",
+      "colSize": "col-md-4",
+      "_options": {
+        "type": "'dateRange' - Two date pickers for start and end dates"
+      }
+    },
+    {
+      "_comment": "Number range filter example",
+      "columnIndex": 7,
+      "type": "numberRange",
+      "label": "Amount Range",
+      "colSize": "col-md-3",
+      "placeholder": {
+        "min": "Min amount",
+        "max": "Max amount"
+      },
+      "_options": {
+        "type": "'numberRange' - Two number inputs for min and max values",
+        "placeholder": "Object with 'min' and 'max' properties for each input"
+      }
+    }
+  ],
+  
+  "_availableFilterTypes": {
+    "select": "Dropdown with predefined options",
+    "text": "Free-text search input",
+    "dateRange": "Start and end date pickers",
+    "numberRange": "Min and max number inputs"
+  },
+  
+  "_colSizeOptions": [
+    "col-md-2  (16.66% width - use for narrow filters like status)",
+    "col-md-3  (25% width - use for medium filters)",
+    "col-md-4  (33.33% width - use for date ranges or larger text inputs)",
+    "col-md-6  (50% width - use for very wide filters)",
+    "col-md-12 (100% width - use for full-width filters)"
+  ],
+  
+  "_bestPractices": [
+    "columnIndex must match the actual column position (0-based)",
+    "Total colSize should add up to 12 or less per row for Bootstrap grid",
+    "Use select filters for categorical data (status, type, category)",
+    "Use text filters for searchable content (names, descriptions)",
+    "Use dateRange for timestamp columns",
+    "Use numberRange for numeric data (amounts, counts)",
+    "Keep labels short and descriptive",
+    "Provide clear placeholders for text inputs",
+    "Test filter combinations to ensure they work together",
+    "Consider mobile users - fewer filters = better mobile UX"
+  ],
+  
+  "_exampleLayouts": {
+    "4-column-layout": "col-md-3 + col-md-3 + col-md-3 + col-md-3 = 12",
+    "3-column-layout": "col-md-4 + col-md-4 + col-md-4 = 12",
+    "2-column-layout": "col-md-6 + col-md-6 = 12",
+    "mixed-layout": "col-md-2 + col-md-2 + col-md-4 + col-md-4 = 12"
+  }
+}

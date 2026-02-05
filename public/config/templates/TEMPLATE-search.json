@@ -1,0 +1,167 @@
+{
+  "_comment": "TEMPLATE: Search Configuration - Copy this file and rename it to '[viewname]-search.json'",
+  "_description": "Configure the global search functionality for the table, including regex support, result highlighting, and search history.",
+  "_usage": "Enable search features appropriate for your use case. All features are optional.",
+  
+  "enabled": true,
+  
+  "_options": {
+    "enabled": "true/false - Enable/disable the global search feature entirely"
+  },
+  
+  "highlightResults": true,
+  
+  "_highlightOptions": {
+    "highlightResults": "true/false - Visually highlight search terms in table cells (yellow background)"
+  },
+  
+  "enableRegex": true,
+  
+  "_regexOptions": {
+    "enableRegex": "true/false - Allow users to search using regular expressions (adds regex toggle button)",
+    "examples": [
+      "^Error - Rows starting with 'Error'",
+      "\\d{3}-\\d{4} - Phone number pattern",
+      "(critical|high) - Multiple terms with OR logic",
+      "\\w+@\\w+\\.com - Email pattern"
+    ]
+  },
+  
+  "showSearchHistory": true,
+  "maxHistoryItems": 20,
+  
+  "_historyOptions": {
+    "showSearchHistory": "true/false - Save and show dropdown of previous searches",
+    "maxHistoryItems": "Number (5-50) - Maximum recent searches to keep in history",
+    "storage": "Search history is stored in browser localStorage"
+  },
+  
+  "_additionalOptions": "Advanced search features (add if needed)",
+  "caseSensitive": false,
+  "smartSearch": true,
+  "searchDelay": 400,
+  
+  "_advancedOptions": {
+    "caseSensitive": "true/false - Make searches case-sensitive (default: false)",
+    "smartSearch": "true/false - Enable intelligent search matching (partial words, fuzzy matching)",
+    "searchDelay": "Number (milliseconds) - Delay before search executes while user types (default: 400ms)"
+  },
+  
+  "_searchBehavior": {
+    "globalSearch": "Searches across all searchable columns simultaneously",
+    "liveSearch": "Results update as user types (with delay)",
+    "clearButton": "X button appears to clear search when text is entered",
+    "keyboardShortcut": "Ctrl+F or / to focus search box (if keyboard navigation enabled)",
+    "placeholder": "Configurable placeholder text in search input"
+  },
+  
+  "_exampleConfigurations": {
+    "basic": {
+      "enabled": true,
+      "highlightResults": true,
+      "enableRegex": false,
+      "showSearchHistory": false,
+      "description": "Simple search with highlighting"
+    },
+    "powerUser": {
+      "enabled": true,
+      "highlightResults": true,
+      "enableRegex": true,
+      "showSearchHistory": true,
+      "maxHistoryItems": 30,
+      "description": "Full-featured search for data analysis"
+    },
+    "minimal": {
+      "enabled": true,
+      "highlightResults": false,
+      "enableRegex": false,
+      "showSearchHistory": false,
+      "description": "Basic search without visual enhancements"
+    },
+    "disabled": {
+      "enabled": false,
+      "description": "No search functionality"
+    }
+  },
+  
+  "_bestPractices": [
+    "Always enable highlightResults - it greatly improves user experience",
+    "Enable regex for power users working with technical data",
+    "Keep maxHistoryItems between 10-30 for good balance",
+    "Set searchDelay to 300-500ms to balance responsiveness and performance",
+    "Disable regex if users are non-technical or don't need advanced patterns",
+    "Enable search history for tables users search frequently",
+    "Test regex patterns to ensure they work as expected",
+    "Provide regex help/examples if enabling regex feature",
+    "Consider disabling search for very small tables (< 20 rows)",
+    "Ensure searchable columns are properly configured in columns config"
+  ],
+  
+  "_performance": {
+    "smallTables": "Search is instant on tables with < 1,000 rows",
+    "largeTables": "May experience lag on tables with > 10,000 rows",
+    "searchDelay": "Prevents excessive searches while user is still typing",
+    "highlighting": "May slow down rendering on very large result sets",
+    "optimization": "Set searchable:false on columns that don't need searching (improves performance)"
+  },
+  
+  "_regexExamples": {
+    "startsWith": "^Error - Matches rows starting with 'Error'",
+    "endsWith": "resolved$ - Matches rows ending with 'resolved'",
+    "numbers": "\\d{4} - Matches 4-digit numbers",
+    "email": "\\w+@\\w+\\.\\w+ - Matches email addresses",
+    "multipleTerms": "(urgent|critical|high) - Matches any of these terms",
+    "range": "[A-E] - Matches letters A through E",
+    "optional": "colou?r - Matches 'color' or 'colour'",
+    "exclude": "^(?!test) - Matches anything NOT starting with 'test'"
+  },
+  
+  "_userInterface": {
+    "searchBox": "Appears in DataTable's default header (top-right)",
+    "clearButton": "X icon appears in search box when text entered",
+    "regexToggle": "Button to enable/disable regex mode (if enableRegex=true)",
+    "historyDropdown": "Dropdown of recent searches (if showSearchHistory=true)",
+    "resultCount": "Shows 'Showing X of Y entries' below table",
+    "noResults": "Shows 'No matching records found' when search returns nothing"
+  },
+  
+  "_accessibility": {
+    "label": "Search input has proper ARIA label (from aria config)",
+    "liveRegion": "Search results announced to screen readers",
+    "keyboard": "Fully keyboard accessible",
+    "clearButton": "Clear button has ARIA label and keyboard support",
+    "shortcuts": "Keyboard shortcuts work with screen readers"
+  },
+  
+  "_integration": {
+    "filters": "Search works together with column filters (both apply simultaneously)",
+    "columns": "Only searches columns where searchable:true in columns config",
+    "serverSide": "For server-side processing, search query sent to backend",
+    "export": "Export includes only filtered/searched rows",
+    "selection": "Row selection works with search results"
+  },
+  
+  "_troubleshooting": {
+    "noResults": "Check that columns have searchable:true in columns config",
+    "slowSearch": "Reduce searchDelay or disable highlightResults",
+    "regexError": "Provide user feedback for invalid regex patterns",
+    "historyNotSaving": "Check browser localStorage permissions",
+    "highlightNotWorking": "Ensure render functions preserve highlight markup"
+  },
+  
+  "_whenToDisable": [
+    "Table has fewer than 10-15 rows (not needed)",
+    "All data visible on one page",
+    "Users use filters instead of search",
+    "Table is view-only with minimal interaction",
+    "Performance issues with large datasets"
+  ],
+  
+  "_whenToEnable": [
+    "Table has many rows (50+)",
+    "Users need to find specific records quickly",
+    "Data analysis or exploration use cases",
+    "Table contains text-heavy content (messages, descriptions)",
+    "Power users who benefit from regex patterns"
+  ]
+}

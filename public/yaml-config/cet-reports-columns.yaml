@@ -1,0 +1,148 @@
+# CET Reports - Table Column Definitions
+# Shared column structure for summary and detail views
+
+reportsSummary:
+  - data: step
+    title: Step
+    width: "5%"
+    orderable: true
+    className: text-center
+
+  - data: subStep
+    title: SubStep
+    width: "5%"
+    orderable: true
+    className: text-center
+
+  - data: criticalSection
+    title: Critical Section
+    width: "8%"
+    orderable: true
+    className: text-center fw-bold
+
+  - data: segmentDate
+    title: Segment Date
+    width: "10%"
+    orderable: true
+    className: text-center
+
+  - data: segmentTime
+    title: Segment Time
+    width: "10%"
+    orderable: true
+    className: text-center
+
+  - data: waitTime
+    title: Wait Time
+    width: "7%"
+    orderable: true
+    className: text-end
+
+  - data: startTime
+    title: Start Time
+    width: "10%"
+    orderable: true
+    className: text-center
+
+  - data: endTime
+    title: End Time
+    width: "10%"
+    orderable: true
+    className: text-center
+
+  - data: duration
+    title: Duration
+    width: "7%"
+    orderable: true
+    className: text-end
+
+  - data: deletes
+    title: Deletes
+    width: "7%"
+    orderable: true
+    className: text-end
+
+  - data: updates
+    title: Updates
+    width: "7%"
+    orderable: true
+    className: text-end
+
+  - data: inserts
+    title: Inserts
+    width: "7%"
+    orderable: true
+    className: text-end
+
+reportsDetail:
+  - data: step
+    title: Step
+    width: "5%"
+    orderable: true
+    className: text-center
+
+  - data: subStep
+    title: SubStep
+    width: "5%"
+    orderable: true
+    className: text-center
+
+  - data: criticalSection
+    title: Critical Section
+    width: "8%"
+    orderable: true
+    className: text-center fw-bold
+
+  - data: segmentDate
+    title: Segment Date
+    width: "10%"
+    orderable: true
+    className: text-center
+
+  - data: segmentTime
+    title: Segment Time
+    width: "10%"
+    orderable: true
+    className: text-center
+
+  - data: waitTime
+    title: Wait Time
+    width: "7%"
+    orderable: true
+    className: text-end
+
+  - data: startTime
+    title: Start Time
+    width: "10%"
+    orderable: true
+    className: text-center
+
+  - data: endTime
+    title: End Time
+    width: "10%"
+    orderable: true
+    className: text-center
+
+  - data: duration
+    title: Duration
+    width: "7%"
+    orderable: true
+    className: text-end
+
+  - data: deletes
+    title: Deletes
+    width: "7%"
+    orderable: true
+    className: text-end
+
+  - data: updates
+    title: Updates
+    width: "7%"
+    orderable: true
+    className: text-end
+
+  - data: inserts
+    title: Inserts
+    width: "7%"
+    orderable: true
+    className: text-end

@@ -1,0 +1,253 @@
+/**
+ * Error Alert Dashboard - Styles
+ * Only custom styles that Bootstrap doesn't provide
+ */
+
+/* ========================================
+   DataTables Customization
+   ======================================== */
+
+/* DataTable wrapper */
+.datatable-wrapper {
+  background: #fff;
+  border-radius: 0.25rem;
+}
+
+.datatable-wrapper table {
+  width: 100%;
+}
+
+/* Bootstrap 5 DataTables Integration */
+/* Most styling is handled by DataTables Bootstrap 5 integration */
+
+/* Uncomment if you need custom spacing (Bootstrap already provides adequate spacing):
+.dataTables_wrapper {
+  padding: 1rem 0;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+  margin-bottom: 1rem;
+}
+*/
+
+/* Uncomment if you need to override Bootstrap form input styles:
+.dataTables_wrapper .dataTables_filter input {
+  margin-left: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #dee2e6;
+  padding: 0.375rem 0.75rem;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.dataTables_wrapper .dataTables_length select {
+  margin: 0 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #dee2e6;
+  padding: 0.375rem 2rem 0.375rem 0.75rem;
+}
+*/
+
+/* Table styling */
+table.dataTable {
+  border-collapse: collapse !important;
+}
+
+table.dataTable thead th {
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+}
+
+table.dataTable tbody td {
+  padding: 0.75rem;
+  vertical-align: middle;
+}
+
+table.dataTable tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.025);
+}
+
+/* Clickable cells */
+.dt-clickable {
+  color: #0d6efd;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dt-clickable:hover {
+  color: #0a58ca;
+  text-decoration: underline;
+}
+
+/* Search highlighting - UNUSED: search feature uses .search-highlight class in table-search.css */
+/* span.highlight {
+  background-color: #fff3cd;
+  padding: 0.1rem 0.2rem;
+  border-radius: 0.15rem;
+  font-weight: 600;
+  color: #664d03;
+} */
+
+/* Child row content (responsive detail) */
+.child-row-content {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-left: 3px solid #0d6efd;
+}
+
+.child-row-content strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+/* Responsive control button */
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control {
+  cursor: pointer;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.15);
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th.dtr-control:before {
+  background-color: #dc3545;
+}
+
+/* Export buttons */
+.dt-buttons {
+  margin-bottom: 1rem;
+}
+
+.dt-button {
+  margin-right: 0.5rem;
+  border-radius: 0.25rem !important;
+  font-size: 0.875rem !important;
+  padding: 0.375rem 0.75rem !important;
+}
+
+.dt-button:hover {
+  background-color: #0d6efd !important;
+  color: white !important;
+  border-color: #0d6efd !important;
+}
+
+/* Pagination - Outline style */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0.375rem 0.75rem;
+  margin: 0 0.125rem;
+  border-radius: 0.25rem;
+  background: transparent !important;
+  color: #0d6efd !important;
+  border: 1px solid #dee2e6 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background: transparent !important;
+  color: #0d6efd !important;
+  border: 1px solid #0d6efd !important;
+  font-weight: 600;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: #0d6efd !important;
+  color: white !important;
+  border: 1px solid #0d6efd !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  background: #0d6efd !important;
+  color: white !important;
+  border: 1px solid #0d6efd !important;
+}
+
+/* Loading indicator */
+.dataTables_processing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
+  margin-top: -26px;
+  text-align: center;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments - Bootstrap handles most responsive behavior */
+/* Uncomment if you need custom mobile layout:
+@media (max-width: 768px) {
+  .dataTables_wrapper .dataTables_length,
+  .dataTables_wrapper .dataTables_filter {
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+  
+  .dataTables_wrapper .dt-buttons {
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+  
+  .dt-button {
+    margin-bottom: 0.5rem;
+  }
+}
+*/
+
+/* Empty table state */
+.dataTables_empty {
+  padding: 2rem !important;
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* ========================================
+   Action Buttons (Minimal Custom CSS - Bootstrap First)
+   ======================================== */
+
+/* Only add what Bootstrap doesn't provide */
+.action-buttons {
+  white-space: nowrap;
+}
+
+/* Ensure button borders connect properly in button group */
+.action-buttons .btn:not(:last-child) {
+  border-right: none;
+}
+
+/* Modal table column width classes */
+.modal-col-25 {
+  width: 25%;
+}
+
+.modal-col-30 {
+  width: 30%;
+}
+
+.modal-col-70 {
+  width: 70%;
+}
+
+.modal-col-75 {
+  width: 75%;
+}

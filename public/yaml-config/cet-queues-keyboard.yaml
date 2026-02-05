@@ -1,0 +1,14 @@
+# CET Queues - Keyboard Accessibility Settings
+
+cetQueuesSummary:
+  enabled: true
+  keys:
+    tab: Navigate between cells
+    enter: View queue message details
+    escape: Clear selection
+
+cetMessageDetails:
+  enabled: true
+  keys:
+    tab: Navigate between cells
+    escape: Return to queue summary

@@ -1,0 +1,33 @@
+# CET Apps - Table Column Definitions
+
+cetApps:
+  - data: iGateApp
+    title: iGate App
+    width: "12%"
+    className: text-center fw-bold
+
+  - data: cetApp
+    title: CET APP
+    width: "18%"
+    className: text-start
+
+  - data: sqlServer
+    title: SQL Server
+    width: "12%"
+    className: text-center
+
+  - data: database_name
+    title: Database
+    width: "15%"
+    className: text-start font-monospace
+
+  - data: description
+    title: Description
+    width: "25%"
+    className: text-start
+
+  - data: supportLink
+    title: Support Link
+    width: "13%"
+    className: text-center
+    render: renderSupportLink

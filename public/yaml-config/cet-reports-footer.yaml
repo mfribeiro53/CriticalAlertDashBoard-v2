@@ -1,0 +1,15 @@
+# CET Reports - Pagination/Footer Configuration
+
+enabled: true
+showEntries: true
+showInfo: true
+showPagination: true
+pageLength: 10
+lengthMenu:
+  - 10
+  - 25
+  - 50
+  - 100
+infoText: Showing _START_ to _END_ of _TOTAL_ segments
+emptyText: No segment data available
+ariaLabel: CET Reports Pagination Controls

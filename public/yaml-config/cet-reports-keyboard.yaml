@@ -1,0 +1,44 @@
+# CET Reports - Keyboard Shortcuts Configuration
+
+enabled: true
+
+shortcuts:
+  - key: ArrowUp
+    action: Navigate to previous row
+    scope: table
+
+  - key: ArrowDown
+    action: Navigate to next row
+    scope: table
+
+  - key: ArrowLeft
+    action: Navigate to previous cell
+    scope: cell
+
+  - key: ArrowRight
+    action: Navigate to next cell
+    scope: cell
+
+  - key: Enter
+    action: Activate selected row or cell action
+    scope: row
+
+  - key: Home
+    action: Navigate to first row
+    scope: table
+
+  - key: End
+    action: Navigate to last row
+    scope: table
+
+  - key: PageUp
+    action: Navigate to previous page
+    scope: table
+
+  - key: PageDown
+    action: Navigate to next page
+    scope: table
+
+  - key: /
+    action: Focus search input
+    scope: global

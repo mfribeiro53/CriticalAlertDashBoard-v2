@@ -1,0 +1,157 @@
+<!--
+  ============================================================================
+  CET Dashboard Information Modal
+  ============================================================================
+  
+  File: cet-dashboard-info-modal.ejs
+  Purpose: Provides comprehensive help documentation for the main CET Dashboard,
+           explaining the overview interface, navigation options, key metrics,
+           and system monitoring capabilities.
+  
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-15 12:44:08
+  
+  Usage:
+    <%%- include('partials/cet-dashboard-info-modal') %%>
+  
+  Modal Trigger:
+    - Activated by clicking the info button on the CET Dashboard page
+    - Button selector: data-bs-target="#appInfoModal"
+  
+  Dependencies:
+    - Bootstrap 5.x (modal, buttons, alerts)
+    - Bootstrap Icons (bi-* classes for icons)
+    - info-modal-resources.ejs (included partial for resource links)
+  
+  Sections Covered:
+    - Dashboard overview and purpose
+    - Navigation guide to different CET views
+    - Key metrics and status cards explanation
+    - Card view features and interactions
+    - Filtering and search capabilities
+    - Related resources and documentation
+  
+  Key Features:
+    - Large scrollable modal (modal-lg modal-dialog-scrollable)
+    - Primary-themed header (bg-primary text-white)
+    - Clear navigation paths to other views
+    - Visual card examples and descriptions
+    - Collapsible resources section
+  
+  Notes:
+    - Serves as the central help hub for the CET application suite
+    - Provides links to all other CET views (Apps, Issues, Queues, Reports)
+    - Dashboard is the entry point for monitoring CET system health
+  ============================================================================
+-->
+<div class="modal fade" id="appInfoModal" tabindex="-1" aria-labelledby="appInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="appInfoModalLabel">
+          <i class="bi bi-info-circle me-2"></i>About CET Dashboard
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-primary mb-3"><i class="bi bi-bar-chart-line me-2"></i>Overview</h6>
+        <p>
+          The <strong>CET Dashboard</strong> provides real-time monitoring and health status tracking for all CET (Central Engine Technology) applications across your infrastructure. This centralized monitoring solution helps you quickly identify and respond to system issues, queue backlogs, and performance degradation.
+        </p>
+
+        <h6 class="text-primary mt-3 mb-2"><i class="bi bi-cpu me-2"></i>What is CET?</h6>
+        <p>
+          CET allows for parallel processing of millions of records over a short period of time by breaking the full flow and enhancement of data into smaller pieces. Each step performs a part of the business logic and passes the data along to the next step, sort of like a data assembly line. The "Partner map" keeps track of what steps need to complete before a downstream step can begin; it also keeps track of when temporary staging data is no longer needed and can be deleted to keep the DASD manageable. The smallest steps (called "critical sections") that write to the same table are kept together in a single stored procedure. Service Broker and activation sprocs are used to make sure the CET sproc can only run once at a time, preventing deadlocks from occurring.
+        </p>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-speedometer2 me-2"></i>Key Metrics</h6>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-app-indicator text-success me-2 fs-5"></i>
+              <div>
+                <strong>Threshold Alerts</strong>
+                <p class="text-muted small mb-0">Total number of Threshold Alerts being monitored in the system</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-exclamation-circle text-warning me-2 fs-5"></i>
+              <div>
+                <strong>CET Alerts</strong>
+                <p class="text-muted small mb-0">Number of applications reporting errors or problems</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-hourglass-split text-warning me-2 fs-5"></i>
+              <div>
+                <strong>Processes Behind</strong>
+                <p class="text-muted small mb-0">Applications experiencing message processing delays</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-speedometer text-secondary me-2 fs-5"></i>
+              <div>
+                <strong>Slow Processes</strong>
+                <p class="text-muted small mb-0">Applications with degraded processing performance</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-table me-2"></i>Application Health Table</h6>
+        <p>The main table displays detailed status information for each CET application:</p>
+        <ul>
+          <li><strong>Application Name:</strong> Unique identifier for the CET application</li>
+          <li><strong>Performance Metrics:</strong> Processing speed and response times</li>
+          <li><strong>Error Information:</strong> Any reported issues or exceptions</li>
+        </ul>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-search me-2"></i>Features</h6>
+        <ul>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Real-time Updates:</strong> Live data refresh to monitor changing conditions</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Advanced Filtering:</strong> Filter applications by status, queue state, or performance</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Sortable Columns:</strong> Click any column header to sort data</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Export Options:</strong> Export data to CSV, Excel, PDF, or print</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Clickable Cards:</strong> Navigate to detailed views by clicking metric cards</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Keyboard Navigation:</strong> Full keyboard accessibility support</li>
+        </ul>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-lightbulb me-2"></i>Quick Tips</h6>
+        <div class="alert alert-info mb-2">
+          <strong><i class="bi bi-cursor me-1"></i>Click on metric cards</strong> to navigate to detailed views for that specific category
+        </div>
+        <div class="alert alert-warning mb-2">
+          <strong><i class="bi bi-exclamation-triangle me-1"></i>Pay attention to red metrics</strong> indicating critical issues requiring immediate attention
+        </div>
+        <div class="alert alert-success mb-0">
+          <strong><i class="bi bi-download me-1"></i>Use export buttons</strong> to generate reports for stakeholder communication
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Resources Section -->
+        <%- include('info-modal-resources', {
+          collapseId: 'resourcesCollapse'
+        }) %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

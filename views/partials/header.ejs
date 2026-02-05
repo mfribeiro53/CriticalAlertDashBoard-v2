@@ -1,0 +1,52 @@
+<!--
+  File: header.ejs
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-20 17:49:54
+-->
+<!-- Header Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a href="/" class="navbar-brand mb-0 h1">
+      <i class="bi bi-bug-fill"></i> Error Alert Dashboard
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a href="/cet-dashboard" class="nav-link <%= currentView === 'cet-dashboard' ? 'active' : '' %>">
+            <i class="bi bi-hdd-network"></i> CET Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/cet-apps" class="nav-link <%= currentView === 'cet-apps' ? 'active' : '' %>">
+            <i class="bi bi-gear-wide-connected"></i> CET Apps
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/cet-apps/admin" class="nav-link <%= currentView === 'cet-apps-admin' ? 'active' : '' %>">
+            <i class="bi bi-gear-fill"></i> Apps Admin
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/cet-issues" class="nav-link <%= currentView === 'cet-issues' ? 'active' : '' %>">
+            <i class="bi bi-exclamation-triangle"></i> CET Issues
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/cet-queues" class="nav-link <%= currentView === 'cet-queues' ? 'active' : '' %>">
+            <i class="bi bi-stack"></i> CET Queues
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/cet-reports" class="nav-link <%= currentView === 'cet-reports' ? 'active' : '' %>">
+            <i class="bi bi-file-earmark-bar-graph"></i> CET Reports
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

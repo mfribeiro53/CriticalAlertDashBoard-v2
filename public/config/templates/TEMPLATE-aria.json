@@ -1,0 +1,122 @@
+{
+  "_comment": "TEMPLATE: ARIA & Accessibility Configuration - Copy this file and rename it to '[viewname]-aria.json'",
+  "_description": "Configure accessibility features including screen reader announcements, ARIA labels, and keyboard navigation enhancements.",
+  "_usage": "Enable features appropriate for your table. More announcements = better accessibility but can be verbose.",
+  
+  "enabled": true,
+  
+  "_options": {
+    "enabled": "true/false - Enable/disable all ARIA enhancements"
+  },
+  
+  "_tableIdentification": "Provide context about what this table contains",
+  "tableLabel": "Your table name",
+  "tableDescription": "Brief description of table content and purpose",
+  
+  "_announcements": "Control what gets announced to screen readers",
+  "announceRowCount": true,
+  "announcePosition": true,
+  "announceSort": true,
+  "announceSearch": true,
+  "announcePage": true,
+  "announceLength": true,
+  "announceUpdate": true,
+  "announceSelection": true,
+  "announceFilter": true,
+  "announceDataChange": true,
+  "announceCellClick": false,
+  
+  "_announcementOptions": {
+    "announceRowCount": "Announce total rows after table loads/updates",
+    "announcePosition": "Announce current row/cell position during navigation",
+    "announceSort": "Announce when column sorting changes",
+    "announceSearch": "Announce search results and match count",
+    "announcePage": "Announce page changes and current page number",
+    "announceLength": "Announce when page length (rows per page) changes",
+    "announceUpdate": "Announce data updates/refreshes",
+    "announceSelection": "Announce row selection/deselection",
+    "announceFilter": "Announce filter applications and result counts",
+    "announceDataChange": "Announce any data modifications",
+    "announceCellClick": "Announce cell clicks (can be verbose, usually false)"
+  },
+  
+  "_enhancements": "Enable enhanced ARIA attributes on controls",
+  "enhanceSearch": true,
+  "enhancePagination": true,
+  "enhancePageLength": true,
+  "enhanceCells": true,
+  
+  "_enhancementOptions": {
+    "enhanceSearch": "Add ARIA labels and descriptions to search input",
+    "enhancePagination": "Add ARIA labels to pagination controls",
+    "enhancePageLength": "Add ARIA labels to page length selector",
+    "enhanceCells": "Add ARIA labels to table cells for better navigation"
+  },
+  
+  "_customMessages": "Override default announcement messages",
+  "messages": {
+    "initialized": "Table loaded with {rowCount} rows. Use arrow keys to navigate, enter to select, and question mark for keyboard shortcuts",
+    "searchLabel": "Search table",
+    "searchDescription": "Enter search terms to filter table rows",
+    "paginationLabel": "Navigate through table pages",
+    "pageLengthLabel": "Select number of rows to display per page",
+    "sortAscending": "Column sorted in ascending order",
+    "sortDescending": "Column sorted in descending order",
+    "rowSelected": "Row {rowNumber} selected",
+    "rowDeselected": "Row {rowNumber} deselected",
+    "filterApplied": "Filter applied, showing {visibleRows} of {totalRows} rows",
+    "pageChanged": "Page {currentPage} of {totalPages}",
+    "noResults": "No matching records found",
+    "_availablePlaceholders": {
+      "{rowCount}": "Total number of rows",
+      "{visibleRows}": "Number of visible/filtered rows",
+      "{totalRows}": "Total rows in dataset",
+      "{rowNumber}": "Current row number",
+      "{columnName}": "Current column name",
+      "{currentPage}": "Current page number",
+      "{totalPages}": "Total number of pages",
+      "{pageLength}": "Rows per page"
+    }
+  },
+  
+  "_wcagCompliance": {
+    "level": "AA",
+    "guidelines": [
+      "1.3.1 Info and Relationships - Semantic structure with ARIA",
+      "2.1.1 Keyboard - Full keyboard navigation support",
+      "2.4.3 Focus Order - Logical focus management",
+      "2.4.6 Headings and Labels - Descriptive labels for controls",
+      "3.3.2 Labels or Instructions - Clear input labels",
+      "4.1.2 Name, Role, Value - Proper ARIA roles and properties"
+    ]
+  },
+  
+  "_bestPractices": [
+    "Always provide meaningful tableLabel and tableDescription",
+    "Enable announceRowCount, announcePosition, and announceSort at minimum",
+    "Set announceCellClick to false unless table is highly interactive",
+    "Enable all enhancements (enhanceSearch, enhancePagination, etc.) for best accessibility",
+    "Customize messages to match your data domain (e.g., 'alerts', 'users', 'products')",
+    "Test with screen readers (NVDA, JAWS, VoiceOver)",
+    "Keep announcements concise but informative",
+    "Use {placeholders} in messages for dynamic content",
+    "Consider announcement frequency - too many can be overwhelming",
+    "Balance verbosity with usability based on user feedback"
+  ],
+  
+  "_testingTools": [
+    "NVDA (Windows) - Free, open-source screen reader",
+    "JAWS (Windows) - Professional screen reader",
+    "VoiceOver (macOS/iOS) - Built-in Apple screen reader",
+    "WAVE - Web accessibility evaluation tool",
+    "axe DevTools - Browser extension for accessibility testing",
+    "Lighthouse - Chrome DevTools accessibility audit"
+  ],
+  
+  "_commonScenarios": {
+    "simpleTable": "Enable basic announcements (rowCount, position, sort)",
+    "searchableTable": "Enable search, filter, and data change announcements",
+    "interactiveTable": "Enable selection, cell click, and update announcements",
+    "complexTable": "Enable all announcements and enhancements for power users"
+  }
+}

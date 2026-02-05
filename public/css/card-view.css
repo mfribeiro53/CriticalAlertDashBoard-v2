@@ -1,0 +1,48 @@
+/**
+ * Card View Specific Styles
+ */
+
+.card-alert {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.card-alert:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2) !important;
+}
+
+.card-alert .card-header {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.card-alert .error-message {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #333;
+  min-height: 3em;
+}
+
+.card-alert code {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.card-alert .card-footer {
+  font-size: 0.8rem;
+}
+
+/* Card description text styling */
+.card-description {
+  font-size: 0.75rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-alert .error-message {
+    min-height: auto;
+  }
+}

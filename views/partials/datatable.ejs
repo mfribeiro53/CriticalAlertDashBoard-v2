@@ -1,0 +1,180 @@
+<%
+/**
+ * File: datatable.ejs
+ * Created: 2025-12-15 12:44:08
+ * Last Modified: 2025-12-15 18:20:32
+ * 
+ * Reusable DataTable Partial
+ * 
+ * A flexible wrapper for DataTables that can be reused across different views
+ * 
+ * Parameters:
+ * @param {string} id - Unique table ID (required)
+ * @param {array} columns - Column configuration array (required)
+ *   Each column object can have:
+ *   - data: string - Data source property (dot notation for nested)
+ *   - title: string - Column header text
+ *   - orderable: boolean - Enable sorting (default: true)
+ *   - searchable: boolean - Include in search (default: true)
+ *   - className: string - CSS classes for column
+ *   - render: string - Name of render function from table-helpers.js
+ *   - urlTemplate: string - URL template for clickable cells (e.g., '/service/{source.service}')
+ *   - responsivePriority: number - Column visibility priority on mobile (1=always visible)
+ *   - width: string - Column width (e.g., '100px', '20%')
+ * @param {array} dataSource - Array of data objects (null for AJAX mode)
+ * @param {array} defaultOrder - Default sort order [[columnIndex, 'asc|desc']] (optional)
+ * @param {object} dtOptions - Additional DataTables options (optional)
+ * @param {array} exportButtons - Export button types ['copy', 'csv', 'excel', 'pdf'] (default: ['copy', 'csv', 'excel'])
+ * @param {boolean} colVisButton - Show column visibility toggle (default: false)
+ * @param {boolean} stateSave - Persist table state in localStorage (default: false)
+ * @param {boolean} serverSide - Enable server-side processing (default: false)
+ * @param {string} ajaxUrl - URL for AJAX data source (required if serverSide=true)
+ * @param {boolean} autoInit - Auto-initialize on page load (default: true)
+ * @param {string} childRowField - Dot-notation field for child row content (optional)
+ * @param {string} childRowRender - Custom render function name for child rows (optional)
+ * @param {object} filterConfig - Advanced filtering configuration (optional)
+ *   - enabled: boolean - Enable column filters
+ *   - position: string - 'top' or 'bottom' (default: 'top')
+ *   - columns: array - Array of filter configurations
+ *     Each filter object:
+ *     - columnIndex: number - Column index to filter
+ *     - type: string - 'text', 'select', 'multi-select', 'range', 'date', 'dateRange'
+ *     - label: string - Filter label
+ *     - placeholder: string - Placeholder text
+ *     - options: array - Options for select/multi-select (optional)
+ *     - colSize: string - Bootstrap column class (default: 'col-md-3')
+ */
+
+// Set defaults
+const tableId = (typeof id !== 'undefined') ? id : 'dataTable_' + Date.now();
+const exportBtns = (typeof exportButtons !== 'undefined') ? exportButtons : ['copy', 'csv', 'excel'];
+const showColVis = (typeof colVisButton !== 'undefined') ? colVisButton : false;
+const saveState = (typeof stateSave !== 'undefined') ? stateSave : false;
+const isServerSide = (typeof serverSide !== 'undefined') ? serverSide : false;
+const shouldAutoInit = (typeof autoInit !== 'undefined') ? autoInit : true;
+const childField = (typeof childRowField !== 'undefined') ? childRowField : null;
+const dataTablesOptions = (typeof dtOptions !== 'undefined') ? dtOptions : {};
+const ajaxSource = (typeof ajaxUrl !== 'undefined') ? ajaxUrl : '';
+const defaultSortOrder = (typeof defaultOrder !== 'undefined') ? defaultOrder : null;
+const filters = (typeof filterConfig !== 'undefined') ? filterConfig : null;
+const selection = (typeof selectionConfig !== 'undefined') ? selectionConfig : null;
+const footer = (typeof footerConfig !== 'undefined') ? footerConfig : null;
+
+// Validate required parameters
+if (!columns || !Array.isArray(columns)) {
+  console.error('DataTable partial: columns parameter is required and must be an array');
+}
+
+// Helper function: Check if columns contain groups
+function hasColumnGroups(cols) {
+  return cols.some(col => col.columns && Array.isArray(col.columns));
+}
+
+// Helper function: Flatten grouped column structure
+function flattenColumns(cols) {
+  const flat = [];
+  cols.forEach(item => {
+    if (item.columns) {
+      // It's a group - add nested columns
+      item.columns.forEach(col => flat.push(col));
+    } else {
+      // Regular column
+      flat.push(item);
+    }
+  });
+  return flat;
+}
+
+// Determine if we have column groups
+const hasGroups = hasColumnGroups(columns);
+const flatColumns = hasGroups ? flattenColumns(columns) : columns;
+
+// Build buttons configuration
+const buttons = [];
+exportBtns.forEach(btn => {
+  if (['copy', 'csv', 'excel', 'pdf', 'print'].includes(btn)) {
+    buttons.push(btn);
+  }
+});
+if (showColVis) {
+  buttons.push('colvis');
+}
+%>
+
+<!-- DataTable Wrapper -->
+<div class="datatable-wrapper">
+  <table id="<%= tableId %>" 
+         class="table table-striped table-hover dt-responsive nowrap" 
+         data-dt-config='<%- JSON.stringify({
+           id: tableId,
+           columns: flatColumns,
+           originalColumns: columns,
+           hasColumnGroups: hasGroups,
+           dataSource: (typeof dataSource !== 'undefined' && dataSource) ? dataSource : null,
+           defaultOrder: defaultSortOrder || null,
+           dtOptions: dataTablesOptions,
+           buttons: buttons,
+           stateSave: saveState,
+           serverSide: isServerSide,
+           ajaxUrl: ajaxSource,
+           childField: childField,
+           autoInit: shouldAutoInit,
+           filterConfig: filters || null,
+           selectionConfig: selection || null,
+           footerConfig: footer || null,
+           searchConfig: (typeof searchConfig !== 'undefined') ? searchConfig : null,
+           ariaConfig: (typeof ariaConfig !== 'undefined') ? ariaConfig : null,
+           keyboardConfig: (typeof keyboardConfig !== 'undefined') ? keyboardConfig : null
+         }) %>'>
+    <thead>
+      <% if (hasGroups) { %>
+        <!-- Group header row (row 1) -->
+        <tr>
+          <% columns.forEach(col => { %>
+            <% if (col.columns) { %>
+              <!-- Grouped column with colspan -->
+              <th colspan="<%= col.columns.length %>" class="group-header"><%= col.groupTitle || 'Group' %></th>
+            <% } else { %>
+              <!-- Non-grouped column with rowspan to span both rows -->
+              <th rowspan="2"><%= col.title || col.data %></th>
+            <% } %>
+          <% }); %>
+        </tr>
+        <!-- Individual column header row (row 2) -->
+        <tr>
+          <% columns.forEach(col => { %>
+            <% if (col.columns) { %>
+              <!-- Output individual columns under the group -->
+              <% col.columns.forEach(subCol => { %>
+                <th><%= subCol.title || subCol.data %></th>
+              <% }); %>
+            <% } %>
+            <!-- Non-grouped columns already handled with rowspan=2 -->
+          <% }); %>
+        </tr>
+      <% } else { %>
+        <!-- Simple single-row header (backward compatible) -->
+        <tr>
+          <% columns.forEach(col => { %>
+            <th><%= col.title || col.data %></th>
+          <% }); %>
+        </tr>
+      <% } %>
+    </thead>
+    <tbody>
+      <!-- Data will be populated by DataTables -->
+    </tbody>
+    <% if (footer && footer.enabled) { %>
+    <tfoot>
+      <tr>
+        <% flatColumns.forEach((col, index) => { %>
+          <td data-column-index="<%= index %>"></td>
+        <% }); %>
+      </tr>
+    </tfoot>
+    <% } %>
+  </table>
+</div>
+
+<!-- No inline script needed! Configuration stored in data-dt-config attribute.
+     Initialization happens in /js/table-init.js -->

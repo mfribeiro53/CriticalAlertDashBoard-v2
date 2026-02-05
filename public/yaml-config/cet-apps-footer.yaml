@@ -1,0 +1,27 @@
+# CET Apps - Table Footer Configuration
+
+enabled: true
+columns:
+  - columnIndex: 0  # iGate App
+    content: "Total Applications:"
+    className: fw-bold text-end
+
+  - columnIndex: 1  # CET APP
+    content: ""
+    className: ""
+
+  - columnIndex: 2  # SQL Server
+    content: ""
+    className: ""
+
+  - columnIndex: 3  # Database
+    content: ""
+    className: ""
+
+  - columnIndex: 4  # Description
+    content: ""
+    className: ""
+
+  - columnIndex: 5  # Support Link
+    content: ""
+    className: ""

@@ -1,0 +1,9 @@
+# CET Queues - Accessibility (ARIA) Configuration
+
+cetQueuesSummary:
+  tableLabel: CET Queue Summary
+  tableDescription: Summary of message queues for CET applications showing queue status and message counts
+
+cetMessageDetails:
+  tableLabel: Queue Message Details
+  tableDescription: Detailed view of individual messages in the selected queue

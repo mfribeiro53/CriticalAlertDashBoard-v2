@@ -1,0 +1,136 @@
+{
+  "_comment": "TEMPLATE: Column Configuration - Copy this file and rename it to '[viewname]-columns.json'",
+  "_description": "Define the columns displayed in your DataTable. Each column maps to a data field and configures its display, behavior, and interactivity.",
+  "_usage": "Replace 'yourDataKey' with actual field names from your data source. Remove columns you don't need.",
+  
+  "yourDataKey": [
+    {
+      "_comment": "Basic column configuration example",
+      "data": "id",
+      "title": "ID",
+      "orderable": true,
+      "searchable": true,
+      "className": "text-center",
+      "width": "60px",
+      "responsivePriority": 1,
+      "_options": {
+        "data": "Property name from your data object (supports nested: 'parent.child')",
+        "title": "Column header text displayed to users",
+        "orderable": "true/false - Enable/disable column sorting",
+        "searchable": "true/false - Include this column in search",
+        "className": "CSS classes for the column cells (e.g., 'text-center', 'fw-bold')",
+        "width": "Fixed width for the column (e.g., '60px', '10%')",
+        "responsivePriority": "Number 1-10, lower = higher priority (1 = always visible)"
+      }
+    },
+    {
+      "_comment": "Column with custom renderer",
+      "data": "status",
+      "title": "Status",
+      "orderable": true,
+      "searchable": true,
+      "render": "renderStatusBadge",
+      "responsivePriority": 2,
+      "_options": {
+        "render": "Name of custom render function from custom-handlers.js (e.g., 'renderStatusBadge', 'renderSeverityBadge', 'renderClickableCell')"
+      }
+    },
+    {
+      "_comment": "Editable column with select dropdown",
+      "data": "category",
+      "title": "Category",
+      "orderable": true,
+      "searchable": true,
+      "editable": true,
+      "editType": "select",
+      "editOptions": [
+        {"value": "option1", "label": "Option 1"},
+        {"value": "option2", "label": "Option 2"}
+      ],
+      "editRequired": true,
+      "responsivePriority": 3,
+      "_options": {
+        "editable": "true/false - Enable inline editing for this column",
+        "editType": "'text', 'select', 'textarea', 'number', 'date' - Input type for editing",
+        "editOptions": "Array of {value, label} objects for select/dropdown editing",
+        "editRequired": "true/false - Whether the field is required when editing"
+      }
+    },
+    {
+      "_comment": "Editable text column",
+      "data": "notes",
+      "title": "Notes",
+      "orderable": false,
+      "searchable": true,
+      "editable": true,
+      "editType": "textarea",
+      "editRequired": false,
+      "responsivePriority": 4
+    },
+    {
+      "_comment": "Clickable column with URL template",
+      "data": "reference",
+      "title": "Reference",
+      "orderable": true,
+      "searchable": true,
+      "render": "renderClickableCell",
+      "urlTemplate": "/details/{id}",
+      "responsivePriority": 5,
+      "_options": {
+        "urlTemplate": "URL pattern with {fieldName} placeholders that get replaced with actual data values"
+      }
+    },
+    {
+      "_comment": "Date/time column with custom format",
+      "data": "timestamp",
+      "title": "Date",
+      "orderable": true,
+      "searchable": true,
+      "type": "date",
+      "render": "renderDateTime",
+      "responsivePriority": 6,
+      "_options": {
+        "type": "'date', 'num', 'string', 'html' - Data type for proper sorting"
+      }
+    },
+    {
+      "_comment": "Hidden column (useful for data storage without display)",
+      "data": "metadata",
+      "title": "",
+      "visible": false,
+      "orderable": false,
+      "searchable": false,
+      "_options": {
+        "visible": "false - Hide column but keep data accessible"
+      }
+    }
+  ],
+  
+  "_availableRenderFunctions": {
+    "renderStatusBadge": "Displays status as colored badge",
+    "renderSeverityBadge": "Displays severity with appropriate styling",
+    "renderClickableCell": "Makes cell clickable with link (requires urlTemplate)",
+    "renderDateTime": "Formats timestamps as readable dates",
+    "renderProgressBar": "Displays numeric values as progress bars",
+    "custom": "Add your own render functions in custom-handlers.js"
+  },
+  
+  "_classNameOptions": [
+    "text-start", "text-center", "text-end",
+    "fw-bold", "fw-normal", "fw-light",
+    "text-muted", "text-primary", "text-success", "text-danger", "text-warning", "text-info",
+    "small", "fs-5", "fs-6",
+    "text-nowrap", "text-truncate"
+  ],
+  
+  "_bestPractices": [
+    "Always set responsivePriority for mobile responsiveness (1=highest priority)",
+    "Use className for consistent styling across your table",
+    "Set orderable=false for columns that don't make sense to sort",
+    "Set searchable=false for ID or action columns",
+    "Use width sparingly - let DataTables handle most column sizing",
+    "For nested data, use dot notation: 'parent.child.property'",
+    "Test your custom render functions thoroughly",
+    "Keep column count reasonable for mobile views (8-10 max recommended)"
+  ]
+}

@@ -1,0 +1,51 @@
+# CET Request Form Configuration
+# Form for requesting historical data for a specific application and time range
+
+action: /api/request-data
+method: POST
+
+fields:
+  appId:
+    label: Application
+    type: select
+    required: true
+    placeholder: Select an application...
+    helpText: Select the application for which you want to request data.
+
+  startDateTime:
+    label: Start Date & Time
+    required: true
+    placeholder: Select start date and time
+    helpText: Specify when the data request period should begin.
+
+  endDateTime:
+    label: End Date & Time
+    required: true
+    placeholder: Select end date and time
+    helpText: Specify when the data request period should end.
+
+submitButton:
+  text: Submit Request
+  variant: primary
+  icon: bi-send
+
+# Data source for populating the app dropdown
+appDataSource: /api/apps
+
+# Flatpickr date/time picker options
+flatpickrOptions:
+  enableTime: true
+  dateFormat: Y-m-d H:i
+  time_24hr: true
+  altInput: true
+  altFormat: F j, Y at H:i
+  defaultHour: 0
+  defaultMinute: 0
+
+showToast: true
+resetOnSuccess: true
+
+# Callback hooks (set in JavaScript)
+onSuccess: null
+onError: null
+onDateTimeChange: null

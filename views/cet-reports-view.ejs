@@ -1,0 +1,107 @@
+<!--
+  File: cet-reports-view.ejs
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-15 12:44:08
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { 
+    pageTitle: 'CET Reports',
+    includeDataTables: true,
+    includeFilters: true,
+    includeFooter: true
+  }) %>
+  
+  <!-- Page-specific CSS -->
+  <link href="/css/cet-reports.css" rel="stylesheet">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="container-fluid mt-4 px-5">
+    <div class="row mb-3">
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/cet-dashboard"><i class="bi bi-arrow-left"></i> Back to CET Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">CET Reports</li>
+          </ol>
+        </nav>
+        <h2>
+          <i class="bi bi-file-earmark-bar-graph text-primary"></i> CET Reports
+          <button type="button" class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#cetReportsInfoModal" aria-label="Page Information">
+            <i class="bi bi-info-circle"></i>
+          </button>
+        </h2>
+        <p class="text-muted">Segment execution data for critical sections - Latest run summary and detailed history</p>
+      </div>
+    </div>
+
+    <!-- Latest Run Summary Table -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-table"></i> Latest Run Summary - Last Run for Each Critical Section
+            </h5>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-3">Table shows the latest data for each critical section for the day</p>
+            <%- include('partials/datatable', { 
+              id: 'cetReportsSummaryTable',
+              columns: columnsSummary,
+              dataSource: cetReportsSummary,
+              defaultOrder: [[0, 'asc'], [1, 'asc'], [2, 'asc']],
+              filterConfig: filterConfig,
+              footerConfig: footerConfig,
+              ariaConfig: ariaConfig,
+              keyboardConfig: keyboardConfig,
+              exportButtons: ['copy', 'csv', 'excel', 'print'],
+              stateSave: true,
+              autoInit: true
+            }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Runs Detail Table -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-list-ul"></i> All Runs Detail - Complete History for the Day
+            </h5>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-3">Table shows all runs for each critical section for the day</p>
+            <%- include('partials/datatable', { 
+              id: 'cetReportsDetailTable',
+              columns: columnsDetail,
+              dataSource: cetReportsDetail,
+              defaultOrder: [[2, 'asc'], [3, 'desc'], [4, 'desc']],
+              filterConfig: filterConfig,
+              footerConfig: footerConfig,
+              ariaConfig: ariaConfig,
+              keyboardConfig: keyboardConfig,
+              exportButtons: ['copy', 'csv', 'excel', 'print'],
+              stateSave: true,
+              autoInit: true
+            }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/cet-reports-info-modal') %>
+
+  <%- include('partials/footer') %>
+  
+  <!-- Page-specific JavaScript -->
+  <script src="/js/pages/cet-reports-page.js"></script>
+</body>
+</html>

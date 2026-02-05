@@ -1,0 +1,270 @@
+<%
+/**
+ * File: card.ejs
+ * Created: 2025-12-15 12:44:08
+ * Last Modified: 2025-12-15 18:24:54
+ * 
+ * Bootstrap Card Wrapper - Reusable EJS Partial
+ * 
+ * Usage:
+ *   include('partials/card', { 
+ *     cardConfig: cardConfig,
+ *     cardId: 'myCard',
+ *     cardData: {...},
+ *     dataAttrs: { icon: 'star', label: 'My Card', thresholds: { warning: 10, danger: 20 } }
+ *   })
+ * 
+ * Parameters:
+ *   @param {Object} cardConfig - Card configuration object
+ *   @param {String} cardId - Unique card identifier
+ *   @param {Object} cardData - Data for card content (optional)
+ *   @param {Object} dataAttrs - Data attributes to embed for client-side JS (optional)
+ */
+
+// Default configuration
+const config = typeof cardConfig !== 'undefined' ? cardConfig : {};
+const id = typeof cardId !== 'undefined' ? cardId : 'card-' + Date.now();
+const data = typeof cardData !== 'undefined' ? cardData : {};
+const attrs = typeof dataAttrs !== 'undefined' ? dataAttrs : {};
+
+// Card properties
+const type = config.type || 'custom'; // stat, chart, list, table, custom, datatable
+const title = config.title || '';
+const subtitle = config.subtitle || '';
+const icon = config.icon || '';
+const iconColor = config.iconColor || 'primary';
+const variant = config.variant || ''; // primary, success, danger, warning, info, light, dark
+const size = config.size || 'md'; // sm, md, lg
+const shadow = config.shadow !== false;
+const border = config.border !== false;
+const collapsible = config.collapsible || false;
+const collapsed = config.collapsed || false;
+const refreshable = config.refreshable || false;
+const closeable = config.closeable || false;
+const fullscreenable = config.fullscreenable || false;
+const loading = config.loading || false;
+const footer = config.footer || null;
+const bodyClass = config.bodyClass || '';
+const headerClass = config.headerClass || '';
+const footerClass = config.footerClass || '';
+const customClass = config.customClass || '';
+
+// Card content
+const content = config.content || '';
+const htmlContent = config.htmlContent || '';
+
+// Build CSS classes
+let cardClasses = ['card'];
+if (shadow) cardClasses.push('shadow-sm');
+if (!border) cardClasses.push('border-0');
+if (variant) cardClasses.push(`border-${variant}`);
+if (size === 'sm') cardClasses.push('card-sm');
+if (size === 'lg') cardClasses.push('card-lg');
+if (customClass) cardClasses.push(customClass);
+if (collapsed) cardClasses.push('card-collapsed');
+
+// Header actions
+const hasActions = collapsible || refreshable || closeable || fullscreenable;
+
+// Build data-* attributes string from dataAttrs
+let dataAttrStr = '';
+if (attrs.icon) dataAttrStr += ` data-icon="${attrs.icon}"`;
+if (attrs.label) dataAttrStr += ` data-label="${attrs.label}"`;
+if (attrs.description) dataAttrStr += ` data-description="${attrs.description}"`;
+if (attrs.clickAction) dataAttrStr += ` data-click-action="${attrs.clickAction}"`;
+if (attrs.thresholds) {
+  if (attrs.thresholds.warning != null) dataAttrStr += ` data-threshold-warning="${attrs.thresholds.warning}"`;
+  if (attrs.thresholds.danger != null) dataAttrStr += ` data-threshold-danger="${attrs.thresholds.danger}"`;
+}
+%>
+
+<div class="<%= cardClasses.join(' ') %>" id="<%= id %>" data-card-type="<%= type %>"<%- dataAttrStr %>>
+  <% if (title || hasActions) { %>
+  <div class="card-header <%= headerClass %> <%= variant ? 'bg-' + variant + ' text-white' : '' %>">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <% if (icon) { %>
+        <i class="bi bi-<%= icon %> text-<%= iconColor %> me-2 fs-4"></i>
+        <% } %>
+        <div>
+          <% if (title) { %>
+          <h5 class="card-title mb-0"><%- title %></h5>
+          <% } %>
+          <% if (subtitle) { %>
+          <small class="text-muted d-block"><%- subtitle %></small>
+          <% } %>
+        </div>
+      </div>
+      
+      <% if (hasActions) { %>
+      <div class="card-actions btn-group btn-group-sm">
+        <% if (refreshable) { %>
+        <button type="button" class="btn btn-sm <%= variant ? 'btn-outline-light' : 'btn-outline-secondary' %>" 
+                data-card-action="refresh" title="Refresh">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+        <% } %>
+        <% if (fullscreenable) { %>
+        <button type="button" class="btn btn-sm <%= variant ? 'btn-outline-light' : 'btn-outline-secondary' %>" 
+                data-card-action="fullscreen" title="Fullscreen">
+          <i class="bi bi-arrows-fullscreen"></i>
+        </button>
+        <% } %>
+        <% if (collapsible) { %>
+        <button type="button" class="btn btn-sm <%= variant ? 'btn-outline-light' : 'btn-outline-secondary' %>" 
+                data-card-action="collapse" title="<%= collapsed ? 'Expand' : 'Collapse' %>">
+          <i class="bi bi-<%= collapsed ? 'chevron-down' : 'chevron-up' %>"></i>
+        </button>
+        <% } %>
+        <% if (closeable) { %>
+        <button type="button" class="btn btn-sm <%= variant ? 'btn-outline-light' : 'btn-outline-secondary' %>" 
+                data-card-action="close" title="Close">
+          <i class="bi bi-x-lg"></i>
+        </button>
+        <% } %>
+      </div>
+      <% } %>
+    </div>
+  </div>
+  <% } %>
+  
+  <div class="position-relative <%= collapsed ? 'd-none' : '' %>">
+    <% if (loading) { %>
+    <div class="position-absolute top-0 start-0 end-0 bottom-0 d-flex align-items-center justify-content-center bg-white bg-opacity-90 rounded-bottom card-loading-overlay">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <% } %>
+    
+    <div class="card-body <%= bodyClass %>">
+      <% if (type === 'stat') { %>
+        <%# Statistic Card %>
+        <div class="text-center py-3">
+          <div class="display-4 fw-bold mb-2 <%= config.statValueClass || '' %>">
+            <%= config.statValue || '0' %>
+          </div>
+          <div class="text-muted text-uppercase small fw-semibold mb-2 letter-spacing-wide">
+            <%= config.statLabel || '' %>
+          </div>
+          <% if (config.statChange) { %>
+          <div class="small fw-semibold mt-2 <%= config.statChange > 0 ? 'text-success' : 'text-danger' %>">
+            <i class="bi bi-<%= config.statChange > 0 ? 'arrow-up' : 'arrow-down' %>"></i>
+            <%= Math.abs(config.statChange) %>%
+            <span class="text-muted ms-1">vs last period</span>
+          </div>
+          <% } %>
+        </div>
+      
+      <% } else if (type === 'chart') { %>
+        <%# Chart Card %>
+        <div class="position-relative w-100 card-chart-wrapper">
+          <canvas id="<%= id %>-chart" data-chart-config="<%= config.chartConfigId || '' %>" class="card-chart-canvas"></canvas>
+        </div>
+      
+      <% } else if (type === 'list') { %>
+        <%# List Card %>
+        <% if (config.listItems && config.listItems.length > 0) { %>
+        <ul class="list-group list-group-flush">
+          <% config.listItems.forEach(function(item) { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+              <% if (item.icon) { %>
+              <i class="bi bi-<%= item.icon %> me-2"></i>
+              <% } %>
+              <%= item.text || item %>
+            </span>
+            <% if (item.badge) { %>
+            <span class="badge bg-<%= item.badgeColor || 'primary' %> rounded-pill">
+              <%= item.badge %>
+            </span>
+            <% } %>
+          </li>
+          <% }); %>
+        </ul>
+        <% } else { %>
+        <p class="text-muted text-center">No items to display</p>
+        <% } %>
+      
+      <% } else if (type === 'table') { %>
+        <%# Simple Table Card %>
+        <% if (config.tableData && config.tableData.length > 0) { %>
+        <div class="table-responsive">
+          <table class="table table-sm table-hover mb-0">
+            <% if (config.tableHeaders) { %>
+            <thead>
+              <tr>
+                <% config.tableHeaders.forEach(function(header) { %>
+                <th><%= header %></th>
+                <% }); %>
+              </tr>
+            </thead>
+            <% } %>
+            <tbody>
+              <% config.tableData.forEach(function(row) { %>
+              <tr>
+                <% if (Array.isArray(row)) { %>
+                  <% row.forEach(function(cell) { %>
+                  <td><%= cell %></td>
+                  <% }); %>
+                <% } else { %>
+                  <% Object.values(row).forEach(function(cell) { %>
+                  <td><%= cell %></td>
+                  <% }); %>
+                <% } %>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+        <% } else { %>
+        <p class="text-muted text-center">No data available</p>
+        <% } %>
+      
+      <% } else if (type === 'datatable') { %>
+        <%# DataTable Card - Include datatable partial %>
+        <%- include('datatable', { 
+          tableConfig: config.datatableConfig,
+          tableId: config.datatableId || id + '-table',
+          tableData: data
+        }) %>
+      
+      <% } else { %>
+        <%# Custom Content %>
+        <% if (htmlContent) { %>
+          <%- htmlContent %>
+        <% } else if (content) { %>
+          <%= content %>
+        <% } else if (config.contentPartial) { %>
+          <%- include(config.contentPartial, config.contentData || {}) %>
+        <% } else { %>
+          <p class="text-muted">No content provided</p>
+        <% } %>
+      <% } %>
+    </div>
+    
+    <% if (footer) { %>
+    <div class="card-footer <%= footerClass %>">
+      <% if (typeof footer === 'string') { %>
+        <%- footer %>
+      <% } else if (footer.text) { %>
+        <%- footer.text %>
+      <% } else if (footer.buttons) { %>
+        <div class="d-flex justify-content-<%= footer.align || 'end' %> gap-2">
+          <% footer.buttons.forEach(function(btn) { %>
+          <button type="button" 
+                  class="btn btn-<%= btn.variant || 'primary' %> btn-<%= btn.size || 'sm' %>"
+                  data-card-button="<%= btn.action || '' %>"
+                  <%= btn.attributes || '' %>>
+            <% if (btn.icon) { %>
+            <i class="bi bi-<%= btn.icon %> me-1"></i>
+            <% } %>
+            <%= btn.text || btn.label || 'Button' %>
+          </button>
+          <% }); %>
+        </div>
+      <% } %>
+    </div>
+    <% } %>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+/**
+ * CET Queues Page Styles
+ * Page-specific styling for the CET Queues view
+ */
+
+/* Row selection styling */
+#cetQueuesSummary tbody tr {
+  cursor: pointer;
+}
+
+#cetQueuesSummary tbody tr:hover {
+  background-color: var(--bs-table-hover-bg, rgba(0, 0, 0, 0.075));
+}
+
+#cetQueuesSummary tbody tr.selected {
+  background-color: var(--bs-primary-bg-subtle, #cfe2ff) !important;
+  border-left: 4px solid var(--bs-primary, #0d6efd);
+}
+
+#cetQueuesSummary tbody tr:focus {
+  outline: 2px solid var(--bs-primary, #0d6efd);
+  outline-offset: -2px;
+}

@@ -1,0 +1,192 @@
+<!--
+  File: request-form.ejs
+  Created: 2025-12-17 15:27:42
+  Last Modified: 2025-12-17 17:16:52
+-->
+<%
+/**
+ * Request Form Partial
+ * 
+ * A reusable Bootstrap form component for data requests.
+ * Designed for extensibility with configuration-driven approach.
+ * 
+ * Parameters:
+ * - formId (optional): Unique form identifier
+ * - formConfig (optional): Configuration object
+ * - formData (optional): Pre-populated form data (for edit scenarios)
+ * 
+ * Configuration structure:
+ * {
+ *   action: '/api/request-data',        // Form submission endpoint
+ *   method: 'POST',                      // HTTP method
+ *   fields: {
+ *     appId: { ... },                    // Field-specific config
+ *     startDateTime: { ... },
+ *     endDateTime: { ... }
+ *   },
+ *   submitButton: {
+ *     text: 'Submit Request',
+ *     variant: 'primary',
+ *     icon: 'bi-send'
+ *   },
+ *   appDataSource: [],                   // Array of app objects or API endpoint
+ *   flatpickrOptions: { ... },           // Global Flatpickr settings
+ *   onSuccess: 'callbackFunction',       // Success callback name
+ *   onError: 'errorHandlerFunction',     // Error callback name
+ *   showToast: true                      // Show toast notifications
+ * }
+ */
+
+// Set defaults
+const formId = typeof id !== 'undefined' ? id : 'requestForm_' + Date.now();
+const config = typeof formConfig !== 'undefined' ? formConfig : {};
+const data = typeof formData !== 'undefined' ? formData : {};
+
+// Configuration defaults
+const defaults = {
+  action: '/api/request-data',
+  method: 'POST',
+  fields: {
+    appId: {
+      label: 'Application',
+      required: true,
+      placeholder: 'Select an application...'
+    },
+    startDateTime: {
+      label: 'Start Date & Time',
+      required: true,
+      placeholder: 'Select start date and time'
+    },
+    endDateTime: {
+      label: 'End Date & Time',
+      required: true,
+      placeholder: 'Select end date and time'
+    }
+  },
+  submitButton: {
+    text: 'Submit Request',
+    variant: 'primary',
+    icon: 'bi-send'
+  },
+  appDataSource: [],
+  flatpickrOptions: {
+    enableTime: true,
+    dateFormat: 'Y-m-d H:i',
+    time_24hr: true,
+    altInput: true,
+    altFormat: 'F j, Y at H:i'
+  },
+  showToast: true
+};
+
+// Merge configuration
+const formConfigMerged = Object.assign({}, defaults, config);
+const fieldConfig = Object.assign({}, defaults.fields, config.fields || {});
+const submitConfig = Object.assign({}, defaults.submitButton, config.submitButton || {});
+const flatpickrOpts = Object.assign({}, defaults.flatpickrOptions, config.flatpickrOptions || {});
+
+// Prepare app options
+const apps = formConfigMerged.appDataSource || [];
+%>
+
+<form id="<%= formId %>" 
+      method="<%= formConfigMerged.method %>" 
+      action="<%= formConfigMerged.action %>"
+      data-form-config='<%- JSON.stringify(formConfigMerged) %>'
+      class="compact-form"
+      novalidate>
+  
+  <div class="row g-3">
+    <!-- App Selector -->
+    <div class="col-lg-4">
+      <label for="<%= formId %>_appId" class="form-label fw-semibold small mb-1">
+        <%= fieldConfig.appId.label %>
+        <% if (fieldConfig.appId.required) { %>
+          <span class="text-danger">*</span>
+        <% } %>
+      </label>
+      <select class="form-select form-select-sm" 
+              id="<%= formId %>_appId" 
+              name="appId"
+              <%= fieldConfig.appId.required ? 'required' : '' %>>
+        <option value="" selected disabled><%= fieldConfig.appId.placeholder %></option>
+        <% if (apps.length > 0) { %>
+          <% apps.forEach(app => { %>
+            <option value="<%= app.id %>" 
+                    <%= data.appId == app.id ? 'selected' : '' %>>
+              <%= app.iGateApp %> - <%= app.cetApp %>
+            </option>
+          <% }); %>
+        <% } %>
+      </select>
+      <div class="invalid-feedback">
+        Please select an application.
+      </div>
+    </div>
+    
+    <!-- Start Date & Time -->
+    <div class="col-lg-3">
+      <label for="<%= formId %>_startDateTime" class="form-label fw-semibold small mb-1">
+        <%= fieldConfig.startDateTime.label %>
+        <% if (fieldConfig.startDateTime.required) { %>
+          <span class="text-danger">*</span>
+        <% } %>
+      </label>
+      <div class="input-group input-group-sm">
+        <span class="input-group-text">
+          <i class="bi bi-calendar-event"></i>
+        </span>
+        <input type="text" 
+               class="form-control form-control-sm flatpickr-input" 
+               id="<%= formId %>_startDateTime" 
+               name="startDateTime"
+               placeholder="<%= fieldConfig.startDateTime.placeholder %>"
+               <%= fieldConfig.startDateTime.required ? 'required' : '' %>
+               value="<%= data.startDateTime || '' %>">
+        <div class="invalid-feedback">
+          Required
+        </div>
+      </div>
+    </div>
+    
+    <!-- End Date & Time -->
+    <div class="col-lg-3">
+      <label for="<%= formId %>_endDateTime" class="form-label fw-semibold small mb-1">
+        <%= fieldConfig.endDateTime.label %>
+        <% if (fieldConfig.endDateTime.required) { %>
+          <span class="text-danger">*</span>
+        <% } %>
+      </label>
+      <div class="input-group input-group-sm">
+        <span class="input-group-text">
+          <i class="bi bi-calendar-check"></i>
+        </span>
+        <input type="text" 
+               class="form-control form-control-sm flatpickr-input" 
+               id="<%= formId %>_endDateTime" 
+               name="endDateTime"
+               placeholder="<%= fieldConfig.endDateTime.placeholder %>"
+               <%= fieldConfig.endDateTime.required ? 'required' : '' %>
+               value="<%= data.endDateTime || '' %>">
+        <div class="invalid-feedback">
+          Required
+        </div>
+      </div>
+    </div>
+    
+    <!-- Form Actions -->
+    <div class="col-lg-2 d-flex align-items-end">
+      <div class="btn-group w-100" role="group">
+        <button type="submit" class="btn btn-sm btn-<%= submitConfig.variant %>">
+          <% if (submitConfig.icon) { %>
+            <i class="<%= submitConfig.icon %>"></i>
+          <% } %>
+          <%= submitConfig.text %>
+        </button>
+        <button type="reset" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-x-circle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

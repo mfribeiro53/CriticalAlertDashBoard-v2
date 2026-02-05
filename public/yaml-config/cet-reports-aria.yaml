@@ -1,0 +1,24 @@
+# CET Reports - Accessibility (ARIA) Configuration
+
+tableLabel: CET Reports Tables
+tableDescription: Segment execution data for critical sections
+
+sections:
+  - id: reportsSummary
+    label: Latest Run Summary
+    description: Shows the latest data for each critical section for the day
+
+  - id: reportsDetail
+    label: All Runs Detail
+    description: Shows all runs for each critical section for the day
+
+landmarks:
+  table: Data table displaying segment execution information
+  search: Search and filter segment data
+  pagination: Navigate through multiple pages of results
+  info: Table information and record count
+
+instructions:
+  navigation: Use arrow keys to navigate between cells, Enter to interact with actionable items
+  search: Type in the search box to filter results across all columns
+  sort: Click column headers to sort data ascending or descending

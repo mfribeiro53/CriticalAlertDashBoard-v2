@@ -1,0 +1,23 @@
+{
+  "type": "table",
+  "title": "System Services",
+  "subtitle": "Status overview",
+  "icon": "server",
+  "iconColor": "primary",
+  "variant": "",
+  "shadow": true,
+  "collapsible": true,
+  "refreshable": true,
+  "tableHeaders": ["Service", "Status", "Uptime", "Response Time"],
+  "tableData": [
+    ["Web Server", "✓ Running", "99.9%", "45ms"],
+    ["Database", "✓ Running", "99.8%", "12ms"],
+    ["API Gateway", "✓ Running", "99.7%", "78ms"],
+    ["Cache Server", "⚠ Degraded", "98.5%", "120ms"],
+    ["Queue Worker", "✓ Running", "99.9%", "5ms"]
+  ],
+  "footer": {
+    "text": "5 of 5 services operational",
+    "align": "start"
+  }
+}

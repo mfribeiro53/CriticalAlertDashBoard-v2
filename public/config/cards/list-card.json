@@ -1,0 +1,47 @@
+{
+  "type": "list",
+  "title": "Recent Activities",
+  "subtitle": "Last 10 events",
+  "icon": "list-ul",
+  "iconColor": "success",
+  "variant": "",
+  "shadow": true,
+  "collapsible": true,
+  "refreshable": true,
+  "listItems": [
+    {
+      "icon": "check-circle",
+      "text": "Server health check passed",
+      "badge": "2m ago",
+      "badgeColor": "success"
+    },
+    {
+      "icon": "x-circle",
+      "text": "Database connection timeout",
+      "badge": "5m ago",
+      "badgeColor": "danger"
+    },
+    {
+      "icon": "info-circle",
+      "text": "System update available",
+      "badge": "1h ago",
+      "badgeColor": "info"
+    },
+    {
+      "icon": "exclamation-triangle",
+      "text": "High memory usage detected",
+      "badge": "2h ago",
+      "badgeColor": "warning"
+    },
+    {
+      "icon": "check-circle",
+      "text": "Backup completed successfully",
+      "badge": "3h ago",
+      "badgeColor": "success"
+    }
+  ],
+  "footer": {
+    "text": "View all activities →",
+    "align": "center"
+  }
+}

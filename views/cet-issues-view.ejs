@@ -1,0 +1,153 @@
+<!--
+  File: cet-issues-view.ejs
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-15 12:44:08
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { 
+    pageTitle: 'CET Issues',
+    includeDataTables: true,
+    includeFilters: true
+  }) %>
+  
+  <!-- Page-specific CSS -->
+  <link href="/css/cet-issues.css" rel="stylesheet">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="container-fluid mt-4">
+    <div class="row mb-3">
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/cet-dashboard"><i class="bi bi-arrow-left"></i> Back to CET Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">CET Issues</li>
+          </ol>
+        </nav>
+        <h2>
+          <i class="bi bi-exclamation-triangle text-warning"></i> CET Issues
+          <button type="button" class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#cetIssuesInfoModal" aria-label="Page Information">
+            <i class="bi bi-info-circle"></i>
+          </button>
+        </h2>
+        <p class="text-muted">Comprehensive issue tracking and detailed analysis across all CET applications</p>
+      </div>
+    </div>
+
+    <!-- Summary Table -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-table"></i> Table of Apps (sortable by any column)
+            </h5>
+          </div>
+          <div class="card-body">
+            <%- include('partials/datatable', { 
+              id: 'cetIssuesSummaryTable',
+              columns: columnsSummary,
+              dataSource: cetIssuesSummary,
+              defaultOrder: [[2, 'desc']],
+              filterConfig: filterConfig,
+              ariaConfig: ariaConfig,
+              keyboardConfig: keyboardConfig,
+              exportButtons: ['copy', 'csv', 'excel'],
+              stateSave: false,
+              autoInit: true
+            }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Detail Modal -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card shadow-sm border-danger">
+          <div class="card-header bg-danger text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-exclamation-octagon"></i> Alert Detail Modal
+            </h5>
+          </div>
+          <div class="card-body">
+            <%- include('partials/datatable', { 
+              id: 'cetAlertDetailsTable',
+              columns: columnsAlertDetails,
+              dataSource: cetAlertDetails,
+              defaultOrder: [[4, 'desc'], [5, 'desc']],
+              ariaConfig: ariaConfig,
+              keyboardConfig: keyboardConfig,
+              exportButtons: ['copy', 'csv', 'excel'],
+              stateSave: false,
+              autoInit: true
+            }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Behind Detail Modal -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card shadow-sm border-info">
+          <div class="card-header bg-info text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-clock-history"></i> Behind Detail Modal
+            </h5>
+          </div>
+          <div class="card-body">
+            <%- include('partials/datatable', { 
+              id: 'cetBehindDetailsTable',
+              columns: columnsBehindDetails,
+              dataSource: cetBehindDetails,
+              defaultOrder: [[4, 'desc'], [5, 'desc']],
+              ariaConfig: ariaConfig,
+              keyboardConfig: keyboardConfig,
+              exportButtons: ['copy', 'csv', 'excel'],
+              stateSave: false,
+              autoInit: true
+            }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slow Detail Modal -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card shadow-sm border-secondary">
+          <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-speedometer"></i> Slow Detail Modal
+            </h5>
+          </div>
+          <div class="card-body">
+            <%- include('partials/datatable', { 
+              id: 'cetSlowDetailsTable',
+              columns: columnsSlowDetails,
+              dataSource: cetSlowDetails,
+              defaultOrder: [[4, 'desc'], [5, 'desc']],
+              ariaConfig: ariaConfig,
+              keyboardConfig: keyboardConfig,
+              exportButtons: ['copy', 'csv', 'excel'],
+              stateSave: false,
+              autoInit: true
+            }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/cet-issues-info-modal') %>
+
+  <%- include('partials/footer') %>
+  
+  <!-- Page-specific initialization -->
+  <script src="/js/pages/cet-issues-page.js"></script>
+</body>
+</html>

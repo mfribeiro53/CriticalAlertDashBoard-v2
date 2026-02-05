@@ -1,0 +1,121 @@
+<!--
+  File: cet-dashboard.ejs
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-15 12:44:08
+-->
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { 
+  pageTitle: 'CET Dashboard',
+  includeDataTables: true,
+  includeFilters: true,
+  includeFooter: true
+}) %>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="container-fluid mt-4 px-5">
+    <div class="row mb-3">
+      <div class="col">
+        <h2>
+          <i class="bi bi-hdd-network text-primary"></i> CET Dashboard
+          <button type="button" class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#appInfoModal" aria-label="Dashboard Information">
+            <i class="bi bi-info-circle"></i>
+          </button>
+        </h2>
+        <p class="text-muted">Real-time monitoring of CET application health across all systems</p>
+      </div>
+    </div>
+
+    <!-- Status Summary Cards - 2 Column x 2 Row Grid -->
+    <div class="row mb-4">
+      <!-- Card 1: Threshold Alerts -->
+      <div class="col-md-6">
+        <%- include('partials/card', { 
+          cardId: 'applicationCard',
+          cardConfig: {
+            type: 'custom',
+            variant: 'success'
+          },
+          dataAttrs: cardsConfig?.applications || {}
+        }) %>
+      </div>
+      
+      <!-- Card 2: CET Alerts -->
+      
+      <div class="col-md-6">
+        <%- include('partials/card', { 
+          cardId: 'issueCard',
+          cardConfig: {
+            type: 'custom',
+            variant: 'primary'
+          },
+          dataAttrs: cardsConfig?.issues || {}
+        }) %>
+      </div>
+    </div>
+    
+    <div class="row mb-4">
+      
+      <!-- Card 3: Processes Behind -->
+      <div class="col-md-6">
+        <%- include('partials/card', { 
+          cardId: 'processesBehindCard',
+          cardConfig: {
+            type: 'custom',
+            variant: 'primary'
+          },
+          dataAttrs: cardsConfig?.processesBehind || {}
+        }) %>
+      </div>
+      
+      <!-- Card 4: Slow Processes -->
+      <div class="col-md-6">
+        <%- include('partials/card', { 
+          cardId: 'slowProcessesCard',
+          cardConfig: {
+            type: 'custom',
+            variant: 'primary'
+          },
+          dataAttrs: cardsConfig?.slowProcesses || {}
+        }) %>
+      </div>
+    </div>
+
+    <!-- CET Dashboard Table -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-table"></i> Application Health Status
+            </h5>
+          </div>
+          <div class="card-body">
+            <%- include('partials/datatable', { 
+              id: 'cetTable',
+              columns: columns,
+              dataSource: cetData,
+              defaultOrder: [[4, 'desc'], [3, 'desc']],
+              filterConfig: filterConfig,
+              footerConfig: footerConfig,
+              ariaConfig: ariaConfig,
+              keyboardConfig: keyboardConfig,
+              exportButtons: ['copy', 'csv', 'excel'],
+              stateSave: false,
+              autoInit: true
+            }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/cet-dashboard-info-modal') %>
+
+  <%- include('partials/footer') %>
+  
+  <!-- Page-specific initialization -->
+  <script type="module" src="/js/pages/cet-dashboard-page.js"></script>
+</body>
+</html>

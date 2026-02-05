@@ -1,0 +1,42 @@
+# CET Dashboard - Summary Cards Configuration
+# Cards displayed at the top showing key metrics
+
+applications:
+  cardId: applicationCard
+  clickAction: /cet-apps
+  icon: app-indicator
+  label: Threshold Alerts
+  description: Total number of Threshold Alerts being monitored in the system
+  thresholds:
+    warning: 999
+    danger: 9999
+
+issues:
+  cardId: issueCard
+  clickAction: /cet-issues
+  icon: exclamation-circle
+  label: Issues
+  description: Total number of CET Alerts being monitored in the system
+  thresholds:
+    warning: 100
+    danger: 200
+
+processesBehind:
+  cardId: processesBehindCard
+  clickAction: null
+  icon: hourglass-split
+  label: Processes Behind
+  description: Count of integration processes experiencing delays beyond expected SLA
+  thresholds:
+    warning: 20
+    danger: 50
+
+slowProcesses:
+  cardId: slowProcessesCard
+  clickAction: null
+  icon: speedometer
+  label: Slow Processes
+  description: Number of processes running with significantly degraded performance metrics
+  thresholds:
+    warning: 5
+    danger: 15

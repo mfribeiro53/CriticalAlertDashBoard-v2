@@ -1,0 +1,43 @@
+# CET Dashboard - Table Column Definitions
+
+cet:
+  - data: iGateApp
+    title: iGate App
+    width: "10%"
+    orderable: true
+    className: text-start fw-bold
+
+  - data: cetApp
+    title: CET APP
+    width: "15%"
+    orderable: true
+    className: text-start
+
+  - data: issues
+    title: Threshold Alerts
+    width: "10%"
+    orderable: true
+    className: text-center
+    render: renderClickableCETThresholdAlerts
+    urlTemplate: /cet-issues?app={iGateApp}
+
+  - data: alerts
+    title: CET Alerts
+    width: "10%"
+    orderable: true
+    className: text-center
+    render: renderCETAlerts
+
+  - data: processesBehind
+    title: Processes Behind
+    width: "10%"
+    orderable: true
+    className: text-center
+    render: renderCETProcessesBehind
+
+  - data: slow
+    title: Slow
+    width: "10%"
+    orderable: true
+    className: text-center
+    render: renderCETSlow

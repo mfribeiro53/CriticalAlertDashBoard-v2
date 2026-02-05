@@ -1,0 +1,42 @@
+{
+  "name": "error-alert-dashboard",
+  "version": "1.0.0",
+  "description": "Minimal viable Error Reporting Dashboard",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "copy-lib": "cp -r node_modules/@mfribeiro/datatable-kit/src/* public/js/lib/ && cp public/js/lib/css/*.css public/css/lib/",
+    "postinstall": "npm run copy-lib"
+  },
+  "keywords": [
+    "error",
+    "dashboard",
+    "express",
+    "ejs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mfribeiro/datatable-kit": "github:mfribeiro53/datatable-kit",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "datatables.net-bs5": "^2.3.5",
+    "datatables.net-buttons": "^3.2.5",
+    "datatables.net-buttons-bs5": "^3.2.5",
+    "datatables.net-responsive-bs5": "^3.0.7",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "flatpickr": "^4.6.13",
+    "jquery": "^3.7.1",
+    "js-yaml": "^4.1.1",
+    "jszip": "^3.10.1",
+    "mssql": "^12.2.0",
+    "pdfmake": "^0.2.20"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

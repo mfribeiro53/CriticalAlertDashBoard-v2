@@ -1,0 +1,233 @@
+<!--
+  ============================================================================
+  CET Issues Information Modal
+  ============================================================================
+  
+  File: cet-issues-info-modal.ejs
+  Purpose: Provides detailed help and guidance for the CET Issues view,
+           explaining error tracking, issue classification, severity levels,
+           and troubleshooting workflows.
+  
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-17 14:28:45
+  
+  Usage:
+    <%%- include('partials/cet-issues-info-modal') %%>
+  
+  Modal Trigger:
+    - Activated by clicking the info button on the CET Issues page
+    - Button selector: data-bs-target="#cetIssuesInfoModal"
+  
+  Dependencies:
+    - Bootstrap 5.x (modal, buttons, alerts, badges, tables)
+    - Bootstrap Icons (bi-* classes for status and severity indicators)
+    - info-modal-resources.ejs (included partial for resource links)
+  
+  Sections Covered:
+    - Overview of CET Issues tracking functionality
+    - Issue classification and severity levels
+    - Column descriptions (Error Code, Message, Timestamp, etc.)
+    - Filtering and search capabilities
+    - Severity badges and color coding
+    - Export options for issue reports
+    - Troubleshooting workflows and best practices
+    - Keyboard shortcuts and accessibility features
+  
+  Key Features:
+    - Extra-large scrollable modal (modal-xl modal-dialog-scrollable)
+    - Warning-themed header (bg-warning text-dark)
+    - Comprehensive column reference table
+    - Color-coded severity indicators (Critical, High, Medium, Low)
+    - Detailed troubleshooting guidance
+    - Interactive collapsible resource sections
+  
+  Notes:
+    - Issues represent errors and exceptions in CET applications
+    - Severity levels help prioritize troubleshooting efforts
+    - Supports real-time monitoring and historical analysis
+    - Critical for maintaining system reliability
+  ============================================================================
+-->
+<div class="modal fade" id="cetIssuesInfoModal" tabindex="-1" aria-labelledby="cetIssuesInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title" id="cetIssuesInfoModalLabel">
+          <i class="bi bi-info-circle me-2"></i>About CET Issues
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-warning mb-3"><i class="bi bi-bar-chart-line me-2"></i>Overview</h6>
+        <p>
+          The <strong>CET Issues</strong> page provides comprehensive issue tracking and diagnostic information for all CET (Central Engine Technology) applications. This page consolidates critical operational data to help you quickly identify, diagnose, and resolve issues affecting your CET infrastructure.
+        </p>
+        <p>
+          The page is organized into a <strong>summary view</strong> showing issue counts per application, followed by <strong>four detailed tables</strong> that provide granular information about specific issue types. Click on any application row in the summary table to automatically filter all detail tables for that specific application.
+        </p>
+
+        <hr class="my-4">
+
+        <h6 class="text-warning mb-3"><i class="bi bi-speedometer2 me-2"></i>Key Metrics</h6>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-exclamation-octagon text-danger me-2 fs-5"></i>
+              <div>
+                <strong>Alerts</strong>
+                <p class="text-muted small mb-0">Number of active alerts for the application. These indicate errors, exceptions, or critical conditions that require immediate attention.</p>
+              </div>
+            </div>
+          </div>         
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-clock-history text-info me-2 fs-5"></i>
+              <div>
+                <strong>Behind</strong>
+                <p class="text-muted small mb-0">Number of processing steps that are behind schedule or experiencing backlogs. Indicates message processing delays.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-speedometer text-secondary me-2 fs-5"></i>
+              <div>
+                <strong>Slow</strong>
+                <p class="text-muted small mb-0">Count of processing steps running slower than expected. May indicate performance degradation or resource constraints.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-warning mb-3"><i class="bi bi-table me-2"></i>Summary Table</h6>
+        <p><strong>Table of Apps</strong> provides a high-level overview of issues across all CET applications:</p>
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered">
+            <thead class="table-light">
+              <tr>
+                <th class="modal-col-30">Column</th>
+                <th class="modal-col-70">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong><i class="bi bi-building text-warning me-1"></i>iGate App</strong></td>
+                <td>The parent iGate application hosting this CET application.</td>
+              </tr>
+              <tr>
+                <td><strong><i class="bi bi-gear-wide-connected text-warning me-1"></i>CET APP</strong></td>
+                <td>The specific CET application name. <strong class="text-info">Click on any row</strong> to filter all detail tables below for this application.</td>
+              </tr>
+              <tr>
+                <td><strong><i class="bi bi-exclamation-octagon text-danger me-1"></i>Alerts</strong></td>
+                <td>Total count of active alerts. Color-coded based on severity (red for critical issues).</td>
+              </tr>
+              <tr>
+                <td><strong><i class="bi bi-clock-history text-info me-1"></i>Behind</strong></td>
+                <td>Total count of steps experiencing processing backlogs.</td>
+              </tr>
+              <tr>
+                <td><strong><i class="bi bi-speedometer text-secondary me-1"></i>Slow</strong></td>
+                <td>Total count of steps with degraded performance.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-warning mb-3"><i class="bi bi-list-columns me-2"></i>Detail Tables</h6>
+        <p>Each detail table shares the following column structure, providing granular information about specific issues:</p>
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered">
+            <thead class="table-light">
+              <tr>
+                <th class="modal-col-30">Column</th>
+                <th class="modal-col-70">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong><i class="bi bi-app text-warning me-1"></i>Application</strong></td>
+                <td>The CET application ID or identifier where the issue occurred.</td>
+              </tr>
+              <tr>
+                <td><strong><i class="bi bi-arrow-right text-warning me-1"></i>Step</strong></td>
+                <td>The processing step number in the CET workflow. Steps represent major phases in the data assembly line.</td>
+              </tr>
+              <tr>
+                <td><strong><i class="bi bi-arrow-right-short text-warning me-1"></i>SubStep</strong></td>
+                <td>The sub-step number within the parent step, providing finer-grained processing detail.</td>
+              </tr>
+              <tr>
+                <td><strong><i class="bi bi-shield-lock text-warning me-1"></i>Critical Section</strong></td>
+                <td>The identifier for the critical section (group of operations writing to the same table). Uses Service Broker to prevent deadlocks.</td>
+              </tr>
+              <tr>
+                <td><strong><i class="bi bi-calendar-event text-warning me-1"></i>Critical Section Date</strong></td>
+                <td>Timestamp when the critical section was last executed or encountered the issue.</td>
+              </tr>
+              <tr>
+                <td><strong><i class="bi bi-clock text-warning me-1"></i>Time</strong></td>
+                <td>Specific time the issue or event occurred.</td>
+              </tr>
+              <tr>
+                <td><strong><i class="bi bi-file-text text-warning me-1"></i>Alert</strong></td>
+                <td>Detailed alert message, error description, or diagnostic information. Contains technical details for troubleshooting.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="alert alert-info mt-3">
+          <h6 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Detail Table Types</h6>
+          <ul class="mb-0">
+            <li><strong class="text-danger">Alert Detail:</strong> Specific error messages and alerts requiring immediate attention</li>
+            <li><strong class="text-info">Behind Detail:</strong> Details about processing backlogs and message delays</li>
+            <li><strong class="text-secondary">Slow Detail:</strong> Performance metrics for slow-running processes</li>
+          </ul>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-warning mb-3"><i class="bi bi-search me-2"></i>Features</h6>
+        <ul>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Interactive Filtering:</strong> Click any row in the summary table to filter all detail tables for that application</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Clear Filter Badge:</strong> Easily see which application is filtered and clear the filter with one click</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Sortable Columns:</strong> Click any column header to sort data in ascending or descending order</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Export Options:</strong> Export any table to CSV, Excel, or copy to clipboard</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Keyboard Navigation:</strong> Full keyboard support for accessibility</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Color-Coded Severity:</strong> Visual indicators help prioritize critical issues</li>
+        </ul>
+
+        <hr class="my-4">
+
+        <h6 class="text-warning mb-3"><i class="bi bi-lightbulb me-2"></i>Quick Tips</h6>
+        <div class="alert alert-info mb-2">
+          <strong><i class="bi bi-cursor me-1"></i>Responsive Tables:</strong> On smaller screens or when columns don't fit, you'll see a <strong>plus icon (+)</strong> in the first column. Click this control to expand the row and reveal hidden columns directly below it.
+        </div>
+        <div class="alert alert-success mb-2">
+          <strong><i class="bi bi-funnel me-1"></i>Quick Filtering:</strong> Click any application row in the summary table to instantly filter all detail tables and focus on that specific app's issues.
+        </div>
+        <div class="alert alert-warning mb-2">
+          <strong><i class="bi bi-x-circle me-1"></i>Clear Filters:</strong> Click the X button in the blue filter badge on any detail table header to remove the application filter and view all data.
+        </div>
+        <div class="alert alert-danger mb-0">
+          <strong><i class="bi bi-exclamation-triangle me-1"></i>Priority Focus:</strong> Start with the Alerts detail table (red border) as these issues typically require immediate attention.
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Resources Section -->
+        <%- include('info-modal-resources', {
+          collapseId: 'cetIssuesResourcesCollapse'
+        }) %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

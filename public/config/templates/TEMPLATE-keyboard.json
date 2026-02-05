@@ -1,0 +1,182 @@
+{
+  "_comment": "TEMPLATE: Keyboard Navigation Configuration - Copy this file and rename it to '[viewname]-keyboard.json'",
+  "_description": "Configure keyboard shortcuts and navigation behavior for enhanced keyboard accessibility and power user efficiency.",
+  "_usage": "Enable the features you want. Set to false to disable specific keyboard behaviors.",
+  
+  "enabled": true,
+  
+  "_options": {
+    "enabled": "true/false - Enable/disable all keyboard navigation features"
+  },
+  
+  "_basicNavigation": "Core arrow key and cell navigation",
+  "arrowKeyNavigation": true,
+  "autoPageDown": true,
+  "autoFocusFirst": true,
+  "announcePosition": true,
+  
+  "_basicNavigationOptions": {
+    "arrowKeyNavigation": "Enable arrow keys (↑↓←→) to navigate between cells",
+    "autoPageDown": "Automatically go to next page when pressing ↓ on last row",
+    "autoFocusFirst": "Automatically focus first cell when table loads",
+    "announcePosition": "Announce current position to screen readers during navigation"
+  },
+  
+  "_cellInteractions": "How users interact with cells via keyboard",
+  "enterToEdit": true,
+  "enterToSelect": false,
+  "spaceToSelect": true,
+  "tabThroughEditable": true,
+  
+  "_cellInteractionOptions": {
+    "enterToEdit": "Press Enter to edit editable cells",
+    "enterToSelect": "Press Enter to select/deselect rows (conflicts with enterToEdit)",
+    "spaceToSelect": "Press Space to select/deselect rows",
+    "tabThroughEditable": "Tab key moves between editable cells only"
+  },
+  
+  "_featureShortcuts": "Enable/disable specific feature keyboard shortcuts",
+  "searchShortcut": true,
+  "refreshShortcut": true,
+  "selectAllShortcut": true,
+  "escapeShortcut": true,
+  "exportShortcut": true,
+  "pageShortcuts": true,
+  "helpShortcut": true,
+  
+  "_featureShortcutOptions": {
+    "searchShortcut": "Ctrl+F or / to focus search box",
+    "refreshShortcut": "Ctrl+R or F5 to refresh table data",
+    "selectAllShortcut": "Ctrl+A to select all rows",
+    "escapeShortcut": "Esc to clear selection/cancel editing/close modals",
+    "exportShortcut": "Ctrl+E to export data",
+    "pageShortcuts": "Page Up/Down, Home/End for quick navigation",
+    "helpShortcut": "? or F1 to show keyboard shortcuts help dialog"
+  },
+  
+  "_defaultShortcuts": "These are built-in unless you override them",
+  "shortcuts": {
+    "_comment": "Default shortcuts are pre-configured. Add custom ones in customShortcuts below.",
+    "search": "Ctrl+F or /",
+    "refresh": "Ctrl+R or F5",
+    "selectAll": "Ctrl+A",
+    "escape": "Esc",
+    "export": "Ctrl+E",
+    "help": "? or F1",
+    "nextPage": "Ctrl+→ or PageDown",
+    "prevPage": "Ctrl+← or PageUp",
+    "firstPage": "Home",
+    "lastPage": "End",
+    "moveUp": "↑",
+    "moveDown": "↓",
+    "moveLeft": "←",
+    "moveRight": "→",
+    "edit": "Enter or F2",
+    "select": "Space",
+    "toggleSelect": "Shift+Space"
+  },
+  
+  "_customShortcuts": "Define your own keyboard shortcuts",
+  "customShortcuts": [
+    {
+      "_comment": "Example custom shortcut - Delete selected rows",
+      "key": "Delete",
+      "ctrl": false,
+      "shift": false,
+      "alt": false,
+      "action": "deleteSelected",
+      "description": "Delete selected rows",
+      "_options": {
+        "key": "Key name (e.g., 'Delete', 'F', 'S', '1', 'Enter')",
+        "ctrl": "true/false - Require Ctrl key",
+        "shift": "true/false - Require Shift key",
+        "alt": "true/false - Require Alt key",
+        "action": "Function name to call from custom-handlers.js",
+        "description": "Help text shown in keyboard shortcuts dialog"
+      }
+    },
+    {
+      "_comment": "Example custom shortcut - Filter by status",
+      "key": "F",
+      "ctrl": true,
+      "shift": true,
+      "alt": false,
+      "action": "toggleFilterDialog",
+      "description": "Open filter dialog"
+    },
+    {
+      "_comment": "Example custom shortcut - Quick action",
+      "key": "Q",
+      "ctrl": true,
+      "shift": false,
+      "alt": false,
+      "action": "quickAction",
+      "description": "Perform quick action on selected row"
+    }
+  ],
+  
+  "_keyboardShortcutGroups": {
+    "navigation": {
+      "arrows": "Navigate between cells",
+      "tab": "Move to next editable cell",
+      "pageUp/pageDown": "Previous/next page",
+      "home/end": "First/last page"
+    },
+    "selection": {
+      "space": "Select/deselect current row",
+      "ctrl+A": "Select all rows",
+      "esc": "Clear selection"
+    },
+    "editing": {
+      "enter": "Edit current cell",
+      "esc": "Cancel editing",
+      "tab": "Move to next editable cell"
+    },
+    "actions": {
+      "ctrl+F": "Search",
+      "ctrl+R": "Refresh",
+      "ctrl+E": "Export",
+      "?": "Show keyboard shortcuts help"
+    }
+  },
+  
+  "_bestPractices": [
+    "Enable arrowKeyNavigation for accessible table navigation",
+    "Set enterToEdit=true OR enterToSelect=true, not both (they conflict)",
+    "Use spaceToSelect for row selection to avoid Enter key conflicts",
+    "Enable helpShortcut so users can discover available shortcuts",
+    "Test keyboard navigation without a mouse to ensure full accessibility",
+    "Avoid overriding common browser shortcuts (Ctrl+T, Ctrl+W, etc.)",
+    "Document custom shortcuts in your application's help/docs",
+    "Use modifier keys (Ctrl, Shift, Alt) to avoid conflicts with typing",
+    "Keep shortcuts intuitive and easy to remember",
+    "Test shortcuts across different browsers and operating systems"
+  ],
+  
+  "_accessibilityConsiderations": [
+    "All table functionality must be accessible via keyboard alone",
+    "Focus should be clearly visible at all times",
+    "Tab order should be logical and predictable",
+    "Screen readers should announce keyboard actions",
+    "Escape key should always cancel or close active operations",
+    "Avoid keyboard traps where users can't tab away",
+    "Provide skip links for large tables",
+    "Support standard browser shortcuts (don't override them)"
+  ],
+  
+  "_platformDifferences": {
+    "windows": "Ctrl key for shortcuts",
+    "mac": "Cmd key often replaces Ctrl (automatically handled by browser)",
+    "linux": "Ctrl key for shortcuts",
+    "note": "The system automatically handles Cmd/Ctrl differences. Configure using 'ctrl' in settings."
+  },
+  
+  "_conflictsToAvoid": [
+    "Ctrl+F - Browser's find function (override only if necessary)",
+    "Ctrl+S - Browser's save page",
+    "Ctrl+P - Browser's print dialog",
+    "Ctrl+W - Close browser tab",
+    "F5 - Browser refresh (safe to override with your own refresh)",
+    "Tab - Natural focus movement (don't override unless for cell navigation)"
+  ]
+}

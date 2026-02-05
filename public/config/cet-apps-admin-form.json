@@ -1,0 +1,88 @@
+{
+  "action": "/cet-apps/api",
+  "method": "POST",
+  "submitButton": {
+    "text": "Save Application",
+    "variant": "success",
+    "icon": "bi-check-circle"
+  },
+  "fields": {
+    "iGateApp": {
+      "label": "iGate Application",
+      "type": "text",
+      "placeholder": "Enter iGate application name...",
+      "required": true,
+      "colClass": "col-md-6",
+      "helpText": "The iGate application name this CET app belongs to"
+    },
+    "cetApp": {
+      "label": "CET Application",
+      "type": "text",
+      "placeholder": "Enter CET application name...",
+      "required": true,
+      "colClass": "col-md-6",
+      "helpText": "The specific CET application name"
+    },
+    "sqlServer": {
+      "label": "SQL Server",
+      "type": "text",
+      "placeholder": "Enter SQL Server instance name...",
+      "required": true,
+      "colClass": "col-md-6",
+      "helpText": "SQL Server instance name"
+    },
+    "database_name": {
+      "label": "Database",
+      "type": "text",
+      "placeholder": "Enter database name...",
+      "required": true,
+      "colClass": "col-md-6",
+      "helpText": "Database name"
+    },
+    "environment": {
+      "label": "Environment",
+      "type": "select",
+      "required": true,
+      "colClass": "col-md-6",
+      "defaultValue": "production",
+      "placeholder": "Choose environment...",
+      "options": [
+        { "value": "production", "label": "Production" },
+        { "value": "staging", "label": "Staging" },
+        { "value": "development", "label": "Development" }
+      ],
+      "helpText": "Application environment"
+    },
+    "status": {
+      "label": "Status",
+      "type": "select",
+      "required": true,
+      "colClass": "col-md-6",
+      "defaultValue": "active",
+      "placeholder": "Choose status...",
+      "options": [
+        { "value": "active", "label": "Active" },
+        { "value": "inactive", "label": "Inactive" }
+      ],
+      "helpText": "Current operational status"
+    },
+    "supportLink": {
+      "label": "Support Link",
+      "type": "text",
+      "placeholder": "Enter support documentation URL (optional)...",
+      "required": false,
+      "colClass": "col-md-12",
+      "helpText": "Optional link to support documentation or wiki"
+    },
+    "description": {
+      "label": "Description",
+      "type": "textarea",
+      "placeholder": "Enter a brief description (optional)...",
+      "required": false,
+      "rows": 3,
+      "maxLength": 500,
+      "colClass": "col-md-12",
+      "helpText": "Optional description of the application purpose and functionality"
+    }
+  }
+}

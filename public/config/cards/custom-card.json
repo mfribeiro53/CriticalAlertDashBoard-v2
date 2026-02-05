@@ -1,0 +1,32 @@
+{
+  "type": "custom",
+  "title": "Custom Content Card",
+  "subtitle": "Flexible content area",
+  "icon": "puzzle",
+  "iconColor": "secondary",
+  "variant": "",
+  "shadow": true,
+  "border": true,
+  "collapsible": true,
+  "refreshable": true,
+  "closeable": true,
+  "fullscreenable": true,
+  "content": "This is a custom content card. You can include any HTML or text content here.",
+  "footer": {
+    "buttons": [
+      {
+        "text": "Action 1",
+        "variant": "primary",
+        "size": "sm",
+        "action": "action1"
+      },
+      {
+        "text": "Action 2",
+        "variant": "outline-secondary",
+        "size": "sm",
+        "action": "action2"
+      }
+    ],
+    "align": "end"
+  }
+}

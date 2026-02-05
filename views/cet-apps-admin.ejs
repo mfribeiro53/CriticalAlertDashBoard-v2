@@ -1,0 +1,140 @@
+<!--
+  File: cet-apps-admin.ejs
+  Created: 2025-12-20 17:25:59
+  Last Modified: 2025-12-20 17:53:22
+-->
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { 
+  pageTitle: 'CET Apps Administration',
+  includeDataTables: true
+}) %>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="container-fluid mt-4">
+    <!-- Breadcrumb Navigation -->
+    <div class="row mb-3">
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/cet-dashboard"><i class="bi bi-arrow-left"></i> CET Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/cet-apps">CET Applications</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Administration</li>
+          </ol>
+        </nav>
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h2>
+              <i class="bi bi-gear-fill text-warning"></i> CET Apps Administration
+              <button type="button" class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#cetAppsAdminInfoModal" aria-label="Page Information">
+                <i class="bi bi-info-circle"></i>
+              </button>
+            </h2>
+            <p class="text-muted">Manage CET application configurations</p>
+          </div>
+          <div>
+            <button type="button" class="btn btn-success" id="addNewAppBtn">
+              <i class="bi bi-plus-circle"></i> Add New Application
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter by iGate App -->
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="iGateAppFilter" class="form-label">
+          <i class="bi bi-funnel"></i> Filter by iGate Application
+        </label>
+        <select class="form-select" id="iGateAppFilter">
+          <option value="">All iGate Applications</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- CET Applications Admin Table -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-warning">
+            <h5 class="mb-0">
+              <i class="bi bi-table"></i> CET Applications Registry
+            </h5>
+          </div>
+          <div class="card-body">
+            <%- include('partials/datatable', { 
+              id: 'cetAppsAdminTable',
+              columns: columns,
+              dataSource: cetAppsData,
+              defaultOrder: [[0, 'asc'], [1, 'asc']],
+              footerConfig: footerConfig,
+              ariaConfig: ariaConfig,
+              keyboardConfig: keyboardConfig,
+              exportButtons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+              stateSave: false,
+              autoInit: false
+            }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal fade" id="appFormModal" tabindex="-1" aria-labelledby="appFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="appFormModalLabel">
+            <i class="bi bi-plus-circle"></i> Add New CET Application
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%- include('partials/cet-dynamic-form', {
+            id: 'appForm',
+            formConfig: formConfig
+          }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="deleteConfirmModalLabel">
+            <i class="bi bi-exclamation-triangle"></i> Confirm Deletion
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this CET application?</p>
+          <div class="alert alert-warning">
+            <strong>iGate App:</strong> <span id="deleteAppIGate"></span><br>
+            <strong>CET App:</strong> <span id="deleteAppCET"></span>
+          </div>
+          <p class="text-danger"><strong>This action cannot be undone.</strong></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+            <i class="bi bi-trash"></i> Delete Application
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/cet-apps-admin-info-modal') %>
+
+  <%- include('partials/footer') %>
+  
+  <!-- Page-specific initialization -->
+  <script type="module" src="/js/pages/cet-apps-admin-page.js"></script>
+</body>
+</html>

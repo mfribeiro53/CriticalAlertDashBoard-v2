@@ -1,0 +1,155 @@
+{
+  "_comment": "TEMPLATE: Footer Configuration - Copy this file and rename it to '[viewname]-footer.json'",
+  "_description": "Configure aggregate calculations displayed in the table footer (summary row at bottom).",
+  "_usage": "Enable footer and define aggregation functions for each column. Leave columns empty if no aggregation needed.",
+  
+  "enabled": true,
+  
+  "_options": {
+    "enabled": "true/false - Show/hide the footer row entirely"
+  },
+  
+  "columns": [
+    {
+      "_comment": "Count aggregation - total number of rows",
+      "columnIndex": 0,
+      "aggregation": "count",
+      "label": "Total",
+      "className": "text-center fw-bold",
+      "_options": {
+        "columnIndex": "Zero-based index of the column (0 = first column)",
+        "aggregation": "'count' - Count total number of visible rows",
+        "label": "Text prefix shown before the count (e.g., 'Total', 'Count')",
+        "className": "CSS classes for styling the footer cell"
+      }
+    },
+    {
+      "_comment": "Static text - no calculation",
+      "columnIndex": 1,
+      "aggregation": "static",
+      "staticText": "Summary",
+      "className": "text-center",
+      "_options": {
+        "aggregation": "'static' - Display fixed text, no calculation",
+        "staticText": "The text to display (can be empty string '')"
+      }
+    },
+    {
+      "_comment": "Count unique values in column",
+      "columnIndex": 2,
+      "aggregation": "countUnique",
+      "label": "Unique",
+      "className": "text-start",
+      "_options": {
+        "aggregation": "'countUnique' - Count distinct/unique values in the column"
+      }
+    },
+    {
+      "_comment": "Sum all numeric values",
+      "columnIndex": 3,
+      "aggregation": "sum",
+      "label": "Total",
+      "prefix": "$",
+      "className": "text-end fw-bold",
+      "_options": {
+        "aggregation": "'sum' - Add up all numeric values in the column",
+        "prefix": "Text shown before the number (e.g., '$', '€', '#')"
+      }
+    },
+    {
+      "_comment": "Average of numeric values",
+      "columnIndex": 4,
+      "aggregation": "average",
+      "label": "Avg",
+      "decimals": 2,
+      "className": "text-end",
+      "_options": {
+        "aggregation": "'average' or 'avg' - Calculate mean of numeric values",
+        "decimals": "Number of decimal places to show (default: 2)"
+      }
+    },
+    {
+      "_comment": "Minimum value",
+      "columnIndex": 5,
+      "aggregation": "min",
+      "label": "Min",
+      "className": "text-end",
+      "_options": {
+        "aggregation": "'min' - Find smallest numeric value"
+      }
+    },
+    {
+      "_comment": "Maximum value",
+      "columnIndex": 6,
+      "aggregation": "max",
+      "label": "Max",
+      "className": "text-end",
+      "_options": {
+        "aggregation": "'max' - Find largest numeric value"
+      }
+    },
+    {
+      "_comment": "Custom aggregation function",
+      "columnIndex": 7,
+      "aggregation": "custom",
+      "customFunction": "calculateCustomTotal",
+      "label": "Custom",
+      "className": "text-center",
+      "_options": {
+        "aggregation": "'custom' - Use a custom JavaScript function",
+        "customFunction": "Name of function defined in custom-handlers.js"
+      }
+    },
+    {
+      "_comment": "Empty cell - no footer content",
+      "columnIndex": 8,
+      "aggregation": "none",
+      "_options": {
+        "aggregation": "'none' or omit the column entirely - Leave footer cell empty"
+      }
+    }
+  ],
+  
+  "_aggregationTypes": {
+    "count": "Total number of visible rows",
+    "countUnique": "Number of distinct values in the column",
+    "sum": "Sum of all numeric values",
+    "average/avg": "Average (mean) of numeric values",
+    "min": "Minimum numeric value",
+    "max": "Maximum numeric value",
+    "static": "Fixed text (no calculation)",
+    "custom": "Custom function from custom-handlers.js",
+    "none": "Empty footer cell"
+  },
+  
+  "_commonClassNames": [
+    "text-start   - Left align",
+    "text-center  - Center align",
+    "text-end     - Right align",
+    "fw-bold      - Bold text",
+    "fw-normal    - Normal weight",
+    "text-muted   - Grayed out",
+    "small        - Smaller font",
+    "bg-light     - Light background"
+  ],
+  
+  "_bestPractices": [
+    "Use 'count' in the first column to show total rows",
+    "Use 'static' with empty string for columns that shouldn't have footers",
+    "Use 'sum', 'avg', 'min', 'max' only for numeric columns",
+    "Right-align (text-end) numeric aggregations for readability",
+    "Add 'fw-bold' to important totals to make them stand out",
+    "Use prefix for currency symbols ($, €) or units (#, units)",
+    "Set appropriate decimals for averages (typically 2)",
+    "Test footer calculations with filtered data to ensure accuracy",
+    "Use countUnique for categorical data (types, categories, status)",
+    "Define columnIndex for every column, even if aggregation is 'none'"
+  ],
+  
+  "_exampleUseCases": {
+    "financialTable": "Use 'sum' for amounts, 'count' for transactions, 'average' for prices",
+    "inventoryTable": "Use 'sum' for quantities, 'countUnique' for product types, 'min'/'max' for stock levels",
+    "analyticsTable": "Use 'count' for total records, 'average' for metrics, 'max' for peak values",
+    "simpleList": "Use 'count' in first column, 'static' with empty strings for others"
+  }
+}

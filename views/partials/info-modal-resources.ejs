@@ -1,0 +1,225 @@
+<!--
+  ============================================================================
+  Info Modal Resources Partial
+  ============================================================================
+  
+  File: info-modal-resources.ejs
+  Purpose: Reusable collapsible resources section for info modals.
+           Provides a consistent way to display documentation, support,
+           monitoring, and tool links across all CET information modals.
+  
+  Created: 2025-12-23
+  Last Modified: 2025-12-24
+  
+  Usage:
+    <%%- include('info-modal-resources', {
+      collapseId: 'uniqueCollapseId',
+      documentation: { links: [{text: 'Guide', url: '/guide', external: false}] },
+      support: { links: [{text: 'Help Desk', url: '#', external: true}] },
+      monitoring: { links: [{text: 'Dashboard', url: '/dashboard', external: false}] },
+      tools: { links: [{text: 'Admin Tool', url: '#', external: true}] }
+    }) %%>
+  
+  Required Parameters:
+    collapseId (string):
+      - Unique identifier for the Bootstrap collapse element
+      - Must be unique per modal to avoid conflicts
+      - Example: 'cetAppsResourcesCollapse', 'cetQueuesResourcesCollapse'
+  
+  Optional Parameters:
+    documentation (object):
+      - Object containing documentation links
+      - Structure: { links: [{text: string, url: string, external: boolean}] }
+      - external: true for external URLs (opens in new tab)
+      - external: false for internal application routes
+  
+    support (object):
+      - Object containing support and help resources
+      - Structure: { links: [{text: string, url: string, external: boolean}] }
+      - Use for help desk, contact pages, or support documentation
+  
+    monitoring (object):
+      - Object containing monitoring and dashboard links
+      - Structure: { links: [{text: string, url: string, external: boolean}] }
+      - Use for related views, dashboards, or status pages
+  
+    tools (object):
+      - Object containing tool and utility links
+      - Structure: { links: [{text: string, url: string, external: boolean}] }
+      - Use for admin consoles, configuration tools, or utilities
+  
+  Features:
+    - Collapsible accordion-style presentation
+    - Icon-enhanced section headers
+    - Support for both internal and external links
+    - External links open in new tabs with security attributes
+    - Graceful handling of missing sections (only displays provided sections)
+    - Consistent styling across all modals
+  
+  Dependencies:
+    - Bootstrap 5.x (collapse, buttons, cards)
+    - Bootstrap Icons (bi-* classes for section icons)
+  
+  Notes:
+    - Each section is optional; only provided sections are rendered
+    - Maintains consistent look and feel across all info modals
+    - Supports expandable content for better space utilization
+    - Icons automatically adjust based on section type
+    - tools (optional): Object with links array
+  
+  Each category object structure:
+  {
+    links: [
+      { text: 'Link Text', url: '/path' },
+      { text: 'External Link', url: 'https://...', external: true }
+    ]
+  }
+-->
+<%
+  // Default values
+  const defaults = {
+    documentation: {
+      icon: 'book',
+      color: 'primary',
+      title: 'Documentation',
+      description: 'Technical guides and reference materials',
+      links: [
+        { text: 'API Documentation', url: '#', external: true },
+        { text: 'User Guide', url: '#', external: true },
+        { text: 'Best Practices', url: '#', external: true }
+      ]
+    },
+    support: {
+      icon: 'headset',
+      color: 'success',
+      title: 'Support',
+      description: 'Get help and report issues',
+      links: [
+        { text: 'Support Portal', url: '#', external: true },
+        { text: 'Submit Ticket', url: '#', external: true },
+        { text: 'Contact Team', url: '#', external: true }
+      ]
+    },
+    monitoring: {
+      icon: 'activity',
+      color: 'warning',
+      title: 'Monitoring',
+      description: 'System health and status pages',
+      links: [
+        { text: 'Status Page', url: '#', external: true },
+        { text: 'Metrics Dashboard', url: '#', external: true },
+        { text: 'Alerts History', url: '#', external: true }
+      ]
+    },
+    tools: {
+      icon: 'tools',
+      color: 'info',
+      title: 'Tools',
+      description: 'Additional resources and utilities',
+      links: [
+        { text: 'Admin Console', url: '#', external: true },
+        { text: 'Log Viewer', url: '#', external: true },
+        { text: 'Configuration', url: '#', external: true }
+      ]
+    }
+  };
+
+  // Merge provided config with defaults
+  const doc = { ...defaults.documentation, ...(typeof documentation !== 'undefined' ? documentation : {}) };
+  const sup = { ...defaults.support, ...(typeof support !== 'undefined' ? support : {}) };
+  const mon = { ...defaults.monitoring, ...(typeof monitoring !== 'undefined' ? monitoring : {}) };
+  const too = { ...defaults.tools, ...(typeof tools !== 'undefined' ? tools : {}) };
+%>
+
+<!-- Collapsible Resources Button -->
+<div class="d-grid gap-2">
+  <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#<%= collapseId %>" aria-expanded="false" aria-controls="<%= collapseId %>">
+    <i class="bi bi-link-45deg me-2"></i>View Resources & Useful Links
+    <i class="bi bi-chevron-down ms-2"></i>
+  </button>
+</div>
+
+<!-- Collapsible Card Grid -->
+<div class="collapse mt-3" id="<%= collapseId %>">
+  <div class="row g-3">
+    <!-- Documentation Card -->
+    <div class="col-md-6">
+      <div class="card h-100 border-<%= doc.color %>">
+        <div class="card-body">
+          <h6 class="card-title"><i class="bi bi-<%= doc.icon %> text-<%= doc.color %> me-2"></i><%= doc.title %></h6>
+          <p class="card-text small text-muted"><%= doc.description %></p>
+          <ul class="list-unstyled small">
+            <% doc.links.forEach(link => { %>
+              <li>
+                <a href="<%= link.url %>" <%= link.external ? 'target="_blank"' : '' %>>
+                  <%= link.text %>
+                  <% if (link.external) { %><i class="bi bi-box-arrow-up-right"></i><% } %>
+                </a>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Support Card -->
+    <div class="col-md-6">
+      <div class="card h-100 border-<%= sup.color %>">
+        <div class="card-body">
+          <h6 class="card-title"><i class="bi bi-<%= sup.icon %> text-<%= sup.color %> me-2"></i><%= sup.title %></h6>
+          <p class="card-text small text-muted"><%= sup.description %></p>
+          <ul class="list-unstyled small">
+            <% sup.links.forEach(link => { %>
+              <li>
+                <a href="<%= link.url %>" <%= link.external ? 'target="_blank"' : '' %>>
+                  <%= link.text %>
+                  <% if (link.external) { %><i class="bi bi-box-arrow-up-right"></i><% } %>
+                </a>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monitoring Card -->
+    <div class="col-md-6">
+      <div class="card h-100 border-<%= mon.color %>">
+        <div class="card-body">
+          <h6 class="card-title"><i class="bi bi-<%= mon.icon %> text-<%= mon.color %> me-2"></i><%= mon.title %></h6>
+          <p class="card-text small text-muted"><%= mon.description %></p>
+          <ul class="list-unstyled small">
+            <% mon.links.forEach(link => { %>
+              <li>
+                <a href="<%= link.url %>" <%= link.external ? 'target="_blank"' : '' %>>
+                  <%= link.text %>
+                  <% if (link.external) { %><i class="bi bi-box-arrow-up-right"></i><% } %>
+                </a>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tools Card -->
+    <div class="col-md-6">
+      <div class="card h-100 border-<%= too.color %>">
+        <div class="card-body">
+          <h6 class="card-title"><i class="bi bi-<%= too.icon %> text-<%= too.color %> me-2"></i><%= too.title %></h6>
+          <p class="card-text small text-muted"><%= too.description %></p>
+          <ul class="list-unstyled small">
+            <% too.links.forEach(link => { %>
+              <li>
+                <a href="<%= link.url %>" <%= link.external ? 'target="_blank"' : '' %>>
+                  <%= link.text %>
+                  <% if (link.external) { %><i class="bi bi-box-arrow-up-right"></i><% } %>
+                </a>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

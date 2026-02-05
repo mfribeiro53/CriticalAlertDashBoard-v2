@@ -1,0 +1,9 @@
+# CET Reports - Search/Filter Configuration
+
+enabled: true
+placeholder: Search segment data...
+searchDelay: 300          # ms delay before search triggers
+minLength: 1              # minimum characters to trigger search
+caseInsensitive: true
+showClearButton: true
+ariaLabel: Search CET Reports

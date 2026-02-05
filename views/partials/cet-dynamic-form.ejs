@@ -1,0 +1,277 @@
+<!--
+  File: cet-dynamic-form.ejs
+  Created: 2025-12-17 22:05:31
+  Last Modified: 2025-12-18 18:57:09
+-->
+<%
+/**
+ * Dynamic Form Partial
+ * 
+ * A fully flexible, configuration-driven form component that dynamically
+ * renders any field type based on the configuration.
+ * 
+ * Supported Field Types:
+ * - text (default)
+ * - textarea
+ * - select (dropdown)
+ * - radio
+ * - checkbox
+ * - number
+ * - file
+ * - datetime (uses Flatpickr)
+ * 
+ * Parameters:
+ * - id: Unique form identifier
+ * - formConfig: Configuration object defining all form properties
+ * - formData (optional): Pre-populated form data
+ */
+
+// Set defaults
+const formId = typeof id !== 'undefined' ? id : 'dynamicForm_' + Date.now();
+const config = typeof formConfig !== 'undefined' ? formConfig : {};
+const data = typeof formData !== 'undefined' ? formData : {};
+
+// Configuration defaults
+const defaults = {
+  action: '/api/submit',
+  method: 'POST',
+  fields: {},
+  submitButton: {
+    text: 'Submit',
+    variant: 'primary',
+    icon: 'bi-send'
+  },
+  showToast: true
+};
+
+// Merge configuration
+const formConfigMerged = Object.assign({}, defaults, config);
+const fieldConfig = config.fields || {};
+const submitConfig = Object.assign({}, defaults.submitButton, config.submitButton || {});
+
+// Helper function to determine field type
+function getFieldType(fieldName, fieldDef) {
+  if (fieldDef.type) return fieldDef.type;
+  if (fieldName.toLowerCase().includes('datetime') || fieldName.toLowerCase().includes('date')) return 'datetime';
+  if (fieldDef.options && !fieldDef.type) return 'select';
+  return 'text';
+}
+
+// Helper function to get data sources
+const appDataSource = formConfigMerged.appDataSource || [];
+const assignedToDataSource = formConfigMerged.assignedToDataSource || [];
+%>
+
+<form id="<%= formId %>" 
+      method="<%= formConfigMerged.method %>" 
+      action="<%= formConfigMerged.action %>"
+      data-form-config='<%- JSON.stringify({
+        appDataSourceLength: appDataSource.length,
+        fieldCount: Object.keys(fieldConfig).length,
+        fields: Object.keys(fieldConfig)
+      }) %>'
+      data-auto-init="true"
+      class="dynamic-form"
+      novalidate>
+  
+  <div class="row g-3">
+    <% 
+    // Iterate through all fields in config
+    Object.keys(fieldConfig).forEach((fieldName, index) => {
+      const field = fieldConfig[fieldName];
+      const fieldType = getFieldType(fieldName, field);
+      const fieldId = `${formId}_${fieldName}`;
+      const fieldValue = data[fieldName] || field.defaultValue || '';
+      
+      // Determine column width based on field type - more compact layout
+      let colClass = 'col-12';
+      if (fieldType === 'text' || fieldType === 'number') colClass = 'col-md-4';
+      if (fieldType === 'select' || fieldType === 'datetime') colClass = 'col-md-4';
+      if (fieldType === 'checkbox') colClass = 'col-12';
+      if (field.colClass) colClass = field.colClass;
+    %>
+    
+    <div class="<%= colClass %>">
+      <% if (fieldType === 'checkbox') { %>
+        <!-- Checkbox Field -->
+        <div class="form-check">
+          <input class="form-check-input" 
+                 type="checkbox" 
+                 id="<%= fieldId %>" 
+                 name="<%= fieldName %>"
+                 value="true"
+                 <%= fieldValue ? 'checked' : '' %>
+                 <%= field.required ? 'required' : '' %>>
+          <label class="form-check-label" for="<%= fieldId %>">
+            <%= field.label %>
+            <% if (field.required) { %>
+              <span class="text-danger">*</span>
+            <% } %>
+          </label>
+          <% if (field.helpText) { %>
+            <div class="form-text small"><%= field.helpText %></div>
+          <% } %>
+        </div>
+        
+      <% } else if (fieldType === 'radio') { %>
+        <!-- Radio Button Group -->
+        <label class="form-label fw-semibold small">
+          <%= field.label %>
+          <% if (field.required) { %>
+            <span class="text-danger">*</span>
+          <% } %>
+        </label>
+        <% if (field.helpText) { %>
+          <div class="form-text small mb-2"><%= field.helpText %></div>
+        <% } %>
+        <% field.options.forEach((option, idx) => { %>
+          <div class="form-check">
+            <input class="form-check-input" 
+                   type="radio" 
+                   name="<%= fieldName %>" 
+                   id="<%= fieldId %>_<%= idx %>"
+                   value="<%= option.value %>"
+                   <%= fieldValue === option.value ? 'checked' : '' %>
+                   <%= field.required ? 'required' : '' %>>
+            <label class="form-check-label" for="<%= fieldId %>_<%= idx %>">
+              <%= option.label %>
+            </label>
+          </div>
+        <% }); %>
+        
+      <% } else { %>
+        <!-- Standard Label for Other Field Types -->
+        <label for="<%= fieldId %>" class="form-label fw-semibold small mb-1">
+          <%= field.label %>
+          <% if (field.required) { %>
+            <span class="text-danger">*</span>
+          <% } %>
+          <% if (field.helpText) { %>
+            <i class="bi bi-info-circle text-muted" data-bs-toggle="tooltip" title="<%= field.helpText %>"></i>
+          <% } %>
+        </label>
+        
+        <% if (fieldType === 'textarea') { %>
+          <!-- Textarea Field -->
+          <textarea class="form-control form-control-sm" 
+                    id="<%= fieldId %>" 
+                    name="<%= fieldName %>"
+                    rows="<%= field.rows || 3 %>"
+                    placeholder="<%= field.placeholder || '' %>"
+                    <%= field.required ? 'required' : '' %>
+                    <%= field.maxLength ? `maxlength="${field.maxLength}"` : '' %>><%= fieldValue %></textarea>
+          <% if (field.maxLength) { %>
+            <div class="form-text small text-end">
+              <span class="char-count">0</span>/<%= field.maxLength %> characters
+            </div>
+          <% } %>
+          
+        <% } else if (fieldType === 'select') { %>
+          <!-- Select Dropdown -->
+          <!-- Debug: fieldName=<%= fieldName %>, appDataSource.length=<%= appDataSource.length %> -->
+          <select class="form-select form-select-sm" 
+                  id="<%= fieldId %>" 
+                  name="<%= fieldName %>"
+                  <%= field.required ? 'required' : '' %>>
+            <option value="" <%= !fieldValue ? 'selected' : '' %> disabled>
+              <%= field.placeholder || 'Select...' %>
+            </option>
+            <% 
+            // Determine which data source to use
+            let options = field.options || [];
+            if (fieldName === 'appId' && appDataSource.length > 0) {
+              appDataSource.forEach(app => { %>
+                <option value="<%= app.id %>" <%= fieldValue == app.id ? 'selected' : '' %>>
+                  <%= app.iGateApp %> - <%= app.cetApp %>
+                </option>
+              <% });
+            } else if (fieldName === 'assignedTo' && assignedToDataSource.length > 0) {
+              assignedToDataSource.forEach(person => { %>
+                <option value="<%= person.value %>" <%= fieldValue == person.value ? 'selected' : '' %>>
+                  <%= person.label %>
+                </option>
+              <% });
+            } else {
+              options.forEach(option => { %>
+                <option value="<%= option.value %>" <%= fieldValue == option.value ? 'selected' : '' %>>
+                  <%= option.label %>
+                </option>
+              <% });
+            }
+            %>
+          </select>
+          
+        <% } else if (fieldType === 'datetime') { %>
+          <!-- DateTime Picker (Flatpickr) -->
+          <div class="input-group input-group-sm">
+            <span class="input-group-text">
+              <i class="bi bi-calendar-event"></i>
+            </span>
+            <input type="text" 
+                   class="form-control form-control-sm flatpickr-input" 
+                   id="<%= fieldId %>" 
+                   name="<%= fieldName %>"
+                   placeholder="<%= field.placeholder || '' %>"
+                   <%= field.required ? 'required' : '' %>
+                   value="<%= fieldValue %>"
+                   data-field-name="<%= fieldName %>">
+          </div>
+          
+        <% } else if (fieldType === 'file') { %>
+          <!-- File Upload -->
+          <input class="form-control form-control-sm" 
+                 type="file" 
+                 id="<%= fieldId %>" 
+                 name="<%= fieldName %>"
+                 <%= field.accept ? `accept="${field.accept}"` : '' %>
+                 <%= field.multiple ? 'multiple' : '' %>
+                 <%= field.required ? 'required' : '' %>>
+          
+        <% } else if (fieldType === 'number') { %>
+          <!-- Number Input -->
+          <input type="number" 
+                 class="form-control form-control-sm" 
+                 id="<%= fieldId %>" 
+                 name="<%= fieldName %>"
+                 placeholder="<%= field.placeholder || '' %>"
+                 <%= field.required ? 'required' : '' %>
+                 <%= field.min !== undefined ? `min="${field.min}"` : '' %>
+                 <%= field.max !== undefined ? `max="${field.max}"` : '' %>
+                 value="<%= fieldValue %>">
+          
+        <% } else { %>
+          <!-- Text Input (default) -->
+          <input type="text" 
+                 class="form-control form-control-sm" 
+                 id="<%= fieldId %>" 
+                 name="<%= fieldName %>"
+                 placeholder="<%= field.placeholder || '' %>"
+                 <%= field.required ? 'required' : '' %>
+                 <%= field.maxLength ? `maxlength="${field.maxLength}"` : '' %>
+                 value="<%= fieldValue %>">
+        <% } %>
+        
+        <div class="invalid-feedback">
+          This field is required.
+        </div>
+      <% } %>
+    </div>
+    
+    <% }); %>
+    
+    <!-- Form Actions -->
+    <div class="col-12">
+      <div class="d-flex gap-2 justify-content-end mt-2">
+        <button type="reset" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-x-circle"></i> Reset
+        </button>
+        <button type="submit" class="btn btn-sm btn-<%= submitConfig.variant %>">
+          <% if (submitConfig.icon) { %>
+            <i class="<%= submitConfig.icon %>"></i>
+          <% } %>
+          <%= submitConfig.text %>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

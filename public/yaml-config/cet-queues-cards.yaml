@@ -1,0 +1,33 @@
+# CET Queues - Dashboard Cards Configuration
+
+totalQueues:
+  cardId: totalQueuesCard
+  icon: stack
+  label: Total Queues
+  description: Total number of message queues configured across all CET applications
+  thresholds: null
+
+enabledQueues:
+  cardId: enabledQueuesCard
+  icon: check-circle
+  label: Enabled Queues
+  description: Number of queues currently active and processing messages
+  thresholds: null
+
+disabledQueues:
+  cardId: disabledQueuesCard
+  icon: x-circle
+  label: Disabled Queues
+  description: Number of queues temporarily disabled due to errors or maintenance
+  thresholds:
+    warning: 3
+    danger: 5
+
+totalMessages:
+  cardId: totalMessagesCard
+  icon: envelope
+  label: Total Messages
+  description: Total pending messages awaiting processing across all queues
+  thresholds:
+    warning: 50
+    danger: 100

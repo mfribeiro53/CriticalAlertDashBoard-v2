@@ -1,0 +1,210 @@
+/**
+ * Table Inline Editing Styles
+ * 
+ * Visual styles for editable cells, edit mode, and validation states.
+ */
+
+/* Editable cell indicator */
+.editable-cell {
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.editable-cell:hover {
+  border-color: var(--bs-primary, #0d6efd) !important;
+  box-shadow: inset 0 0 0 1px var(--bs-primary, #0d6efd);
+}
+
+.editable-cell::after {
+  content: '\270E'; /* Pencil icon */
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 11px;
+  color: var(--bs-secondary-color, #6c757d);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.editable-cell:hover::after {
+  opacity: 0.5;
+}
+
+/* Edit mode active state */
+.editable-cell.editing-active {
+  background-color: var(--bs-warning-bg-subtle, #fff3cd) !important;
+  padding: 4px 8px !important;
+}
+
+.editable-cell.editing-active::after {
+  display: none;
+}
+
+/* Cell display and edit containers */
+.cell-display {
+  display: block;
+}
+
+.cell-edit {
+  display: none;
+}
+
+.editing-active .cell-display {
+  display: none;
+}
+
+.editing-active .cell-edit {
+  display: block;
+}
+
+/* Edit input styling - uses Bootstrap form-control as base */
+.cell-edit-input {
+  width: 100% !important;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--bs-primary, #0d6efd);
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb, 13, 110, 253), 0.25);
+}
+
+.cell-edit-input:focus {
+  outline: none;
+  border-color: var(--bs-primary, #0d6efd);
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb, 13, 110, 253), 0.25);
+}
+
+/* Textarea specific */
+.cell-edit-input[rows] {
+  resize: vertical;
+  min-height: 50px;
+}
+
+/* Edit buttons - using Bootstrap button classes */
+.cell-edit-buttons {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.save-cell-btn,
+.cancel-cell-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  border-radius: 0.25rem;
+}
+
+.save-cell-btn {
+  background-color: var(--bs-success, #198754);
+  border-color: var(--bs-success, #198754);
+  color: white;
+}
+
+.save-cell-btn:hover {
+  background-color: var(--bs-success-border-subtle, #157347);
+  border-color: var(--bs-success-border-subtle, #146c43);
+}
+
+.cancel-cell-btn {
+  background-color: var(--bs-secondary, #6c757d);
+  border-color: var(--bs-secondary, #6c757d);
+  color: white;
+}
+
+.cancel-cell-btn:hover {
+  background-color: var(--bs-secondary-border-subtle, #5c636a);
+  border-color: var(--bs-secondary-border-subtle, #565e64);
+}
+
+.save-cell-btn i,
+.cancel-cell-btn i {
+  font-size: 1rem;
+}
+
+/* Validation error - Bootstrap-compatible */
+.validation-error {
+  color: var(--bs-danger, #dc3545);
+  font-size: 0.75rem;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.cell-edit-input.is-invalid,
+.cell-edit-input:invalid {
+  border-color: var(--bs-danger, #dc3545);
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-danger-rgb, 220, 53, 69), 0.25);
+}
+
+/* Loading state */
+.editable-cell.saving {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.editable-cell.saving::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Edit trigger icon (optional alternative to ::after) */
+.edit-cell-trigger {
+  display: inline-block;
+  margin-left: 6px;
+  color: var(--bs-secondary-color, #6c757d);
+  cursor: pointer;
+  font-size: 0.875rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.editable-cell:hover .edit-cell-trigger {
+  opacity: 0.7;
+}
+
+.edit-cell-trigger:hover {
+  opacity: 1 !important;
+  color: var(--bs-primary, #0d6efd);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cell-edit-input {
+    font-size: 0.8125rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .save-cell-btn,
+  .cancel-cell-btn {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.8125rem;
+  }
+
+  .editable-cell::after {
+    font-size: 10px;
+    top: 3px;
+    right: 4px;
+  }
+}
+
+/* Accessibility */
+.editable-cell:focus-within {
+  outline: 2px solid var(--bs-primary, #0d6efd);
+  outline-offset: 2px;
+}
+
+/* Required field indicator */
+.cell-edit-input[required]::placeholder {
+  color: var(--bs-danger, #dc3545);
+  opacity: 0.5;
+}

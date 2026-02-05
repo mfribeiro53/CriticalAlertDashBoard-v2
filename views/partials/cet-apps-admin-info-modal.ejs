@@ -1,0 +1,229 @@
+<!--
+  ============================================================================
+  CET Apps Administration Information Modal
+  ============================================================================
+  
+  File: cet-apps-admin-info-modal.ejs
+  Purpose: Provides comprehensive help documentation and usage guidance for
+           the CET Apps Administration page, including CRUD operations,
+           form field descriptions, and best practices.
+  
+  Created: 2025-12-20 17:51:28
+  Last Modified: 2025-12-20 17:53:22
+  
+  Usage:
+    <%%- include('partials/cet-apps-admin-info-modal') %%>
+  
+  Modal Trigger:
+    - Activated by clicking the info button on the CET Apps Admin page
+    - Button selector: data-bs-target="#cetAppsAdminInfoModal"
+  
+  Dependencies:
+    - Bootstrap 5.x (modal, buttons, alerts, badges)
+    - Bootstrap Icons (bi-* classes for iconography)
+    - info-modal-resources.ejs (included partial for resource links)
+  
+  Sections Covered:
+    - Overview of CET Apps Administration
+    - Available CRUD actions (Create, Read, Update, Delete)
+    - Form field specifications and requirements
+    - Best practices for application management
+    - Export options (Copy, CSV, Excel, PDF, Print)
+    - Related resources and documentation links
+  
+  Key Features:
+    - Large modal with scrollable content (modal-lg)
+    - Warning-themed header (bg-warning)
+    - Responsive table layout for field descriptions
+    - Color-coded badges for required/optional fields
+    - Icon-enhanced content sections
+    - Collapsible resources section
+  
+  Notes:
+    - Modal is dismissible via close button or clicking outside
+    - All form field requirements are documented in detail
+    - Includes safety warnings for configuration changes
+  ============================================================================
+-->
+<div class="modal fade" id="cetAppsAdminInfoModal" tabindex="-1" aria-labelledby="cetAppsAdminInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title" id="cetAppsAdminInfoModalLabel">
+          <i class="bi bi-info-circle me-2"></i>About CET Apps Administration
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-warning mb-3"><i class="bi bi-gear-fill me-2"></i>Overview</h6>
+        <p>
+          The <strong>CET Apps Administration</strong> page allows you to manage the CET (Central Engine Technology) application configuration registry. Use this interface to add new CET applications, update existing configurations, or remove deprecated applications from the system.
+        </p>
+        <div class="alert alert-info">
+          <i class="bi bi-info-circle me-2"></i>
+          <strong>Admin Access:</strong> This page provides full CRUD (Create, Read, Update, Delete) operations for managing CET application configurations.
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-warning mb-3"><i class="bi bi-list-check me-2"></i>Available Actions</h6>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-plus-circle text-success me-2 fs-5"></i>
+              <div>
+                <strong>Add New Application</strong>
+                <p class="text-muted small mb-0">Create a new CET application entry with all required configuration details including server, database, and connection information.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-pencil-square text-primary me-2 fs-5"></i>
+              <div>
+                <strong>Edit Application</strong>
+                <p class="text-muted small mb-0">Modify existing application configurations such as server locations, database names, descriptions, or status.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-trash text-danger me-2 fs-5"></i>
+              <div>
+                <strong>Delete Application</strong>
+                <p class="text-muted small mb-0">Remove deprecated or decommissioned applications from the registry. Requires confirmation before deletion.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-funnel text-info me-2 fs-5"></i>
+              <div>
+                <strong>Filter by iGate App</strong>
+                <p class="text-muted small mb-0">Use the dropdown filter to view applications belonging to a specific iGate parent application.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-warning mb-3"><i class="bi bi-file-earmark-text me-2"></i>Form Fields</h6>
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered">
+                <thead class="table-light">
+                  <tr>
+                    <th class="modal-col-30">Field</th>
+                    <th class="modal-col-15">Required</th>
+                    <th class="modal-col-55">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong><i class="bi bi-building text-primary me-1"></i>iGate Application</strong></td>
+                    <td><span class="badge bg-danger">Required</span></td>
+                    <td>The parent iGate application name (e.g., ESR, Billing, Pharmacy). Groups related CET applications together.</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-gear text-primary me-1"></i>CET Application</strong></td>
+                    <td><span class="badge bg-danger">Required</span></td>
+                    <td>Unique identifier for the CET application, typically includes port number and description (e.g., "1097 (ESR Primary)").</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-server text-primary me-1"></i>SQL Server</strong></td>
+                    <td><span class="badge bg-danger">Required</span></td>
+                    <td>SQL Server instance name where the application database is hosted (e.g., C101, C102).</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-database text-primary me-1"></i>Database</strong></td>
+                    <td><span class="badge bg-danger">Required</span></td>
+                    <td>Database name on the SQL Server instance (e.g., DESR0013_SRT).</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-file-text text-primary me-1"></i>Description</strong></td>
+                    <td><span class="badge bg-danger">Required</span></td>
+                    <td>Brief description of the application's purpose and functionality (max 500 characters).</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-link text-primary me-1"></i>Support Link</strong></td>
+                    <td><span class="badge bg-secondary">Optional</span></td>
+                    <td>URL to documentation, wiki page, or support resources for this application.</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-toggle-on text-primary me-1"></i>Status</strong></td>
+                    <td><span class="badge bg-danger">Required</span></td>
+                    <td>Current operational status: <span class="badge bg-success">Active</span> or <span class="badge bg-secondary">Inactive</span>.</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-cloud text-primary me-1"></i>Environment</strong></td>
+                    <td><span class="badge bg-danger">Required</span></td>
+                    <td>Deployment environment: Production, Staging, or Development.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-warning mb-3"><i class="bi bi-shield-check me-2"></i>Best Practices</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>Naming Conventions:</strong> Use consistent naming patterns for CET applications (e.g., port number followed by description in parentheses).
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>Documentation:</strong> Always provide a clear description and support link to help team members understand the application's purpose.
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>Status Management:</strong> Keep the status field up-to-date. Mark applications as inactive before deletion.
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>Verification:</strong> Double-check server and database names before saving to avoid connection issues.
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-circle text-success me-2"></i>
+            <strong>Deletion:</strong> Only delete applications that are fully decommissioned. Use inactive status for temporary outages.
+          </li>
+        </ul>
+
+        <hr class="my-4">
+
+        <h6 class="text-warning mb-3"><i class="bi bi-keyboard me-2"></i>Export Options</h6>
+        <p>
+          Use the export buttons above the table to download the application registry in various formats:
+        </p>
+        <ul>
+          <li><strong>Copy:</strong> Copy table data to clipboard for pasting into other applications</li>
+          <li><strong>CSV:</strong> Export as comma-separated values for Excel or other spreadsheet tools</li>
+          <li><strong>Excel:</strong> Direct Excel (.xlsx) export with formatting preserved</li>
+          <li><strong>PDF:</strong> Generate a printable PDF document of the current view</li>
+          <li><strong>Print:</strong> Print-friendly view of the table data</li>
+        </ul>
+
+        <hr class="my-4">
+
+        <div class="alert alert-warning">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          <strong>Warning:</strong> Changes made on this page directly affect the CET application configuration registry. Ensure all information is accurate before saving.
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Resources Section -->
+        <%- include('info-modal-resources', {
+          collapseId: 'cetAppsAdminResourcesCollapse'
+        }) %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

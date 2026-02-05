@@ -1,0 +1,271 @@
+<!--
+  ============================================================================
+  CET Queues Information Modal
+  ============================================================================
+  
+  File: cet-queues-info-modal.ejs
+  Purpose: Provides comprehensive help for the CET Queues view, explaining
+           message queue monitoring, queue health metrics, processing status,
+           and performance optimization.
+  
+  Created: 2025-12-18 12:31:38
+  Last Modified: 2025-12-18 12:34:58
+  
+  Usage:
+    <%%- include('partials/cet-queues-info-modal') %%>
+  
+  Modal Trigger:
+    - Activated by clicking the info button on the CET Queues page
+    - Button selector: data-bs-target="#cetQueuesInfoModal"
+  
+  Dependencies:
+    - Bootstrap 5.x (modal, buttons, alerts, badges)
+    - Bootstrap Icons (bi-* classes for status indicators)
+    - info-modal-resources.ejs (included partial for resource links)
+  
+  Sections Covered:
+    - Overview of CET Queues functionality
+    - Queue health metrics and monitoring
+    - Column descriptions (Queue Name, Status, Message Count, etc.)
+    - Status indicators and color coding
+    - Filtering and search capabilities
+    - Card view features for queue visualization
+    - Performance metrics and bottleneck identification
+    - Export options and analysis tools
+    - Keyboard shortcuts and accessibility
+  
+  Key Features:
+    - Large scrollable modal (modal-lg modal-dialog-scrollable)
+    - Primary-themed header (bg-primary text-white)
+    - Status badge examples (Processing, Idle, Blocked, Error)
+    - Comprehensive column reference documentation
+    - Queue health monitoring guidance
+    - Interactive collapsible resource sections
+  
+  Notes:
+    - Queues are critical for message processing workflows
+    - Monitoring queue health prevents system bottlenecks
+    - Supports both real-time monitoring and historical analysis
+    - Status indicators help identify processing issues quickly
+  ============================================================================
+-->
+<div class="modal fade" id="cetQueuesInfoModal" tabindex="-1" aria-labelledby="cetQueuesInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="cetQueuesInfoModalLabel">
+          <i class="bi bi-info-circle me-2"></i>About CET Queue Monitor
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-primary mb-3"><i class="bi bi-bar-chart-line me-2"></i>Overview</h6>
+        <p>
+          The <strong>CET Queue Monitor</strong> provides real-time visibility into message queues across all CET (Central Engine Technology) applications. This page helps you monitor queue health, track message volumes, and identify potential bottlenecks or processing delays.
+        </p>
+        <p>
+          Use this page to quickly identify disabled queues, monitor message backlogs, and investigate processing issues that may impact your CET applications.
+        </p>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-speedometer2 me-2"></i>Key Metrics</h6>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-stack text-primary me-2 fs-5"></i>
+              <div>
+                <strong>Total Queues</strong>
+                <p class="text-muted small mb-0">Total number of message queues across all CET applications</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-check-circle text-success me-2 fs-5"></i>
+              <div>
+                <strong>Enabled Queues</strong>
+                <p class="text-muted small mb-0">Number of queues currently enabled and actively processing messages</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-x-circle text-danger me-2 fs-5"></i>
+              <div>
+                <strong>Disabled Queues</strong>
+                <p class="text-muted small mb-0">Queues that have been manually or automatically disabled and are not processing messages</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-envelope text-warning me-2 fs-5"></i>
+              <div>
+                <strong>Total Messages</strong>
+                <p class="text-muted small mb-0">Total count of messages pending or processing across all queues</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-funnel me-2"></i>Data Request Form</h6>
+        <p>
+          Use the <strong>Request Queue Data</strong> form to filter and retrieve queue information:
+        </p>
+        <ul>
+          <li><strong>Date Range:</strong> Select a time period to view queue data</li>
+          <li><strong>Application Filter:</strong> Filter queues by specific CET application</li>
+          <li><strong>Status Filter:</strong> Show only enabled, disabled, or all queues</li>
+          <li><strong>Submit:</strong> Click the search button to update the tables with your criteria</li>
+        </ul>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-table me-2"></i>Queue Summary Table</h6>
+        <p>The <strong>Queue Summary</strong> table displays aggregated information for each queue:</p>
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered">
+                <thead class="table-light">
+                  <tr>
+                    <th class="modal-col-30">Column</th>
+                    <th class="modal-col-70">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong><i class="bi bi-gear-wide-connected text-primary me-1"></i>Application Name</strong></td>
+                    <td>The CET application that owns this message queue</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-inbox text-primary me-1"></i>Queue Name</strong></td>
+                    <td>The unique identifier for the message queue. Click a queue name to view detailed message information below</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-check-square text-primary me-1"></i>Is Enabled</strong></td>
+                    <td>Indicates whether the queue is currently enabled (Yes) or disabled (No). Disabled queues do not process messages</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-database text-primary me-1"></i>Database</strong></td>
+                    <td>The SQL Server database where this queue's messages are stored</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-envelope-fill text-primary me-1"></i>Messages in Queue</strong></td>
+                    <td>The current count of messages pending in the queue. High numbers may indicate processing issues or backlogs</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-clock-history text-primary me-1"></i>Oldest Message</strong></td>
+                    <td>Timestamp of the oldest message in the queue. Very old messages may indicate stuck processing</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-clock text-primary me-1"></i>Newest Message</strong></td>
+                    <td>Timestamp of the most recent message added to the queue</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-list-check me-2"></i>Message Details Table</h6>
+        <p>
+          The <strong>Message Details</strong> table shows individual messages from the selected queue. Click a queue name in the Queue Summary table to populate this section with detailed message information.
+        </p>
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered">
+                <thead class="table-light">
+                  <tr>
+                    <th class="modal-col-30">Column</th>
+                    <th class="modal-col-70">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong><i class="bi bi-hash text-primary me-1"></i>Message ID</strong></td>
+                    <td>Unique identifier for the individual message</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-calendar-event text-primary me-1"></i>Enqueued Time</strong></td>
+                    <td>Timestamp when the message was added to the queue</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-tag text-primary me-1"></i>Message Type</strong></td>
+                    <td>Classification or category of the message, indicating its purpose or content type</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-diagram-3 text-primary me-1"></i>Priority</strong></td>
+                    <td>Processing priority level (High, Normal, Low) determining message processing order</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-info-square text-primary me-1"></i>Status</strong></td>
+                    <td>Current status of the message (Pending, Processing, Completed, Error, etc.)</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-code-square text-primary me-1"></i>Message Body</strong></td>
+                    <td>Preview of the message content or payload. May be truncated for display</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-search me-2"></i>Features</h6>
+        <ul>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Real-time Monitoring:</strong> Live view of queue status and message counts</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Click-through Navigation:</strong> Click any queue to view detailed message information</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Advanced Filtering:</strong> Filter queues by status, application, or date range</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Sortable Columns:</strong> Click any column header to sort data</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Data Export:</strong> Export queue and message data to CSV, Excel, or PDF formats</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Search Function:</strong> Quickly locate queues or messages using the search box</li>
+        </ul>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-lightbulb me-2"></i>Tips</h6>
+        <div class="alert alert-info mb-2">
+          <i class="bi bi-info-circle me-2"></i>
+          <strong>Tip:</strong> Monitor the "Messages in Queue" column regularly. Sudden increases may indicate processing issues or upstream system problems.
+        </div>
+        <div class="alert alert-warning mb-2">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          <strong>Watch for:</strong> Disabled queues with high message counts require immediate attention to prevent data loss or service disruption.
+        </div>
+        <div class="alert alert-success mb-0">
+          <i class="bi bi-check-circle me-2"></i>
+          <strong>Best Practice:</strong> Check the "Oldest Message" timestamp. Messages older than your expected processing time may indicate stuck processes.
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-question-circle me-2"></i>Common Actions</h6>
+        <ul>
+          <li><strong>Investigating Backlogs:</strong> Look for queues with high message counts and old message timestamps</li>
+          <li><strong>Checking Disabled Queues:</strong> Filter by "Is Enabled = No" to find queues that need attention</li>
+          <li><strong>Monitoring Specific Apps:</strong> Use the application filter to focus on particular CET applications</li>
+          <li><strong>Tracking Message Flow:</strong> Click on a queue to see individual messages and their processing status</li>
+        </ul>
+
+        <hr class="my-4">
+
+        <!-- Resources Section -->
+        <%- include('info-modal-resources', {
+          collapseId: 'cetQueuesResourcesCollapse'
+        }) %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

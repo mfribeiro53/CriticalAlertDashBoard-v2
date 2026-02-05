@@ -1,0 +1,110 @@
+<!--
+  File: cet-apps-view.ejs
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-17 09:42:35
+-->
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { 
+  pageTitle: 'CET Applications',
+  includeDataTables: true,
+  includeFilters: true,
+  includeFooter: true
+}) %>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="container-fluid mt-4">
+    <div class="row mb-3">
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/cet-dashboard"><i class="bi bi-arrow-left"></i> Back to CET Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">CET Applications</li>
+          </ol>
+        </nav>
+        <h2>
+          <i class="bi bi-gear-wide-connected text-primary"></i> CET Applications
+          <button type="button" class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#cetAppsInfoModal" aria-label="Page Information">
+            <i class="bi bi-info-circle"></i>
+          </button>
+        </h2>
+        <p class="text-muted">Configuration registry for all CET applications including ports, databases, and support links</p>
+      </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <%- include('partials/card', { 
+          cardId: 'totalApps',
+          cardConfig: {
+            type: 'custom',
+            variant: 'primary',
+            htmlContent: '<h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-hdd-stack text-primary"></i> Total Applications</h6><h3 class="card-title text-primary" id="totalApps">-</h3>'
+          },
+          dataAttrs: cardsConfig?.totalApps || {}
+        }) %>
+      </div>
+     
+      <div class="col-md-4">
+        <%- include('partials/card', { 
+          cardId: 'sqlServers',
+          cardConfig: {
+            type: 'custom',
+            variant: 'info',
+            htmlContent: '<h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-server text-info"></i> SQL Servers</h6><h3 class="card-title text-info" id="sqlServers">-</h3>'
+          },
+          dataAttrs: cardsConfig?.sqlServers || {}
+        }) %>
+      </div>
+      <div class="col-md-4">
+        <%- include('partials/card', { 
+          cardId: 'iGateApps',
+          cardConfig: {
+            type: 'custom',
+            variant: 'secondary',
+            htmlContent: '<h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-building text-secondary"></i> iGate Apps</h6><h3 class="card-title text-secondary" id="iGateApps">-</h3>'
+          },
+          dataAttrs: cardsConfig?.iGateApps || {}
+        }) %>
+      </div>
+    </div>
+
+    <!-- CET Applications Table -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+              <i class="bi bi-table"></i> Application Configuration Registry
+            </h5>
+          </div>
+          <div class="card-body">
+            <%- include('partials/datatable', { 
+              id: 'cetAppsTable',
+              columns: columns,
+              dataSource: cetAppsData,
+              defaultOrder: [[0, 'asc'], [1, 'asc']],
+              filterConfig: filterConfig,
+              footerConfig: footerConfig,
+              ariaConfig: ariaConfig,
+              keyboardConfig: keyboardConfig,
+              exportButtons: ['copy', 'csv', 'excel'],
+              stateSave: false,
+              autoInit: true
+            }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/cet-apps-info-modal') %>
+
+  <%- include('partials/footer') %>
+
+  <!-- Page-specific initialization -->
+  <script type="module" src="/js/pages/cet-apps-page.js"></script>
+</body>
+</html>

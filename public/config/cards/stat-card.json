@@ -1,0 +1,18 @@
+{
+  "type": "stat",
+  "title": "Total Alerts",
+  "subtitle": "Last 24 hours",
+  "icon": "exclamation-triangle",
+  "iconColor": "danger",
+  "variant": "primary",
+  "shadow": true,
+  "refreshable": true,
+  "statValue": "1,234",
+  "statValueClass": "text-primary",
+  "statLabel": "Active Alerts",
+  "statChange": 12.5,
+  "footer": {
+    "text": "Updated 5 minutes ago",
+    "align": "center"
+  }
+}

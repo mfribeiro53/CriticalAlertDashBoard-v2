@@ -1,0 +1,85 @@
+<!--
+  File: head.ejs
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-17 15:27:59
+-->
+<%
+  // Set defaults for all optional parameters
+  const defaults = {
+    includeDataTables: false,
+    includeCardView: false,
+    includeColumnGroups: false,
+    includeFilters: false,
+    includeSelection: false,
+    includeFooter: false,
+    includeEditing: false,
+    includeSearch: false,
+    includeFlatpickr: false
+  };
+  
+  // Merge with provided values
+  const config = Object.assign({}, defaults, {
+    includeDataTables: typeof includeDataTables !== 'undefined' ? includeDataTables : false,
+    includeCardView: typeof includeCardView !== 'undefined' ? includeCardView : false,
+    includeColumnGroups: typeof includeColumnGroups !== 'undefined' ? includeColumnGroups : false,
+    includeFilters: typeof includeFilters !== 'undefined' ? includeFilters : false,
+    includeSelection: typeof includeSelection !== 'undefined' ? includeSelection : false,
+    includeFooter: typeof includeFooter !== 'undefined' ? includeFooter : false,
+    includeEditing: typeof includeEditing !== 'undefined' ? includeEditing : false,
+    includeSearch: typeof includeSearch !== 'undefined' ? includeSearch : false,
+    includeFlatpickr: typeof includeFlatpickr !== 'undefined' ? includeFlatpickr : false
+  });
+%>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle || 'Error Alert Dashboard' %></title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap Icons -->
+  <link href="/node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <% if (config.includeFlatpickr) { %>
+  <!-- Flatpickr CSS -->
+  <link href="/node_modules/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+  <% } %>
+  
+  <% if (config.includeDataTables) { %>
+  <!-- DataTables Bootstrap 5 CSS -->
+  <link href="/node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <link href="/node_modules/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet">
+  <link href="/node_modules/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet">
+  <% } %>
+  
+  <!-- Base Custom Styles -->
+  <link href="/css/styles.css" rel="stylesheet">
+  
+  <% if (config.includeCardView) { %>
+  <!-- Card View Styles -->
+  <link href="/css/card-view.css" rel="stylesheet">
+  <% } %>
+  
+  <% if (config.includeDataTables) { %>
+  <!-- DataTable Feature Styles -->
+  <% if (config.includeColumnGroups) { %>
+  <link href="/css/lib/table-column-groups.css" rel="stylesheet">
+  <% } %>
+  <% if (config.includeFilters) { %>
+  <link href="/css/lib/table-filters.css" rel="stylesheet">
+  <% } %>
+  <% if (config.includeSelection) { %>
+  <link href="/css/lib/table-feature-selection.css" rel="stylesheet">
+  <% } %>
+  <% if (config.includeFooter) { %>
+  <link href="/css/lib/table-footer.css" rel="stylesheet">
+  <% } %>
+  <% if (config.includeEditing) { %>
+  <link href="/css/lib/table-editing.css" rel="stylesheet">
+  <% } %>
+  <% if (config.includeSearch) { %>
+  <link href="/css/lib/table-search.css" rel="stylesheet">
+  <% } %>
+  <% } %>
+</head>

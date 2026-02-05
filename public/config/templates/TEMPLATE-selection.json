@@ -1,0 +1,202 @@
+{
+  "_comment": "TEMPLATE: Row Selection Configuration - Copy this file and rename it to '[viewname]-selection.json'",
+  "_description": "Configure row selection features including checkboxes, select-all functionality, and bulk actions.",
+  "_usage": "Enable selection if you need users to select rows for actions like delete, export, or bulk updates.",
+  
+  "enabled": true,
+  
+  "_options": {
+    "enabled": "true/false - Enable/disable row selection feature entirely"
+  },
+  
+  "selectAll": true,
+  
+  "_selectAllOptions": {
+    "selectAll": "true/false - Show 'Select All' checkbox in header row",
+    "behavior": "Clicking selects all visible/filtered rows (not just current page)"
+  },
+  
+  "bulkActions": ["delete", "export", "update"],
+  
+  "_bulkActionsOptions": {
+    "bulkActions": "Array of action names that can be performed on selected rows",
+    "availableActions": {
+      "delete": "Delete selected rows (requires confirmation)",
+      "export": "Export selected rows to CSV/Excel",
+      "update": "Bulk update selected rows",
+      "archive": "Archive selected rows",
+      "assign": "Assign selected rows to user/team",
+      "tag": "Add tags to selected rows",
+      "email": "Email selected rows",
+      "print": "Print selected rows",
+      "custom": "Define your own in custom-handlers.js"
+    },
+    "buttonLocation": "Bulk action buttons appear above table when rows selected"
+  },
+  
+  "persistSelection": false,
+  
+  "_persistOptions": {
+    "persistSelection": "true/false - Save selection state to localStorage (persists between page reloads)",
+    "warning": "Enable only if selection should survive navigation/refresh"
+  },
+  
+  "checkboxColumn": 0,
+  
+  "_checkboxColumnOptions": {
+    "checkboxColumn": "Number (zero-based) - Which column contains the selection checkboxes",
+    "common": "Usually 0 (first column) or -1 (last column)",
+    "styling": "Column automatically gets checkbox styling and narrow width"
+  },
+  
+  "_additionalOptions": "Advanced selection features",
+  "multiSelect": true,
+  "clickToSelect": false,
+  "selectOnEdit": false,
+  "maxSelection": null,
+  
+  "_advancedOptions": {
+    "multiSelect": "true/false - Allow selecting multiple rows (false = single selection only)",
+    "clickToSelect": "true/false - Click anywhere on row to select (not just checkbox)",
+    "selectOnEdit": "true/false - Automatically select row when editing a cell",
+    "maxSelection": "Number or null - Maximum rows that can be selected (null = unlimited)"
+  },
+  
+  "_selectionBehavior": {
+    "checkbox": "Click checkbox to select/deselect individual row",
+    "selectAll": "Header checkbox selects all visible/filtered rows",
+    "keyboard": "Space bar to select current row (if keyboard navigation enabled)",
+    "visual": "Selected rows highlighted with different background color",
+    "counter": "Shows count of selected rows (e.g., '3 rows selected')",
+    "bulkActions": "Action buttons appear when rows are selected"
+  },
+  
+  "_exampleConfigurations": {
+    "fullFeatured": {
+      "enabled": true,
+      "selectAll": true,
+      "bulkActions": ["delete", "export", "update"],
+      "persistSelection": false,
+      "checkboxColumn": 0,
+      "multiSelect": true,
+      "description": "Complete row selection with bulk actions"
+    },
+    "singleSelect": {
+      "enabled": true,
+      "selectAll": false,
+      "bulkActions": [],
+      "persistSelection": false,
+      "checkboxColumn": 0,
+      "multiSelect": false,
+      "description": "Select only one row at a time (radio button behavior)"
+    },
+    "exportOnly": {
+      "enabled": true,
+      "selectAll": true,
+      "bulkActions": ["export"],
+      "persistSelection": false,
+      "checkboxColumn": 0,
+      "description": "Selection for exporting rows only"
+    },
+    "clickAnywhere": {
+      "enabled": true,
+      "selectAll": true,
+      "bulkActions": ["delete"],
+      "checkboxColumn": 0,
+      "clickToSelect": true,
+      "description": "Click anywhere on row to select"
+    },
+    "disabled": {
+      "enabled": false,
+      "description": "No row selection"
+    }
+  },
+  
+  "_bestPractices": [
+    "Place checkbox in first column (checkboxColumn: 0) for consistency",
+    "Enable selectAll for user convenience when dealing with bulk operations",
+    "Only enable persistSelection if selection needs to survive page refresh",
+    "Limit bulkActions to what's actually needed - don't overwhelm users",
+    "Use multiSelect: false for single-selection scenarios (like choosing one item)",
+    "Always provide visual feedback for selected rows (automatic)",
+    "Show bulk action buttons only when rows are selected",
+    "Require confirmation for destructive bulk actions (delete, archive)",
+    "Test bulk actions with edge cases (all selected, none selected, filtered rows)",
+    "Consider maxSelection for performance with very large datasets"
+  ],
+  
+  "_bulkActionImplementation": {
+    "location": "Define bulk action handlers in /public/js/custom-handlers.js",
+    "naming": "Function name should match action name (e.g., 'delete' -> handleBulkDelete)",
+    "parameters": "Functions receive array of selected row data",
+    "confirmation": "Always confirm destructive actions (use modal or confirm dialog)",
+    "feedback": "Show success/error messages after bulk action completes",
+    "refresh": "Refresh table data after bulk action completes"
+  },
+  
+  "_bulkActionExample": {
+    "comment": "Example in custom-handlers.js",
+    "code": "function handleBulkDelete(selectedRows) {\n  if (confirm(`Delete ${selectedRows.length} rows?`)) {\n    // Perform delete operation\n    // Refresh table\n    // Show success message\n  }\n}"
+  },
+  
+  "_userInterface": {
+    "checkboxes": "Checkboxes in designated column for each row",
+    "selectAllCheckbox": "Checkbox in header row (if selectAll=true)",
+    "selectedCount": "Text showing '3 rows selected' above table",
+    "bulkActionBar": "Button bar appears above table when rows selected",
+    "clearSelection": "Button or link to deselect all rows",
+    "visualHighlight": "Selected rows have distinct background color",
+    "indeterminate": "Select-all checkbox shows indeterminate state when some (not all) selected"
+  },
+  
+  "_accessibility": {
+    "checkboxLabels": "Each checkbox has descriptive ARIA label",
+    "announcements": "Selection changes announced to screen readers",
+    "keyboard": "Space bar to select, arrow keys to navigate",
+    "focusVisible": "Clear focus indicators on checkboxes",
+    "selectAllLabel": "Select-all checkbox has clear label",
+    "bulkActionButtons": "Action buttons fully keyboard accessible"
+  },
+  
+  "_integration": {
+    "filters": "Selection works with filtered data",
+    "search": "Selection works with search results",
+    "pagination": "Selection persists across pages (unless persistSelection=false)",
+    "sorting": "Selection maintained when sorting columns",
+    "export": "Export only selected rows (if rows are selected)",
+    "editing": "Can combine with inline editing (selectOnEdit option)"
+  },
+  
+  "_performance": {
+    "smallTables": "No performance impact on tables < 1,000 rows",
+    "largeTables": "Consider maxSelection to prevent selecting thousands of rows",
+    "persistSelection": "Storing large selections in localStorage may impact performance",
+    "bulkActions": "Process bulk actions in batches for large selections (100+ rows)",
+    "optimization": "Use server-side processing for bulk actions on very large datasets"
+  },
+  
+  "_troubleshooting": {
+    "checkboxNotAppearing": "Verify checkboxColumn index matches your column count",
+    "selectAllNotWorking": "Check that selectAll is true and checkboxColumn is valid",
+    "persistenceIssues": "Check browser localStorage permissions and quotas",
+    "bulkActionNotFiring": "Verify function name matches action name in custom-handlers.js",
+    "selectionLost": "If persistSelection=false, selection clears on page change (expected)"
+  },
+  
+  "_whenToDisable": [
+    "Table is read-only with no actions",
+    "Single row interaction only (use clickable rows instead)",
+    "Very simple table with minimal interaction",
+    "Mobile-first design where checkboxes are too small",
+    "Data is automatically processed (no user action needed)"
+  ],
+  
+  "_whenToEnable": [
+    "Users need to delete multiple rows",
+    "Export functionality required",
+    "Bulk updates or assignments needed",
+    "Users work with subsets of data",
+    "Multi-step workflows (select, then action)",
+    "Data management or admin interfaces"
+  ]
+}

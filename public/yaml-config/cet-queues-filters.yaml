@@ -1,0 +1,36 @@
+# CET Queues - Filter Configuration
+# Column-based filters for each table
+
+cetQueuesSummary:
+  - column: 0
+    type: text
+    placeholder: Filter App
+
+  - column: 1
+    type: text
+    placeholder: Filter App Name
+
+  - column: 2
+    type: text
+    placeholder: Filter Queue
+
+  - column: 3
+    type: select
+    placeholder: All Status
+
+  - column: 4
+    type: text
+    placeholder: Filter Messages
+
+cetMessageDetails:
+  - column: 0
+    type: text
+    placeholder: Filter Queue
+
+  - column: 1
+    type: text
+    placeholder: Filter Time
+
+  - column: 2
+    type: text
+    placeholder: Filter Section

@@ -1,0 +1,280 @@
+<!--
+  ============================================================================
+  CET Reports Information Modal
+  ============================================================================
+  
+  File: cet-reports-info-modal.ejs
+  Purpose: Provides detailed help and guidance for the CET Reports view,
+           explaining report types, data analysis features, filtering options,
+           and export capabilities.
+  
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-15 12:44:08
+  
+  Usage:
+    <%%- include('partials/cet-reports-info-modal') %%>
+  
+  Modal Trigger:
+    - Activated by clicking the info button on the CET Reports page
+    - Button selector: data-bs-target="#cetReportsInfoModal"
+  
+  Dependencies:
+    - Bootstrap 5.x (modal, buttons, alerts, badges, cards)
+    - Bootstrap Icons (bi-* classes for visual indicators)
+    - info-modal-resources.ejs (included partial for resource sections)
+  
+  Sections Covered:
+    - Overview of CET Reports functionality
+    - Available report types and their purposes
+    - Column descriptions and data interpretation
+    - Filtering and search capabilities
+    - Export options and data analysis tools
+    - Performance metrics and monitoring features
+    - Keyboard shortcuts and accessibility features
+  
+  Key Features:
+    - Large scrollable modal (modal-lg modal-dialog-scrollable)
+    - Primary-themed header (bg-primary text-white)
+    - Icon-enhanced sections for better visual hierarchy
+    - Interactive collapsible resource links
+    - Comprehensive column reference table
+  
+  Notes:
+    - Reports focus on historical data and trend analysis
+    - Supports multiple export formats for further analysis
+    - Includes accessibility guidance for screen reader users
+  ============================================================================
+-->
+<div class="modal fade" id="cetReportsInfoModal" tabindex="-1" aria-labelledby="cetReportsInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="cetReportsInfoModalLabel">
+          <i class="bi bi-info-circle me-2"></i>About CET Reports
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-primary mb-3"><i class="bi bi-file-earmark-bar-graph me-2"></i>Overview</h6>
+        <p>
+          The <strong>CET Reports</strong> page provides detailed segment execution tracking for critical sections within CET processes. This page displays two complementary tables that help you monitor and analyze the performance of critical sections throughout the day.
+        </p>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-table me-2"></i>Latest Run Summary Table</h6>
+        <p>
+          The top table shows the <strong>latest data for each critical section</strong> for the current day. This provides a snapshot of the most recent execution for each critical section, making it easy to see the current state at a glance.
+        </p>
+        
+        <p class="text-muted small">
+          <i class="bi bi-info-circle me-1"></i>
+          Use this table to quickly identify which critical sections have run most recently and their performance characteristics.
+        </p>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-list-ul me-2"></i>All Runs Detail Table</h6>
+        <p>
+          The bottom table displays <strong>all runs for each critical section</strong> throughout the day. This comprehensive view allows you to track patterns, identify trends, and analyze performance over time.
+        </p>
+        
+        <p class="text-muted small">
+          <i class="bi bi-info-circle me-1"></i>
+          Use this table to see the complete history of executions and spot any anomalies or performance degradation over time.
+        </p>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-columns-gap me-2"></i>Column Descriptions</h6>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-1-circle text-primary me-2 fs-5"></i>
+              <div>
+                <strong>Step</strong>
+                <p class="text-muted small mb-0">The main step number in the CET process flow</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-2-circle text-primary me-2 fs-5"></i>
+              <div>
+                <strong>SubStep</strong>
+                <p class="text-muted small mb-0">The sub-step within the main step</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-shield-fill-exclamation text-danger me-2 fs-5"></i>
+              <div>
+                <strong>Critical Section</strong>
+                <p class="text-muted small mb-0">Identifier for the critical section being executed</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-calendar3 text-info me-2 fs-5"></i>
+              <div>
+                <strong>Segment Date</strong>
+                <p class="text-muted small mb-0">Date of the segment execution (YYYYMMDD format)</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-clock text-info me-2 fs-5"></i>
+              <div>
+                <strong>Segment Time</strong>
+                <p class="text-muted small mb-0">Time when the segment was scheduled (HHMMSS format)</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-hourglass-split text-warning me-2 fs-5"></i>
+              <div>
+                <strong>Wait Time</strong>
+                <p class="text-muted small mb-0">Seconds waited before execution began</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-play-circle text-success me-2 fs-5"></i>
+              <div>
+                <strong>Start Time</strong>
+                <p class="text-muted small mb-0">Actual time execution started (HHMMSS format)</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-stop-circle text-danger me-2 fs-5"></i>
+              <div>
+                <strong>End Time</strong>
+                <p class="text-muted small mb-0">Time when execution completed (HHMMSS format)</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-speedometer2 text-primary me-2 fs-5"></i>
+              <div>
+                <strong>Duration</strong>
+                <p class="text-muted small mb-0">Total execution time in seconds</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-trash text-danger me-2 fs-5"></i>
+              <div>
+                <strong>Deletes</strong>
+                <p class="text-muted small mb-0">Number of records deleted during execution</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-pencil-square text-warning me-2 fs-5"></i>
+              <div>
+                <strong>Updates</strong>
+                <p class="text-muted small mb-0">Number of records updated during execution</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-plus-circle text-success me-2 fs-5"></i>
+              <div>
+                <strong>Inserts</strong>
+                <p class="text-muted small mb-0">Number of records inserted during execution</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-tools me-2"></i>Features</h6>
+        <ul>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Dual Table View:</strong> Both summary and detailed views for comprehensive analysis</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Advanced Sorting:</strong> Click any column header to sort data</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Search & Filter:</strong> Find specific segments or critical sections quickly</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Export Options:</strong> Export data to CSV, Excel, or print for reporting</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Performance Tracking:</strong> Monitor execution times and record counts</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Historical Analysis:</strong> View all executions throughout the day</li>
+        </ul>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-keyboard me-2"></i>Keyboard Shortcuts</h6>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><kbd>/</kbd></td>
+                <td>Focus search box</td>
+              </tr>
+              <tr>
+                <td><kbd>↑</kbd> <kbd>↓</kbd></td>
+                <td>Navigate between rows</td>
+              </tr>
+              <tr>
+                <td><kbd>←</kbd> <kbd>→</kbd></td>
+                <td>Navigate between cells</td>
+              </tr>
+              <tr>
+                <td><kbd>Home</kbd></td>
+                <td>Jump to first row</td>
+              </tr>
+              <tr>
+                <td><kbd>End</kbd></td>
+                <td>Jump to last row</td>
+              </tr>
+              <tr>
+                <td><kbd>Page Up</kbd> / <kbd>Page Down</kbd></td>
+                <td>Navigate between pages</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-lightbulb me-2"></i>Usage Tips</h6>
+        <div class="alert alert-info">
+          <ul class="mb-0">
+            <li>Use the <strong>Latest Run Summary</strong> table for quick status checks of all critical sections</li>
+            <li>Use the <strong>All Runs Detail</strong> table to analyze patterns and identify performance trends</li>
+            <li>Sort by Duration to identify slow-running critical sections that may need optimization</li>
+            <li>Filter by Critical Section to focus on specific areas of interest</li>
+            <li>Export data for deeper analysis in Excel or for reporting purposes</li>
+            <li>Monitor the Inserts, Updates, and Deletes columns to verify expected data processing volumes</li>
+          </ul>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Resources Section -->
+        <%- include('info-modal-resources', {
+          collapseId: 'cetReportsResourcesCollapse'
+        }) %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

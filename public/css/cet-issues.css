@@ -1,0 +1,19 @@
+/**
+ * CET Issues Page Styles
+ * Page-specific styling for the CET Issues view
+ */
+
+/* Make summary table rows clickable */
+#cetIssuesSummaryTable tbody tr {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#cetIssuesSummaryTable tbody tr:hover {
+  background-color: var(--bs-table-hover-bg, rgba(0, 0, 0, 0.075)) !important;
+}
+
+#cetIssuesSummaryTable tbody tr.selected {
+  background-color: var(--bs-primary-bg-subtle, #cfe2ff) !important;
+  font-weight: 600;
+}

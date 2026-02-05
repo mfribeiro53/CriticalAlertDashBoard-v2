@@ -1,0 +1,86 @@
+# CET Apps Admin Form Configuration
+# Defines the form fields for adding/editing CET applications
+
+action: /api/cet-apps
+method: POST
+
+fields:
+  iGateApp:
+    label: iGate Application
+    type: text
+    required: true
+    placeholder: "Enter iGate application name..."
+    helpText: The parent application name
+
+  cetApp:
+    label: CET Application
+    type: text
+    required: true
+    placeholder: "Enter CET application name..."
+    helpText: CET application identifier with port and description
+
+  sqlServer:
+    label: SQL Server
+    type: text
+    required: true
+    placeholder: "Enter SQL Server instance name..."
+    helpText: SQL Server instance name
+
+  database_name:
+    label: Database
+    type: text
+    required: true
+    placeholder: "Enter database name..."
+    helpText: Database name on the SQL Server
+
+  environment:
+    label: Environment
+    type: select
+    required: true
+    placeholder: "Choose environment..."
+    defaultValue: production
+    options:
+      - value: production
+        label: Production
+      - value: staging
+        label: Staging
+      - value: development
+        label: Development
+    helpText: Deployment environment
+
+  status:
+    label: Status
+    type: select
+    required: true
+    placeholder: "Choose status..."
+    defaultValue: active
+    options:
+      - value: active
+        label: Active
+      - value: inactive
+        label: Inactive
+    helpText: Current operational status
+
+  supportLink:
+    label: Support Link
+    type: text
+    required: false
+    placeholder: "Enter support documentation URL (optional)..."
+    helpText: Link to documentation or support wiki
+
+  description:
+    label: Description
+    type: textarea
+    rows: 3
+    maxLength: 500
+    required: false
+    placeholder: "Enter a brief description (optional)..."
+    helpText: Brief description of what this application does
+
+submitButton:
+  text: Save Application
+  variant: success
+  icon: bi-check-circle
+
+showToast: true
+resetOnSuccess: false

@@ -1,0 +1,186 @@
+# CET Issues - Table Column Definitions
+# Multiple table configurations for summary and detail views
+
+# Summary table showing issue counts per application
+cetIssuesSummary:
+  - data: iGateApp
+    title: iGate App
+    width: "15%"
+    className: text-center fw-bold
+
+  - data: cetApp
+    title: CET APP
+    width: "20%"
+    className: text-start
+
+  - data: alerts
+    title: Alerts
+    width: "12%"
+    className: text-center
+    render: renderCETIssueCount
+
+  - data: disabledQueues
+    title: Disabled Queues
+    width: "15%"
+    className: text-center
+    render: renderCETIssueCount
+
+  - data: behind
+    title: Behind
+    width: "12%"
+    className: text-center
+    render: renderCETIssueCount
+
+  - data: slow
+    title: Slow
+    width: "12%"
+    className: text-center
+    render: renderCETIssueCount
+
+# Detail table for alert information
+cetAlertDetails:
+  - data: application
+    title: Application
+    width: "10%"
+    className: text-center fw-bold
+
+  - data: step
+    title: Step
+    width: "8%"
+    className: text-center
+
+  - data: subStep
+    title: SubStep
+    width: "8%"
+    className: text-center
+
+  - data: criticalSection
+    title: Critical Section
+    width: "10%"
+    className: text-center
+
+  - data: criticalSectionDate
+    title: Critical Section Date
+    width: "12%"
+    className: text-center
+
+  - data: time
+    title: Time
+    width: "8%"
+    className: text-center
+
+  - data: alert
+    title: Alert
+    width: "44%"
+    className: text-start font-monospace small
+
+# Detail table for disabled queues
+cetDisabledQueueDetails:
+  - data: application
+    title: Application
+    width: "10%"
+    className: text-center fw-bold
+
+  - data: step
+    title: Step
+    width: "8%"
+    className: text-center
+
+  - data: subStep
+    title: SubStep
+    width: "8%"
+    className: text-center
+
+  - data: criticalSection
+    title: Critical Section
+    width: "10%"
+    className: text-center
+
+  - data: criticalSectionDate
+    title: Critical Section Date
+    width: "12%"
+    className: text-center
+
+  - data: time
+    title: Time
+    width: "8%"
+    className: text-center
+
+  - data: alert
+    title: Alert
+    width: "44%"
+    className: text-start font-monospace small
+
+# Detail table for processes behind schedule
+cetBehindDetails:
+  - data: application
+    title: Application
+    width: "10%"
+    className: text-center fw-bold
+
+  - data: step
+    title: Step
+    width: "8%"
+    className: text-center
+
+  - data: subStep
+    title: SubStep
+    width: "8%"
+    className: text-center
+
+  - data: criticalSection
+    title: Critical Section
+    width: "10%"
+    className: text-center
+
+  - data: criticalSectionDate
+    title: Critical Section Date
+    width: "12%"
+    className: text-center
+
+  - data: time
+    title: Time
+    width: "8%"
+    className: text-center
+
+  - data: alert
+    title: Alert
+    width: "44%"
+    className: text-start font-monospace small
+
+# Detail table for slow processes
+cetSlowDetails:
+  - data: application
+    title: Application
+    width: "10%"
+    className: text-center fw-bold
+
+  - data: step
+    title: Step
+    width: "8%"
+    className: text-center
+
+  - data: subStep
+    title: SubStep
+    width: "8%"
+    className: text-center
+
+  - data: criticalSection
+    title: Critical Section
+    width: "10%"
+    className: text-center
+
+  - data: criticalSectionDate
+    title: Critical Section Date
+    width: "12%"
+    className: text-center
+
+  - data: time
+    title: Time
+    width: "8%"
+    className: text-center
+
+  - data: alert
+    title: Alert
+    width: "44%"
+    className: text-start font-monospace small

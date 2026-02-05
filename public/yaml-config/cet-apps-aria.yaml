@@ -1,0 +1,5 @@
+# CET Apps - Accessibility (ARIA) Configuration
+
+enabled: true
+tableLabel: CET Applications - System Configuration Registry
+tableDescription: Complete registry of CET applications including port numbers, SQL server connections, database names, and support documentation links

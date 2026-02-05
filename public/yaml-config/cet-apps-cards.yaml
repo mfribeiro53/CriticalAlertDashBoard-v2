@@ -1,0 +1,23 @@
+# CET Apps - Dashboard Cards Configuration
+# Cards displayed at the top of the CET Apps view
+
+totalApps:
+  cardId: totalApps
+  icon: hdd-stack
+  label: Total Applications
+  description: Total number of applications registered in the CET configuration registry
+  thresholds: null
+
+sqlServers:
+  cardId: sqlServers
+  icon: server
+  label: SQL Servers
+  description: Count of distinct SQL Server instances configured across all applications
+  thresholds: null
+
+iGateApps:
+  cardId: iGateApps
+  icon: building
+  label: iGate Apps
+  description: Number of applications integrated with iGate enterprise systems
+  thresholds: null

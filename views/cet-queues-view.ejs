@@ -1,0 +1,160 @@
+<!--
+  File: cet-queues-view.ejs
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-20 17:09:16
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { 
+    pageTitle: 'CET Queues' ,
+    includeDataTables: true,
+    includeFilters: true,
+    includeFooter: true,
+    includeFlatpickr: true
+  }) %>
+  
+  <!-- Page-specific CSS -->
+  <link href="/css/cet-queues.css" rel="stylesheet">
+</head>
+<body>
+  <%- include('partials/header', { currentView: 'cet-queues' }) %>
+
+  <main class="container-fluid">
+    <div class="row mt-4">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/cet-dashboard"><i class="bi bi-arrow-left"></i> Back to CET Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">CET Queues</li>
+          </ol>
+        </nav>
+        <h1 class="mb-4">
+          <i class="bi bi-stack"></i> CET Queue Monitor
+          <button type="button" class="btn btn-sm btn-info ms-2" data-bs-toggle="modal" data-bs-target="#cetQueuesInfoModal" aria-label="Page Information">
+            <i class="bi bi-info-circle"></i>
+          </button>
+        </h1>
+        
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+          <div class="col-md-3 col-sm-6">
+            <%- include('partials/card', { 
+              cardId: 'totalQueuesCard',
+              cardConfig: {
+                type: 'custom',
+                variant: 'primary',
+                htmlContent: '<h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-stack text-primary"></i> Total Queues</h6><h3 class="card-title text-primary" id="totalQueues">0</h3>'
+              },
+              dataAttrs: cardsConfig?.totalQueues || {}
+            }) %>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <%- include('partials/card', { 
+              cardId: 'enabledQueuesCard',
+              cardConfig: {
+                type: 'custom',
+                variant: 'primary',
+                htmlContent: '<h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-check-circle text-success"></i> Enabled Queues</h6><h3 class="card-title text-success" id="enabledQueues">0</h3>'
+              },
+              dataAttrs: cardsConfig?.enabledQueues || {}
+            }) %>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <%- include('partials/card', { 
+              cardId: 'disabledQueuesCard',
+              cardConfig: {
+                type: 'custom',
+                variant: 'primary',
+                htmlContent: '<h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-x-circle text-danger"></i> Disabled Queues</h6><h3 class="card-title text-primary" id="disabledQueues">0</h3>'
+              },
+              dataAttrs: cardsConfig?.disabledQueues || {}
+            }) %>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <%- include('partials/card', { 
+              cardId: 'totalMessagesCard',
+              cardConfig: {
+                type: 'custom',
+                variant: 'primary',
+                htmlContent: '<h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-envelope text-warning"></i> Total Messages</h6><h3 class="card-title text-primary" id="totalMessages">0</h3>'
+              },
+              dataAttrs: cardsConfig?.totalMessages || {}
+            }) %>
+          </div>
+        </div>
+
+        <!-- Data Request Form -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-light">
+            <h6 class="mb-0"><i class="bi bi-funnel"></i> Request Queue Data</h6>
+          </div>
+          <div class="card-body py-3">
+            <%- include('partials/cet-dynamic-form', {
+              id: 'queueDataRequestForm',
+              formConfig: requestFormConfig
+            }) %>
+          </div>
+        </div>
+
+        <!-- Queue Summary Table -->
+        <div class="card shadow-sm mb-5">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Queue Summary</h5>
+          </div>
+          <div class="card-body">
+            <p class="text-muted">Click on a queue to view message details</p>
+            <%- include('partials/datatable', {
+              id: 'cetQueuesSummary',
+              columns: cetQueuesSummaryColumns,
+              dataSource: cetQueuesSummary,
+              defaultOrder: [[4, 'desc']],
+              filterConfig: cetQueuesSummaryFilters,
+              footerConfig: cetQueuesSummaryFooter,
+              exportButtons: ['copy', 'csv', 'excel', 'print'],
+              stateSave: false,
+              autoInit: true
+            }) %>
+          </div>
+        </div>
+
+        <!-- Active Filter Display -->
+        <div id="activeFilterBadge" class="mb-3 d-none">
+          <span class="badge bg-info fs-6">
+            Filtering messages for: <strong id="filterQueueName"></strong>
+            <button type="button" class="btn-close btn-close-white ms-2" aria-label="Clear filter" id="clearFilter"></button>
+          </span>
+        </div>
+
+        <!-- Message Details Table -->
+        <div class="card shadow-sm">
+          <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Message Details</h5>
+          </div>
+          <div class="card-body">
+            <p class="text-muted">Detailed view of messages in selected queue</p>
+            <%- include('partials/datatable', {
+              id: 'cetMessageDetails',
+              columns: cetMessageDetailsColumns,
+              dataSource: cetMessageDetails,
+              defaultOrder: [[1, 'desc']],
+              filterConfig: cetMessageDetailsFilters,
+              footerConfig: cetMessageDetailsFooter,
+              exportButtons: ['copy', 'csv', 'excel', 'print'],
+              stateSave: false,
+              autoInit: true
+            }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/cet-queues-info-modal') %>
+
+  <%- include('partials/footer') %>
+
+  <!-- Page-specific initialization -->
+  <script type="module" src="/js/pages/cet-queues-page.js"></script>
+</body>
+</html>

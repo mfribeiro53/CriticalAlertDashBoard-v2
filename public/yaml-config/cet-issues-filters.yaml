@@ -1,0 +1,12 @@
+# CET Issues - Filter Configuration
+
+filters:
+  - column: iGateApp
+    type: select
+    label: iGate App
+    placeholder: Filter by iGate App
+
+  - column: cetApp
+    type: select
+    label: CET App
+    placeholder: Filter by CET App

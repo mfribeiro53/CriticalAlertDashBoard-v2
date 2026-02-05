@@ -1,0 +1,195 @@
+<!--
+  ============================================================================
+  CET Applications Information Modal
+  ============================================================================
+  
+  File: cet-apps-info-modal.ejs
+  Purpose: Provides detailed help and guidance for the CET Applications view,
+           explaining application monitoring, configuration details, status
+           tracking, and filtering capabilities.
+  
+  Created: 2025-12-15 12:44:08
+  Last Modified: 2025-12-17 14:28:45
+  
+  Usage:
+    <%%- include('partials/cet-apps-info-modal') %%>
+  
+  Modal Trigger:
+    - Activated by clicking the info button on the CET Apps View page
+    - Button selector: data-bs-target="#cetAppsInfoModal"
+  
+  Dependencies:
+    - Bootstrap 5.x (modal, buttons, alerts, badges)
+    - Bootstrap Icons (bi-* classes for application indicators)
+    - info-modal-resources.ejs (included partial for resource links)
+  
+  Sections Covered:
+    - Overview of CET Applications registry
+    - Application configuration details
+    - Column descriptions (iGate App, CET App, Server, Database, etc.)
+    - Status indicators and filtering options
+    - Card view features for application visualization
+    - Export options and documentation
+    - Keyboard shortcuts and accessibility features
+  
+  Key Features:
+    - Large scrollable modal (modal-lg modal-dialog-scrollable)
+    - Primary-themed header (bg-primary text-white)
+    - Status badge examples (Active, Inactive)
+    - Comprehensive column reference table
+    - Application grouping by iGate parent application
+    - Interactive collapsible resource sections
+  
+  Notes:
+    - Applications view provides read-only access to CET registry
+    - For administrative changes, use the CET Apps Admin page
+    - Applications are grouped by iGate parent for better organization
+    - Status field indicates operational availability
+  ============================================================================
+-->
+<div class="modal fade" id="cetAppsInfoModal" tabindex="-1" aria-labelledby="cetAppsInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="cetAppsInfoModalLabel">
+          <i class="bi bi-info-circle me-2"></i>About CET Applications
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-primary mb-3"><i class="bi bi-bar-chart-line me-2"></i>Overview</h6>
+        <p>
+          The <strong>CET Applications</strong> page serves as a comprehensive configuration registry for all CET (Central Engine Technology) applications in your environment. This centralized reference provides essential technical details needed to manage, troubleshoot, and access each CET application.
+        </p>
+        <p>
+          Use this page to quickly find server locations, database connections, port configurations, and support resources for any CET application in your infrastructure.
+        </p>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-speedometer2 me-2"></i>Key Metrics</h6>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-hdd-stack text-primary me-2 fs-5"></i>
+              <div>
+                <strong>Total Applications</strong>
+                <p class="text-muted small mb-0">Total number of applications registered in the CET configuration registry</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-check-circle text-success me-2 fs-5"></i>
+              <div>
+                <strong>Active</strong>
+                <p class="text-muted small mb-0">Number of applications currently in active status and available for use</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-server text-info me-2 fs-5"></i>
+              <div>
+                <strong>SQL Servers</strong>
+                <p class="text-muted small mb-0">Count of distinct SQL Server instances configured across all applications</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+              <i class="bi bi-building text-secondary me-2 fs-5"></i>
+              <div>
+                <strong>iGate Apps</strong>
+                <p class="text-muted small mb-0">Number of applications integrated with iGate enterprise systems</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-table me-2"></i>Column Descriptions</h6>
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered">
+                <thead class="table-light">
+                  <tr>
+                    <th class="modal-col-25">Column</th>
+                    <th class="modal-col-75">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong><i class="bi bi-building text-primary me-1"></i>iGate App</strong></td>
+                    <td>The iGate application name that hosts or manages this CET application. Multiple CET apps may be associated with a single iGate application.</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-gear-wide-connected text-primary me-1"></i>CET APP</strong></td>
+                    <td>The unique name or identifier for the specific CET application. This is the primary identifier used throughout the system.</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-server text-primary me-1"></i>SQL Server</strong></td>
+                    <td>The SQL Server instance where this CET application's database is hosted. Used for database connectivity and troubleshooting.</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-database text-primary me-1"></i>Database</strong></td>
+                    <td>The specific database name used by this CET application. Contains the application's data, queues, and processing tables.</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-file-text text-primary me-1"></i>Description</strong></td>
+                    <td>A brief description of what the CET application does, its purpose, or the business process it supports.</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-link-45deg text-primary me-1"></i>Support Link</strong></td>
+                    <td>A clickable link to additional documentation, support pages, or configuration details for this application. Opens in a new tab.</td>
+                  </tr>
+                  <tr>
+                    <td><strong><i class="bi bi-circle-fill text-success me-1"></i>Status</strong></td>
+                    <td>Current operational status of the application. Typically shows "Active" (green) for running applications or "Inactive" for disabled ones.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-search me-2"></i>Features</h6>
+        <ul>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Search & Filter:</strong> Quickly find applications by name, server, database, or status</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Sortable Columns:</strong> Click any column header to sort data alphabetically or by status</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Export Options:</strong> Export the registry to CSV or Excel for documentation</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>External Links:</strong> Click support links to access detailed documentation in a new tab</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Live Summary Cards:</strong> Summary metrics update dynamically as you filter the table</li>
+          <li><i class="bi bi-check-circle text-success me-1"></i> <strong>Keyboard Navigation:</strong> Full keyboard accessibility support for efficient browsing</li>
+        </ul>
+
+        <hr class="my-4">
+
+        <h6 class="text-primary mb-3"><i class="bi bi-lightbulb me-2"></i>Quick Tips</h6>
+        <div class="alert alert-info mb-2">
+          <strong><i class="bi bi-search me-1"></i>Use the search box</strong> to quickly locate applications by any column value
+        </div>
+        <div class="alert alert-success mb-2">
+          <strong><i class="bi bi-link-45deg me-1"></i>Click support links</strong> to access detailed technical documentation and configuration guides
+        </div>
+        <div class="alert alert-warning mb-0">
+          <strong><i class="bi bi-funnel me-1"></i>Apply filters</strong> to view applications by server, database, or status for targeted analysis
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Resources Section -->
+        <%- include('info-modal-resources', {
+          collapseId: 'cetAppsResourcesCollapse'
+        }) %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

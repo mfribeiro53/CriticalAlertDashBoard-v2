@@ -1,0 +1,6 @@
+# CET Apps - Keyboard Accessibility Settings
+
+enabled: true
+navigation: true
+search: true
+announcements: true

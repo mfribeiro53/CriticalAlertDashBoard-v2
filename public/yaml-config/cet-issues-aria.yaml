@@ -1,0 +1,5 @@
+# CET Issues - Accessibility (ARIA) Configuration
+
+enabled: true
+tableLabel: CET Issues - Summary and Detailed Views
+tableDescription: Comprehensive issue tracking across CET applications including alerts, disabled queues, processing delays, and slow performance

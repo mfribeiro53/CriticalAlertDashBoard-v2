@@ -1,0 +1,29 @@
+# CET Dashboard - Table Footer Configuration
+# Columns with aggregation: "sum" will auto-calculate totals
+
+enabled: true
+columns:
+  - columnIndex: 0  # iGate App
+    content: "Total Systems:"
+    className: fw-bold text-end
+
+  - columnIndex: 1  # CET APP
+    content: ""
+    className: ""
+
+  # Aggregated columns (sum of values)
+  - columnIndex: 2  # Threshold Alerts
+    aggregation: sum
+    className: text-center fw-bold
+
+  - columnIndex: 3  # CET Alerts
+    aggregation: sum
+    className: text-center fw-bold text-danger
+
+  - columnIndex: 4  # Processes Behind
+    aggregation: sum
+    className: text-center fw-bold text-danger
+
+  - columnIndex: 5  # Slow
+    aggregation: sum
+    className: text-center fw-bold text-danger
