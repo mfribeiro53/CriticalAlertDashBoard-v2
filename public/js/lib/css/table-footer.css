@@ -1,0 +1,126 @@
+/**
+ * Table Footer Styling
+ * 
+ * Styles for DataTables footer with aggregations
+ */
+
+/* Footer row styling */
+.dataTables_wrapper tfoot tr {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-top: 2px solid var(--bs-border-color, #dee2e6);
+  font-weight: 600;
+}
+
+.dataTables_wrapper tfoot th,
+.dataTables_wrapper tfoot td {
+  padding: 12px 8px;
+  vertical-align: middle;
+  border-top: 2px solid var(--bs-border-color, #dee2e6);
+  color: var(--bs-secondary-color, #495057);
+  font-size: 0.9rem;
+}
+
+/* Footer cell content */
+.dataTables_wrapper tfoot .footer-label {
+  font-weight: 600;
+  color: var(--bs-secondary-color, #6c757d);
+  margin-right: 6px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dataTables_wrapper tfoot .footer-value {
+  font-weight: 700;
+  color: var(--bs-body-color, #212529);
+  font-size: 1rem;
+}
+
+/* Numeric value styling */
+.dataTables_wrapper tfoot .numeric-value {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* Status indicators in footer */
+.dataTables_wrapper tfoot .footer-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.dataTables_wrapper tfoot .footer-badge.bg-success {
+  background-color: var(--bs-success-bg-subtle, #d4edda) !important;
+  color: var(--bs-success-text-emphasis, #155724) !important;
+}
+
+.dataTables_wrapper tfoot .footer-badge.bg-warning {
+  background-color: var(--bs-warning-bg-subtle, #fff3cd) !important;
+  color: var(--bs-warning-text-emphasis, #856404) !important;
+}
+
+.dataTables_wrapper tfoot .footer-badge.bg-danger {
+  background-color: var(--bs-danger-bg-subtle, #f8d7da) !important;
+  color: var(--bs-danger-text-emphasis, #721c24) !important;
+}
+
+.dataTables_wrapper tfoot .footer-badge.bg-info {
+  background-color: var(--bs-info-bg-subtle, #d1ecf1) !important;
+  color: var(--bs-info-text-emphasis, #0c5460) !important;
+}
+
+/* Icon in footer */
+.dataTables_wrapper tfoot .footer-icon {
+  margin-right: 4px;
+  opacity: 0.7;
+}
+
+/* Empty footer cell */
+.dataTables_wrapper tfoot .footer-empty {
+  color: var(--bs-secondary-color, #adb5bd);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dataTables_wrapper tfoot th,
+  .dataTables_wrapper tfoot td {
+    padding: 10px 6px;
+    font-size: 0.85rem;
+  }
+  
+  .dataTables_wrapper tfoot .footer-label {
+    font-size: 0.75rem;
+  }
+  
+  .dataTables_wrapper tfoot .footer-value {
+    font-size: 0.9rem;
+  }
+}
+
+/* Bootstrap table compatibility */
+.table tfoot tr {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-top: 2px solid var(--bs-border-color, #dee2e6);
+}
+
+.table-striped tfoot tr {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+}
+
+.table-hover tfoot tr:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+}
+
+/* Highlight effect for updated values */
+@keyframes footerUpdate {
+  0% { background-color: rgba(13, 110, 253, 0.1); }
+  100% { background-color: transparent; }
+}
+
+.dataTables_wrapper tfoot td.footer-updated {
+  animation: footerUpdate 0.5s ease-out;
+}

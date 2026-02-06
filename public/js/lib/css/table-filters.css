@@ -1,0 +1,74 @@
+/* Advanced Filter Styles */
+
+/* Filter wrapper card */
+.datatable-filters-wrapper {
+    border: 1px solid var(--bs-border-color, #dee2e6);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.datatable-filters-wrapper .card-header {
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+    padding: 0.75rem 1rem;
+}
+
+.datatable-filters-wrapper .card-header h6 {
+    color: var(--bs-secondary-color, #495057);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.datatable-filters-wrapper .card-header h6 i {
+    color: var(--bs-secondary-color, #6c757d);
+    margin-right: 0.5rem;
+}
+
+.datatable-filters-wrapper .card-body {
+    padding: 1rem;
+}
+
+/* Filter form controls - sizes only, Bootstrap handles rest */
+.datatable-filters-wrapper .form-control,
+.datatable-filters-wrapper .form-select {
+    font-size: 0.9rem;
+}
+
+.datatable-filters-wrapper .form-floating > label {
+    font-size: 0.875rem;
+}
+
+.datatable-filters-wrapper .form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.375rem;
+}
+
+/* Clear filters button alignment */
+.datatable-filters-wrapper .btn-outline-secondary {
+    height: calc(3.5rem + 2px); /* Match floating form control height */
+}
+
+/* Date range inputs */
+.datatable-filters-wrapper .input-group {
+    margin-top: 0.25rem;
+}
+
+/* DataTables controls wrapper */
+.dt-container .dataTables_wrapper {
+    background: white;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .datatable-filters-wrapper .card-body {
+        padding: 0.75rem;
+    }
+    
+    .datatable-filters-wrapper .btn-outline-secondary {
+        height: auto;
+        margin-top: 0.5rem;
+    }
+}
+
