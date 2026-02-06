@@ -25,9 +25,9 @@ import {
     initializeFooter,
     initializeEditing,
     initializeSearch
-} from './lib/index.js';
+} from './lib/datatable-kit/index.js';
 
-import * as renderHelpers from './lib/helpers/table-helpers.js';
+import * as renderHelpers from './lib/datatable-kit/helpers/table-helpers.js';
 
 // Import CET-specific render helpers (project-specific customizations)
 import * as cetRenderHelpers from './helpers/cet-render-helpers.js';

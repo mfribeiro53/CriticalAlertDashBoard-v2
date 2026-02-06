@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "copy-lib": "cp -r node_modules/@mfribeiro/datatable-kit/src/* public/js/lib/ && cp public/js/lib/css/*.css public/css/lib/",
+    "copy-datatable-kit": "mkdir -p public/js/lib/datatable-kit && cp -r node_modules/@mfribeiro/datatable-kit/src/* public/js/lib/datatable-kit/ && mkdir -p public/css/lib && cp public/js/lib/datatable-kit/css/*.css public/css/lib/",
+    "copy-card-kit": "mkdir -p public/js/lib/card-kit && cp -r node_modules/@mfribeiro/card-kit/src/* public/js/lib/card-kit/ && mkdir -p public/css/lib && cp public/js/lib/card-kit/css/*.css public/css/lib/",
+    "copy-lib": "npm run copy-datatable-kit && npm run copy-card-kit",
     "postinstall": "npm run copy-lib"
   },
   "keywords": [
@@ -18,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mfribeiro/card-kit": "github:mfribeiro53/card-kit",
     "@mfribeiro/datatable-kit": "github:mfribeiro53/datatable-kit",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",

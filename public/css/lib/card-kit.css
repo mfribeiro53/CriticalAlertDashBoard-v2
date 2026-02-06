@@ -1,0 +1,193 @@
+/**
+ * Card Kit - Core Styles
+ * 
+ * Styles for card components, actions, loading states, and fullscreen mode.
+ */
+
+/* ==========================================================================
+   Card Base Styles
+   ========================================================================== */
+
+.card[data-card-type] {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card[data-card-type]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Clickable cards */
+.card-clickable {
+  cursor: pointer;
+}
+
+.card-clickable:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ==========================================================================
+   Card Actions
+   ========================================================================== */
+
+.card-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.card-actions button {
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.card-actions button:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Loading Overlay
+   ========================================================================== */
+
+.card-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .card-loading-overlay {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* ==========================================================================
+   Fullscreen Mode
+   ========================================================================== */
+
+.card-fullscreen {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1050 !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  overflow: auto;
+}
+
+.card-fullscreen-active {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Stat Card Styles
+   ========================================================================== */
+
+.stat-card {
+  text-align: center;
+  padding: 1rem;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+
+.stat-change {
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.stat-change i {
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   Metric Card Styles
+   ========================================================================== */
+
+.card-description {
+  font-size: 0.75rem;
+}
+
+/* Threshold-based borders */
+.card.border-success {
+  border-left: 4px solid var(--bs-success) !important;
+}
+
+.card.border-warning {
+  border-left: 4px solid var(--bs-warning) !important;
+}
+
+.card.border-danger {
+  border-left: 4px solid var(--bs-danger) !important;
+}
+
+/* ==========================================================================
+   Toast Container
+   ========================================================================== */
+
+.toast-container {
+  z-index: 1100;
+}
+
+/* ==========================================================================
+   Collapsed State
+   ========================================================================== */
+
+.card-collapsed .card-body-wrapper {
+  display: none;
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .stat-value {
+    font-size: 2rem;
+  }
+  
+  .card-fullscreen {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .stat-value {
+    font-size: 1.75rem;
+  }
+  
+  .card-actions button {
+    padding: 0.25rem;
+  }
+}
