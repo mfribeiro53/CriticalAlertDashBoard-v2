@@ -51,6 +51,19 @@ export {
 } from './helpers/form-helpers.js';
 
 // ============================================================================
+// FEATURE EXPORTS
+// ============================================================================
+
+export {
+  registerValidator,
+  getValidator,
+  runValidators,
+  clearValidationState,
+  validateFormWithCustom,
+  validators
+} from './features/form-feature-validators.js';
+
+// ============================================================================
 // VERSION INFO
 // ============================================================================
 
