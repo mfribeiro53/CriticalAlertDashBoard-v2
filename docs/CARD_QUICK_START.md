@@ -10,7 +10,7 @@ Already installed! The card wrapper is ready to use in your application.
 
 **Files Created:**
 - `views/partials/card.ejs` - The reusable card partial
-- `public/js/card-helpers.js` - JavaScript utilities
+- `public/js/lib/card-kit/` - Card library (core/, handlers/)
 - `public/css/cards.css` - Custom styling
 - `public/config/cards/*.json` - Configuration templates
 - `CARD_FEATURES.md` - Complete documentation
@@ -41,7 +41,7 @@ Already installed! The card wrapper is ready to use in your application.
     cardId: 'myCard'
   }) %>
   
-  <script src="/js/card-helpers.js"></script>
+  <script type="module" src="/js/card-init-bridge.js"></script>
 </body>
 </html>
 ```

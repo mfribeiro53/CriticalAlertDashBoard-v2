@@ -75,7 +75,7 @@ dtConfig.initComplete = function(settings, json) {
 - ✅ No race conditions or timing assumptions
 - ✅ More maintainable and reliable code
 
-**Location:** `/public/js/table-init.js`
+**Location:** `/public/js/lib/datatable-kit/core/table-init.js`
 
 **Related Features:** Filters, row selection, footer aggregations, inline editing, advanced search, ARIA enhancements, keyboard navigation
 
@@ -87,12 +87,12 @@ dtConfig.initComplete = function(settings, json) {
 
 **Three-Layer Architecture:**
 
-1. **Generic Utilities** (`card-custom-handlers.js`):
+1. **Generic Utilities** (`lib/card-kit/handlers/card-custom-handlers.js`):
    - Reusable functions like `updateDashboardCard()`
    - Generic rendering functions
    - No page-specific business logic or hard-coded card IDs
 
-2. **Orchestration Layer** (`card-init.js`):
+2. **Orchestration Layer** (`lib/card-kit/core/card-init.js`):
    - Loads card configurations from JSON
    - Coordinates between generic utilities and page-specific logic
    - Handles errors and async loading
@@ -114,7 +114,7 @@ dtConfig.initComplete = function(settings, json) {
 **Example: CET Dashboard Cards**
 
 ```javascript
-// Generic utility (card-custom-handlers.js)
+// Generic utility (lib/card-kit/handlers/card-custom-handlers.js)
 export const updateDashboardCard = (cardId, count, icon, label, description, thresholds) => { ... };
 
 // Configuration file (config/cet-dashboard-cards.json)

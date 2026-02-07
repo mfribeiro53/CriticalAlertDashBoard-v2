@@ -161,10 +161,12 @@ public/
   │   └── cards/               # Card templates
   ├── css/                      # Stylesheets (Bootstrap-first)
   └── js/                       # JavaScript modules
-      ├── datatable-*.js       # DataTable modules
-      ├── card-*.js            # Card modules
-      ├── table-custom-handlers.js  # DataTable customizations
-      ├── card-custom-handlers.js       # Card generic utilities
+      ├── lib/                  # Modular kit libraries
+      │   ├── datatable-kit/   # DataTable enhancements (core/, features/, helpers/)
+      │   ├── card-kit/        # Card enhancements (core/, handlers/)
+      │   └── form-kit/        # Form enhancements (core/, helpers/, features/)
+      ├── table-init-bridge.js # Bridge for datatable-kit
+      ├── card-init-bridge.js  # Bridge for card-kit
       └── pages/               # Page-specific logic
           └── *-page.js        # Page initialization & binding
 views/
@@ -211,12 +213,12 @@ export const customHandlers = {
 ### Card Architecture
 Card components follow a three-layer **configuration-driven** architecture:
 
-1. **Generic Utilities** (`card-custom-handlers.js`):
+1. **Generic Utilities** (`lib/card-kit/handlers/card-custom-handlers.js`):
    - Reusable functions like `updateDashboardCard()`
    - Generic rendering and setup functions
    - No page-specific business logic or hard-coded IDs
 
-2. **Orchestration** (`card-init.js`):
+2. **Orchestration** (`lib/card-kit/core/card-init.js`):
    - Loads configurations from JSON
    - Coordinates initialization
    - Handles errors
@@ -240,8 +242,8 @@ This project follows a **Bootstrap-first approach**:
 - ❌ No hardcoded colors/spacing in custom CSS
 
 ### Adding Custom Features
-1. For DataTables: Define behavior in `table-custom-handlers.js`
-2. For Cards: Add generic utilities to `card-custom-handlers.js`, page logic to `pages/*-page.js`
+1. For DataTables: Define behavior in `lib/datatable-kit/core/table-custom-handlers.js`
+2. For Cards: Add generic utilities to `lib/card-kit/handlers/`, page logic to `pages/*-page.js`
 3. Create configuration JSON file
 4. Include in view template
 5. Feature auto-initializes on page load

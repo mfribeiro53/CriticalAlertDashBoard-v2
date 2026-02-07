@@ -8,7 +8,12 @@ The Bootstrap Card Wrapper provides a reusable, parameterized component system f
 
 **Files:**
 - `views/partials/card.ejs` - Reusable card partial template
-- `public/js/card-helpers.js` - JavaScript utilities and event handlers
+- `public/js/lib/card-kit/` - Card library module
+  - `core/card-init.js` - Card initialization
+  - `core/card-helpers.js` - JavaScript utilities
+  - `handlers/card-custom-handlers.js` - Custom update functions
+  - `index.js` - Main entry point
+- `public/js/card-init-bridge.js` - Bridge for ES6 module loading
 - `public/css/cards.css` - Custom styling beyond Bootstrap defaults
 - `public/config/cards/*.json` - Card configuration templates
 

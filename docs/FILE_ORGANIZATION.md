@@ -83,12 +83,27 @@ JS_Application_ErrorAlert_Dashboard/
 │   │   └── cards/           # Card templates
 │   ├── css/                  # Stylesheets (Bootstrap-first)
 │   └── js/                   # JavaScript modules
-│       ├── datatable-*.js   # DataTable modules
-│       ├── card-*.js        # Card modules
-│       ├── table-custom-handlers.js  # DataTable customizations
-│       ├── card-custom-handlers.js       # Card generic utilities
-│       └── pages/           # Page-specific logic
-│           └── *-page.js    # Page initialization & binding
+│       ├── lib/              # Modular kit libraries
+│       │   ├── datatable-kit/   # DataTable enhancements
+│       │   │   ├── core/        # table-init.js, table-custom-handlers.js
+│       │   │   ├── features/    # table-feature-*.js modules
+│       │   │   ├── helpers/     # table-helpers.js render functions
+│       │   │   ├── css/         # Feature-specific styles
+│       │   │   └── index.js     # Main entry point
+│       │   ├── card-kit/        # Card enhancements
+│       │   │   ├── core/        # card-init.js, card-helpers.js
+│       │   │   ├── handlers/    # card-custom-handlers.js
+│       │   │   ├── css/         # Card styles
+│       │   │   └── index.js     # Main entry point
+│       │   └── form-kit/        # Form enhancements
+│       │       ├── core/        # form-init.js, form-dynamic.js
+│       │       ├── helpers/     # form-helpers.js
+│       │       ├── features/    # form-feature-validators.js
+│       │       └── index.js     # Main entry point
+│       ├── table-init-bridge.js     # Bridge for datatable-kit
+│       ├── card-init-bridge.js      # Bridge for card-kit
+│       └── pages/               # Page-specific logic
+│           └── *-page.js        # Page initialization & binding
 ├── views/
 │   ├── cet-*.ejs            # CET view pages
 │   └── partials/            # Reusable components
