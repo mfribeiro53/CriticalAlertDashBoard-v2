@@ -1,15 +1,17 @@
 /**
  * File: form-init.js
  * Created: 2025-12-17 15:28:50
- * Last Modified: 2025-12-18 18:58:00
+ * Last Modified: 2026-02-06
  * 
  * Form Initialization Module
  * 
  * Handles initialization and event binding for request forms.
  * Integrates Flatpickr datetime pickers and manages form submission.
+ * 
+ * @module form-kit/core/form-init
  */
 
-import * as formHelpers from './form-helpers.js';
+import * as formHelpers from '../helpers/form-helpers.js';
 import { initializeDynamicForm } from './form-dynamic.js';
 
 // Make form helpers available globally for inline handlers if needed

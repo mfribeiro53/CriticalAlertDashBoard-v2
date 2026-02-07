@@ -25,8 +25,8 @@
 
 'use strict';
 
-import { showToast } from '../form-helpers.js';
-import { initializeDynamicForm, resetForm, getFormData } from '../form-dynamic.js';
+import { showToast } from '../lib/form-kit/helpers/form-helpers.js';
+import { initializeDynamicForm, resetForm, getFormData } from '../lib/form-kit/core/form-dynamic.js';
 import { renderSupportLink } from '../helpers/cet-render-helpers.js';
 
 let cetAppsTable;
