@@ -42,7 +42,7 @@ import {
 } from './lib/card-kit/index.js';
 
 // Import CET-specific card handlers (project-specific customizations)
-import { updateDashboardCard } from './card-custom-handlers.js';
+import { updateDashboardCard } from './lib/card-kit/handlers/card-custom-handlers.js';
 
 // Re-export everything for use by other modules in this app
 export {

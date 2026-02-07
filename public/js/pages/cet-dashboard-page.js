@@ -36,7 +36,7 @@
 
 'use strict';
 
-import { updateDashboardCard } from '../card-custom-handlers.js';
+import { updateDashboardCard } from '../lib/card-kit/handlers/card-custom-handlers.js';
 
 /**
  * Read card configuration from data-* attributes on DOM element
