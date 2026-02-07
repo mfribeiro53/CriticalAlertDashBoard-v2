@@ -8,7 +8,8 @@
     "dev": "nodemon app.js",
     "copy-datatable-kit": "mkdir -p public/js/lib/datatable-kit && cp -r node_modules/@mfribeiro/datatable-kit/src/* public/js/lib/datatable-kit/ && mkdir -p public/css/lib && cp public/js/lib/datatable-kit/css/*.css public/css/lib/",
     "copy-card-kit": "mkdir -p public/js/lib/card-kit && cp -r node_modules/@mfribeiro/card-kit/src/* public/js/lib/card-kit/ && mkdir -p public/css/lib && cp public/js/lib/card-kit/css/*.css public/css/lib/",
-    "copy-lib": "npm run copy-datatable-kit && npm run copy-card-kit",
+    "copy-form-kit": "mkdir -p public/js/lib/form-kit && cp -r node_modules/@mfribeiro/form-kit/src/* public/js/lib/form-kit/",
+    "copy-lib": "npm run copy-datatable-kit && npm run copy-card-kit && npm run copy-form-kit",
     "postinstall": "npm run copy-lib"
   },
   "keywords": [
@@ -22,6 +23,7 @@
   "dependencies": {
     "@mfribeiro/card-kit": "github:mfribeiro53/card-kit",
     "@mfribeiro/datatable-kit": "github:mfribeiro53/datatable-kit",
+    "@mfribeiro/form-kit": "github:mfribeiro53/form-kit",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
